@@ -1,28 +1,17 @@
 import React,{useState, useEffect} from 'react'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import Homepage from './Homepage'
+import Product from './Product'
+
 
 function App() {
-  const [data, setData] = useState([{}])
-  
-  useEffect(() => {
-    fetch("/members").then(
-       res=> res.json()
-    ).then(
-        data => {
-            setData(data)
-            console.log(data)
-        }
-    )
-  })
-  return (
-    <div>
-      { (typeof data.members == 'undefined') ? (
-        <p> Loading ...</p>
-      ) : (
-        data.members.map((member,i) =>(
-           <p key={i}>{member}</p>
-        ))
-      )}
-    </div>
+  return(
+    <Router>
+        <Routes>
+            <Route path="/" element={<Homepage/>}  />
+            <Route path="/product" element={<Product/>}  />
+        </Routes>
+    </Router>
   )
 }
 
