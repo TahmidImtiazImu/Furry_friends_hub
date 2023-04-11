@@ -8,6 +8,7 @@ import {MdPeopleAlt,MdOutlineSecurity,MdSentimentSatisfiedAlt} from "react-icons
 import {BsFillCartFill,BsFillHouseFill,BsFacebook,BsWhatsapp,BsInstagram,BsTwitter,BsYoutube} from "react-icons/bs"
 import {AiOutlineSearch} from "react-icons/ai"
 import {GrDeliver} from "react-icons/gr"
+import Popup from "./Popup";
 
 const theme = {
   blue: {
@@ -57,7 +58,10 @@ const Homepage = () => {
   const navigateProduct =() =>{
     navigate('/Product');
   }
-
+  const toggleHover =() =>{
+    this.setState({hover: !this.state.hover})
+  }
+  const[popup,setpop] = useState(false);
   return (
     <>
     {/* HEADERRRRRRRRRRRRRRRRRRRRR */}
@@ -73,7 +77,10 @@ const Homepage = () => {
       {/* SERVICE LIST */}
       <div className="service">
         <ul>
-          <li className="list"> <a href onClick={navigateProduct}><FaCat className="servicelist"/> </a></li>
+          <li className="list"> 
+          <a href onMouseEnter={()=>{setpop(true);}}  onClick={navigateProduct}><FaCat className="servicelist"/> </a>
+           {popup && <Popup closepop={setpop}/>}
+           </li>
           <li className="list"> <a href onClick={navigateProduct}><FaDog className="servicelist"/> </a></li>
           <li className="list"> <a href onClick={navigateProduct}> <GiRabbit className="servicelist"/> </a></li>
           <li className="list"> <a href onClick={navigateProduct}> <FaKiwiBird className="servicelist"/> </a></li>
@@ -97,6 +104,7 @@ const Homepage = () => {
 
       {/* BODDDDDDDDDDDDDDDDYYYYYYYYYYYYYYYY */}
       <body className="body">
+        <div className="all_images">
         <ul className="images">
           <li><img src={"/images/Cat.jpeg"} alt="React Image" className="pet_image"/></li>
           <li><img src={"/images/dog.jpg"} alt="React Image" className="pet_image"/></li>
@@ -106,6 +114,7 @@ const Homepage = () => {
         <li><img src={"/images/bird.jpg"} alt="React Image" className="pet_image2"/></li>
         <li><img src={"/images/pet_sitter.jpg"} alt="React Image" className="pet_image2"/></li>
         </ul>
+        </div>
 
         <ul className="body_writing">
         <ul className="delivery">
@@ -175,20 +184,4 @@ const Homepage = () => {
 
 export default Homepage;
 
-{/* <header className='header'>  
-      <div >
-        <button type="button" onClick={handleClick}>
-          SignUp
-        </button>
-      </div>
-      </header>
-      <body>
-        <div>
-          Body
-        </div>
-      </body>
-      <footer>
-        <div>
-          Footer
-        </div>
-      </footer> */}
+
