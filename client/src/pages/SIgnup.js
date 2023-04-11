@@ -22,8 +22,9 @@ export const signup = () => {
                 title = "Service provider"/>
         </div>
         <div className='choices'>
-            <p>Already have an account?</p>
-            <p className='navtologin'>Log In</p>
+            <p>
+                Already have an account? <a href='#'>Log In</a>
+            </p>
         </div>
     </div>
     
