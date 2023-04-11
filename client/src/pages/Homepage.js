@@ -9,6 +9,9 @@ import {BsFillCartFill,BsFillHouseFill,BsFacebook,BsWhatsapp,BsInstagram,BsTwitt
 import {AiOutlineSearch} from "react-icons/ai"
 import {GrDeliver} from "react-icons/gr"
 import Popup from "./Popup";
+import PopupDog from "./PopupDog";
+import PopupBird from "./PopupBird";
+import PopupRabbit from "./PopupRabbit";
 
 const theme = {
   blue: {
@@ -62,6 +65,9 @@ const Homepage = () => {
     this.setState({hover: !this.state.hover})
   }
   const[popup,setpop] = useState(false);
+  const[popupdog,setpopdog] = useState(false);
+  const[popupbird,setpopbird] = useState(false);
+  const[popuprabbit,setpoprabbit] = useState(false);
   return (
     <>
     {/* HEADERRRRRRRRRRRRRRRRRRRRR */}
@@ -78,12 +84,22 @@ const Homepage = () => {
       <div className="service">
         <ul>
           <li className="list"> 
-          <a href onMouseEnter={()=>{setpop(true);}}  onClick={navigateProduct}><FaCat className="servicelist"/> </a>
-           {popup && <Popup closepop={setpop}/>}
+          <a href onMouseEnter={()=>{setpop(true); setpopdog(false); setpopbird(false); setpoprabbit(false);}}  
+          onClick={navigateProduct}><FaCat className="servicelist"/> </a>
+           {popup && !popupdog && !popupbird && !popuprabbit && <Popup closepop={setpop}/>}
            </li>
-          <li className="list"> <a href onClick={navigateProduct}><FaDog className="servicelist"/> </a></li>
-          <li className="list"> <a href onClick={navigateProduct}> <GiRabbit className="servicelist"/> </a></li>
-          <li className="list"> <a href onClick={navigateProduct}> <FaKiwiBird className="servicelist"/> </a></li>
+          <li className="list" > <a href  onMouseEnter={()=>{setpop(false); setpopdog(true); setpopbird(false); setpoprabbit(false);}} 
+          onClick={navigateProduct}><FaDog className="servicelist"/> </a>
+           {!popup && popupdog && !popupbird && !popuprabbit && <PopupDog closepop={setpopdog}/>}
+          </li>
+          <li className="list"> <a href onMouseEnter={()=>{setpop(false); setpopdog(false); setpopbird(true); setpoprabbit(false);}}  
+          onClick={navigateProduct}> <FaKiwiBird className="servicelist"/> </a>
+           {!popup && !popupdog && popupbird && !popuprabbit && <PopupBird closepop={setpopbird}/>}
+          </li>
+          <li className="list"> <a href onMouseEnter={()=>{setpop(false); setpopdog(false); setpopbird(false); setpoprabbit(true);}}  
+          onClick={navigateProduct}> <GiRabbit className="servicelist"/> </a>
+           {!popup && !popupdog && !popupbird && popuprabbit && <PopupRabbit closepop={setpoprabbit}/>}
+          </li>         
           <li className="list"> <a href onClick={navigateProduct}> <BsFillHouseFill className="servicelist"/> </a></li>
           <li className="list"> <a href onClick={navigateProduct}> <FaWalking className="servicelist"/> </a></li>
         </ul>

@@ -1,0 +1,35 @@
+.modalBackgroundbird {
+    width: 150px;
+    height: 150px;
+    border-radius: 12px;
+    background-color: rgba(200, 200, 200);
+    position: fixed; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modalContainerbird {
+    width: 150px;
+    height: 100px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+  }
+  
+  .titleCloseBtnbird {
+    width: 2px;
+    height: 2px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+.cancelrow{
+    display: grid;
+}
+.Bird_product:hover{
+    color: lightgrey;
+}

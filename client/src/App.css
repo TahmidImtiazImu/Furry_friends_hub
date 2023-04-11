@@ -34,8 +34,9 @@
    justify-content: space-around;
    align-items: center;
 }
-.servicelist{
+.servicelist:hover{
   size-adjust: 20;
+  color: lightslategray;
 }
 .signup_and_cart{
   grid-column: 4/5;
