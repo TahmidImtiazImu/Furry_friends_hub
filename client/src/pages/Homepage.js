@@ -34,7 +34,7 @@ transition: ease background-color 250ms;
 
 const StyledButton = styled.button`
   background-color: black;
-  font-size: 32px;
+  font-size: 12px;
   color: white;
 `;
 
@@ -48,7 +48,21 @@ const navigateSignUp = () => {
 const Homepage = () => {
   return (
     <>
-      <StyledButton>button</StyledButton>
+    <header className='header'>  
+      <div >
+      <StyledButton onClick={handleClick}>Sign up</StyledButton>
+      </div>
+      </header>
+      <body>
+        <div>
+          Body
+        </div>
+      </body>
+      <footer>
+        <div>
+          Footer
+        </div>
+      </footer>
     </>
 
   )
