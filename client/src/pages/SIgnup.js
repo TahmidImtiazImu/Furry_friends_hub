@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from './Card'
+import './SIgnup.css'
 
 const joinClick = () => {
     alert("Successfully joined!");
@@ -14,13 +15,15 @@ export const signup = () => {
         <div className='wrapper'>
                 <Card 
                 img = "./images/customer.jpg"
-                title = "Cutomer"/>
+                title = "Cutomer"
+                path = "/customerSignup"/>
                 <Card 
                 img = "./images/service_provider.png"
                 title = "Service provider"/>
         </div>
-        <div className='confirm_button'>
-            <button onClick={joinClick}>Join As Customer</button>
+        <div className='choices'>
+            <p>Already have an account?</p>
+            <p className='navtologin'>Log In</p>
         </div>
     </div>
     
