@@ -3,6 +3,7 @@
   margin : 0px;
 }
 .navBar{
+  margin-top: 0px;
   background-color: lightcyan;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
   rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; 
@@ -53,9 +54,7 @@
   position: absolute;
   right: 0;
 }
-.body{
-  height: 10rem;
-}
+
 .footer{
   background-color: lightcyan;
   color: black;
@@ -85,5 +84,53 @@
 }
 .copyright{
   display: grid;
+  justify-content: center;
+}
+.body{
+  margin-top: 0px;
+  margin-bottom: 1px;
+  margin-left: 1px;
+  margin-right: 1px;
+
+  height: 50rem;
+}
+
+.images{
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: 0fr 0fr 0fr;
+}
+.images2{
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: 0fr 0fr;
+}
+.pet_image{
+  width: 300px;
+  height: 300px;
+}
+.pet_image2{
+  width: 450px;
+  height: 300px;
+}
+.body_writing{
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.delivery{
+  list-style: none;
+  border-right: 1px solid black;
+  justify-content: center;
+}
+.security{
+  display: grid;
+  list-style-type: none;
+  border-right: 1px solid black;
+  justify-content: center;
+}
+.satisfied{
+  display: grid;
+  list-style: none;
   justify-content: center;
 }
