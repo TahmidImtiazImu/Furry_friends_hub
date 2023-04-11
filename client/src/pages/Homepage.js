@@ -43,14 +43,14 @@ const handleClick = () => {
 }
 
 const navigateSignUp = () => {
-  Navigate('/signup');
+  Navigate('/Signup');
 }
 const Homepage = () => {
   return (
     <>
     <header className='header'>  
       <div >
-      <StyledButton onClick={handleClick}>Sign up</StyledButton>
+      <StyledButton onClick={navigateSignUp}>Sign up</StyledButton>
       </div>
       </header>
       <body>
