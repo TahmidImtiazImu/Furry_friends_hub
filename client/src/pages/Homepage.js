@@ -38,14 +38,18 @@ const StyledButton = styled.button`
   color: white;
 `;
 
-const handleClick = () => {
-  alert("You clicked me!"); 
-}
-
-const navigateSignUp = () => {
-  Navigate('/Signup');
-}
 const Homepage = () => {
+
+  const handleClick = () => {
+    alert("You clicked me!"); 
+  }  
+
+  const navigate = useNavigate();
+
+  const navigateSignUp = () => {
+    navigate('/Signup');
+  }
+
   return (
     <>
     <header className='header'>  
