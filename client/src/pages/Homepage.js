@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
-import {BsSearch} from 'react-icons/bs'
+import {BsSearch,BsPeople} from 'react-icons/bs'
 import styled from "styled-components";
+import {FaCat, FaDog, FaKiwiBird,FaWalking} from "react-icons/fa"
+import {GiRabbit} from "react-icons/gi"
+import {MdPeopleAlt} from "react-icons/md"
+import {BsFillCartFill,BsFillHouseFill,BsFacebook,BsWhatsapp,BsInstagram,BsTwitter,BsYoutube} from "react-icons/bs"
+import {AiOutlineSearch} from "react-icons/ai"
+
 const theme = {
   blue: {
     default: "#3f51b5",
@@ -33,9 +39,7 @@ transition: ease background-color 250ms;
 `;
 
 const StyledButton = styled.button`
-  background-color: black;
   font-size: 12px;
-  color: white;
 `;
 
 const Homepage = () => {
@@ -49,22 +53,93 @@ const Homepage = () => {
   const navigateSignUp = () => {
     navigate('/Signup');
   }
+  const navigateProduct =() =>{
+    navigate('/Product');
+  }
 
   return (
     <>
-    <header className='header'>  
-      <div >
-      <StyledButton onClick={navigateSignUp}>Sign up</StyledButton>
+    {/* HEADERRRRRRRRRRRRRRRRRRRRR */}
+    
+    <nav className="navBar">
+      {/* NAME OF THE WEBSITEEE */}
+      <div className="website_name">
+          <span>F</span>urry
+          <span>F</span>riends
+          <span>H</span>ub
       </div>
-      </header>
-      <body>
+
+      {/* SERVICE LIST */}
+      <div className="service">
+        <ul>
+          <li className="list"> <a href onClick={navigateProduct}><FaCat className="servicelist"/> </a></li>
+          <li className="list"> <a href onClick={navigateProduct}><FaDog className="servicelist"/> </a></li>
+          <li className="list"> <a href onClick={navigateProduct}> <GiRabbit className="servicelist"/> </a></li>
+          <li className="list"> <a href onClick={navigateProduct}> <FaKiwiBird className="servicelist"/> </a></li>
+          <li className="list"> <a href onClick={navigateProduct}> <BsFillHouseFill className="servicelist"/> </a></li>
+          <li className="list"> <a href onClick={navigateProduct}> <FaWalking className="servicelist"/> </a></li>
+        </ul>
+     </div>
+
+     {/* SIGNUP and CART */}
+    <div className="signup_and_cart">
+      <ul>
+      <li className="list"> <div><input type="text" placeholder="Search here" className="input"/> 
+      <span className="search_icon"><AiOutlineSearch/></span>  </div></li>
+        <li className="list"><BsFillCartFill className="cart"/> </li>
+        <li className="list"><StyledButton onClick={navigateSignUp}> <MdPeopleAlt/> </StyledButton></li>
+      </ul>
+      
+    </div>
+    </nav>
+
+
+      {/* BODDDDDDDDDDDDDDDDYYYYYYYYYYYYYYYY */}
+      <body className="body">
         <div>
           Body
         </div>
       </body>
-      <footer>
-        <div>
-          Footer
+
+      {/* FOOOOOOOOOOOOOOOOTTTTTTTTTTTTTTTTEEEEEEEEEEEEEEEEEERRRRRRRRRRRRR */}
+      <footer className="footer">
+        <div className="footer_box">
+          <div className="footer_div">
+           <ul>
+            <li> ABOUT US</li>
+            <li> <p>This is the best e-commerce site for your
+              preferable choice for cat or preferable choice for any 
+              pet accessories. Also you can get pet sitting services
+              from here.
+            </p>
+            </li>
+            <ul className="footer_social_media">
+          <li className="socialmedia_list"> <a href ><BsFacebook className="servicelist"/> </a></li>
+          <li className="socialmedia_list"> <a href><BsInstagram className="servicelist"/> </a></li>
+          <li className="socialmedia_list"> <a href> <BsWhatsapp className="servicelist"/> </a></li>
+          <li className="socialmedia_list"> <a href> <BsTwitter className="servicelist"/> </a></li>
+          <li className="socialmedia_list"> <a href> <BsYoutube className="servicelist"/> </a></li>
+            </ul>
+            </ul>
+          </div>
+          <div className="footer_div"> 
+           <ul> <p>Recent News</p>
+            <li> Services </li>
+            <li> Get in touch </li>
+           </ul>
+          </div>
+          <div className="footer_div"> 
+           <ul> <p>Contact Us</p>
+            <li> Phone : </li>
+            <li> 017******** </li>
+            <li> Email : </li>
+            <li> furryhub@gmail.com </li>
+           </ul>
+          </div>
+        </div>
+        <hr classname="horizontal_line"></hr>
+        <div >
+          <p className="copyright">COPYRIGHT 2023 Furry Friends Hub | SITE DEVELOPED BY Imu and Jobayer</p>
         </div>
       </footer>
     </>

@@ -1,39 +1,89 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .header {
-  background-color: #88a9eb;
-  min-height: 30vh;
+  width: 100%;
+  margin : 0px;
+}
+.navBar{
+  background-color: lightcyan;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+  rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; 
+  width: 100%;
+  height: 15 rem;
+  display: grid;
+  grid-template-columns: 2rem 1fr 2fr 1fr 1rem;
+}
+.website_name{
   display: flex;
-  flex-direction: column;
+  /* background-color: #61dafb; */
+  color: black;
+  grid-column: 2/3;
+  justify-content: start;
   align-items: center;
+  font-style: italic;
+  font-size: 25px;
+}
+.list{
+  list-style: none;
+}
+.service{
+  grid-column: 3/4;
+}
+.service ul{
+   height: 5 rem;
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+}
+.servicelist{
+  size-adjust: 20;
+}
+.signup_and_cart{
+  grid-column: 4/5;
+}
+.signup_and_cart ul{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.input {
+  width: 3cm;
+  position: relative;
+  display: inline-block;
+}
+.searc_icon {
+  position: absolute;
+  right: 0;
+}
+.body{
+  height: 10rem;
+}
+.footer{
+  background-color: lightcyan;
+  color: black;
+  position: relative;
+  width: 100%;
+  height: 15rem;
+}
+.footer_box{
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr;
+}
+.footer_div ul{
+  list-style: none;
+}
+.horizontal_line{
+  color: black;
+  height: 2rem;
+}
+.footer_social_media{
+  list-style: none;
+  height: 5 rem;
+  display: flex;
+  justify-content: start;
+
+}
+.copyright{
+  display: grid;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  text-decoration-color: aqua;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
