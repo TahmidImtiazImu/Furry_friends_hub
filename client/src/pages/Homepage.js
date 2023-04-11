@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import {BsSearch} from 'react-icons/bs'
 import styled from "styled-components";
 const theme = {
@@ -30,33 +31,45 @@ transition: ease background-color 250ms;
   opacity: 0.7;
 }
 `;
-function clickMe() {
-  alert("You clicked me!");
+
+const StyledButton = styled.button`
+  background-color: black;
+  font-size: 32px;
+  color: white;
+`;
+
+const handleClick = () => {
+  alert("You clicked me!"); 
+}
+
+const navigateSignUp = () => {
+  Navigate('/signup');
 }
 const Homepage = () => {
   return (
     <>
-     styled.button`color = white`
+      <StyledButton>button</StyledButton>
     </>
 
   )
 }
 
-export default Homepage
-{/* <header className='header'>  */}
-{/* <div >
-  <div>
-    Button
-  </div>
-</div>
-</header>
-<body>
-  <div>
-    Body
-  </div>
-</body>
-<footer>
-  <div>
-    Footer
-  </div>
-</footer> */}
+export default Homepage;
+
+{/* <header className='header'>  
+      <div >
+        <button type="button" onClick={handleClick}>
+          SignUp
+        </button>
+      </div>
+      </header>
+      <body>
+        <div>
+          Body
+        </div>
+      </body>
+      <footer>
+        <div>
+          Footer
+        </div>
+      </footer> */}
