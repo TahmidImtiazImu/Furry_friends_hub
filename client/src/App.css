@@ -102,27 +102,14 @@
   display: grid;
   grid-template-columns: 0fr 0fr 0fr;
 }
-.image_container{
-  /* position: relative; */
-}
-.image_btn{
-  position: absolute;
-  top: 50%;
-  left: 40%;
-}
-.image_btn:hover{
-  color:wheat;
-  transform: scale(1);
-  background-color: black;
-}
+
 .pet_image:hover{
-  transform: scale(1.02);
-  box-shadow: 0px 0px 15px 0px;
+  filter: blur(5px);
   overflow: hidden;
+
 }
 .pet_image2:hover{
-  transform: scale(1.02);
-  box-shadow: 0px 0px 15px 0px;
+  filter: blur(5px);
 }
 .images2{
   list-style-type: none;
@@ -131,7 +118,8 @@
 }
 .pet_image{
   width: 300px;
-  height: 300px;
+  height: 350px;
+  /* position: relative; */
 }
 .pet_image2{
   width: 450px;
@@ -161,7 +149,19 @@
 .all_images{
   display: grid;
   justify-content: center;
+  grid-template-rows: 0fr 0fr;
 }
 .searchbox{
+
+}
+/* .imagecontainer{
+  position: inherit;
+} */
+.shopnow{
+  position: absolute;
+  top: 50%;
+  left: 50% ;
+} 
+.imageholder{
 
 }

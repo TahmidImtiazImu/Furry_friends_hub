@@ -1,0 +1,19 @@
+.cardbodycontainer{
+  width: 300px;
+  height: 350px;
+ background-image: url(/home/imtiazimu/Desktop/Ip_Lab/Project/Furry_friends_hub/client/public/images/Cat.jpeg);
+  background-size: 300px;
+  background-repeat: no-repeat;
+}
+
+.cardbodycontainer:hover{
+    filter:blur(2px);
+    visibility: visible;
+
+}
+.cardshopnow{
+  visibility: hidden;
+  justify-content: center;
+  margin-top: 40%;
+  margin-left: 40%;
+}

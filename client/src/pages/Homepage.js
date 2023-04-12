@@ -12,6 +12,7 @@ import Popup from "./Popup";
 import PopupDog from "./PopupDog";
 import PopupBird from "./PopupBird";
 import PopupRabbit from "./PopupRabbit";
+import CardImages from "./CardImages";
 
 const StyledButton = styled.button`
   font-size: 12px;
@@ -22,11 +23,20 @@ const Homepage = () => {
   const handleClick = () => {
     alert("You clicked me!"); 
   }  
+  
+  const Card_homeimages = () =>{
+    return (
+    <div >
+      <img src={"/images/Cat.jpeg"} alt="React Image" className="pet_image"/> 
+          <button className="shopnow">Shop now</button>
+    </div>
+    )
+  }
 
   const navigate = useNavigate();
 
   const navigateSignUp = () => {
-    navigate('/Signup');
+    navigate('/Login');
   }
   const navigateProduct =() =>{
     navigate('/Product');
@@ -91,15 +101,16 @@ const Homepage = () => {
       {/* BODDDDDDDDDDDDDDDDYYYYYYYYYYYYYYYY */}
       <body className="body">
       <div className="all_images">
+        <ul>
         <ul className="images">
-          <li> <div className="image_container"><img src={"/images/Cat.jpeg"} alt="React Image" className="pet_image"/> 
-          <button className="image_btn"> Shop now</button> </div></li>
+          <li><img src={"/images/Cat.jpeg"} alt="React Image" className="pet_image"/></li>
           <li><img src={"/images/dog.jpg"} alt="React Image" className="pet_image"/></li>
           <li><img src={"/images/rabbit.webp"} alt="React Image" className="pet_image"/></li>
         </ul>
         <ul className="images2">
         <li><img src={"/images/bird.jpg"} alt="React Image" className="pet_image2"/></li>
         <li><img src={"/images/pet_sitter.jpg"} alt="React Image" className="pet_image2"/></li>
+        </ul>
         </ul>
       </div>
 
