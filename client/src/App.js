@@ -4,6 +4,7 @@ import Homepage from './pages/Homepage'
 import Product from './pages/Product'
 import Signup from './pages/SIgnup'
 import CustomerSignup from './pages/CustomerSignup'
+import LogIn from './pages/LogIn'
 import "./App.css";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
             <Route path="/product" element={<Product/>}  />
             <Route path="/Signup" element={<Signup/>} />
             <Route path="/customerSignup" element={<CustomerSignup/>} />
+            <Route path="/LogIn" element={<LogIn/>} />
         </Routes>
     </Router>
   )

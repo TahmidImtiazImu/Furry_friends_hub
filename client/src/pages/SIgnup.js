@@ -23,7 +23,7 @@ export const signup = () => {
         </div>
         <div className='choices'>
             <p>
-                Already have an account? <a href='#'>Log In</a>
+                Already have an account? <a className='movetologin' href='/LogIn'>Log In</a>
             </p>
         </div>
     </div>

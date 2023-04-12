@@ -33,7 +33,7 @@ export const CustomerSignup = () => {
                     <input type='checkbox' name="agreement" onChange={handleChange}/> I agree to the <a href='#'>Terms of use</a> and <a href='#'>Privacy Policy</a>.
                 </p>
                 <div className="customersignwhole">
-                    <button className='customersigned' onClick={signUp} disabled={!agreement}>SIgn Up</button> <a href='#'>Learn more</a>
+                    <button className='customersigned' onClick={signUp} disabled={!agreement}>SIgn Up</button> <a className="customerlearn" href='#'>Learn more</a>
                 </div>
             </div>
         </div>

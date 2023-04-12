@@ -92,3 +92,7 @@
     display: grid;
     justify-content: center;
   }
+
+  .movetologin:hover{
+    color: blue;
+  }
