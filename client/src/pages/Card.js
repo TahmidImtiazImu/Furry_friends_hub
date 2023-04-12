@@ -9,7 +9,8 @@ export const Card = (props) => {
             navigate('/customerSignup');
         }
         else {
-            alert("Service not yet available :(");
+            // alert("Service not yet available :(");
+            navigate('/ServiceSIgnup');
         }
         
     }
