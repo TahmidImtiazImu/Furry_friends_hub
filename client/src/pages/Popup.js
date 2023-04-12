@@ -24,12 +24,6 @@ const Popup = ({closepop}) => {
             <li className="cat_product" onClick={navigateProduct}>Cat Bowl</li>
             <hr></hr>
             <li className="cat_product" onClick={navigateProduct}>Cat Perfume</li>            
-            <li className="titleCloseBtn">
-               <button
-                onClick={() => {
-                closepop(false);}}>close
-               </button>
-            </li>
         </ui>
 
       </div>

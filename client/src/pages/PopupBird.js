@@ -11,17 +11,11 @@ const PopupBird = ({closepop}) => {
     <div className="modalBackgroundbird">
       <div className="modalContainerbird">
         <ui>
-            <li className="Bird_product" onClick={navigateProduct}>Bird Food</li>
+            <li className="Bird_product" onClick={navigateProduct} >Bird Food</li>
             <hr></hr>
             <li className="Bird_product" onClick={navigateProduct}>Bird Toy</li>
             <hr></hr>
             <li className="Bird_product" onClick={navigateProduct}>Bird Vitamin</li>
-            <li className="titleCloseBtnbird">
-               <button
-                onClick={() => {
-                closepop(false);}}>close
-               </button>
-            </li>
         </ui>
 
       </div>

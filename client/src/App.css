@@ -45,11 +45,13 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  flex-direction: row;
 }
 .input {
   width: 3cm;
   position: relative;
   display: inline-block;
+  border-radius: 12px;
 }
 .searc_icon {
   position: absolute;
@@ -95,11 +97,32 @@
 
   height: 50rem;
 }
-
 .images{
   list-style-type: none;
   display: grid;
   grid-template-columns: 0fr 0fr 0fr;
+}
+.image_container{
+  /* position: relative; */
+}
+.image_btn{
+  position: absolute;
+  top: 50%;
+  left: 40%;
+}
+.image_btn:hover{
+  color:wheat;
+  transform: scale(1);
+  background-color: black;
+}
+.pet_image:hover{
+  transform: scale(1.02);
+  box-shadow: 0px 0px 15px 0px;
+  overflow: hidden;
+}
+.pet_image2:hover{
+  transform: scale(1.02);
+  box-shadow: 0px 0px 15px 0px;
 }
 .images2{
   list-style-type: none;
@@ -138,4 +161,7 @@
 .all_images{
   display: grid;
   justify-content: center;
+}
+.searchbox{
+
 }
