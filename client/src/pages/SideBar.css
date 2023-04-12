@@ -1,0 +1,26 @@
+.sidebar{
+    width: 100px;
+    height: 230px;
+    /* border-radius: 12px; */
+    background: transparent;
+    /* position: fixed; */
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+    /* display: flex;
+    flex-direction: column; */
+    /* padding: 25px; */
+    /* margin : 5px */
+}
+.sidebar_oneelement{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.sidebararrow{
+    color: gray;
+    margin-top: 4px;
+    height: 10px;
+}
+
+.sidberelementname:hover{
+  color: gray;
+}

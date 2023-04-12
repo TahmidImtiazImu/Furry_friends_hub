@@ -1,0 +1,30 @@
+.product{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    height: 50rem;
+}
+
+.sidebar{
+    margin-left: 25px;
+    margin-top: 15px;
+    grid-column: 1/2;
+    width: 80%;
+}
+
+.products{
+    overflow: auto;
+    display: block;
+     grid-column: 2/6;
+
+}
+.products ul{
+    display: grid;
+    grid-template-rows: 2fr 2fr 2fr;
+}
+.onerowproduct{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.productbody{
+ 
+}
