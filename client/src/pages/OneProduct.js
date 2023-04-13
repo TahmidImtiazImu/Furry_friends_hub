@@ -14,8 +14,8 @@ const OneProduct = () => {
 
   return ( 
 
-    <div className="oneproduct" onClick={click}>
-      {popuproduct && <ProductPopupInfo/>}
+    <div className="oneproduct" >
+      {/* {popuproduct && <ProductPopupInfo/>} */}
         <div className="stock">
          Stock:3
         </div>
