@@ -32,7 +32,9 @@ const Product = () => {
       <div className="products">
        <ul>
         <li className="onerowproduct">
-          <div onClick={click}><OneProduct/>{popuproduct && <ProductPopupInfo closepop = {setpoproduct}/>}</div>  <OneProduct/> <OneProduct/>
+          <div onClick={click}><OneProduct/>
+          {popuproduct && <ProductPopupInfo closepop = {setpoproduct}/>}
+          </div>  <OneProduct/> <OneProduct/>
         </li>
         <li  className="onerowproduct">
           <OneProduct/> <OneProduct/> <OneProduct/>

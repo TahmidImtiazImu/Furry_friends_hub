@@ -42,7 +42,7 @@ const Homepage = () => {
     
       <Header/>
      
-   {/* BODDDDDDDDDDDDDDDDYYYYYYYYYYYYYYYY */}
+      {/* BODDDDDDDDDDDDDDDDYYYYYYYYYYYYYYYY */}
       <body className="body">
       <div className="all_images">
         <ul>
