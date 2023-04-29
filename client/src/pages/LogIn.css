@@ -1,5 +1,5 @@
 .loginWhole{
-    background-color: lightcyan;
+    /* background-color: lightcyan; */
     display: grid;
     justify-content: center;
 }
@@ -7,6 +7,7 @@
 .loginBorder{
     text-align: center;
     justify-content: center;
+    border-color: lightcyan;
     display: flex;
     width: 500px;
     /* padding: 90px 0 90px 0; */

@@ -6,6 +6,7 @@ import Signup from './pages/SIgnup'
 import CustomerSignup from './pages/CustomerSignup'
 import LogIn from './pages/LogIn'
 import ServiceSIgnup from './pages/ServiceSIgnup'
+import Cart from './pages/Cart'
 import "./App.css";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/customerSignup" element={<CustomerSignup/>} />
             <Route path="/LogIn" element={<LogIn/>} />
             <Route path="/ServiceSIgnup" element={<ServiceSIgnup/>} />
+            <Route path='/Cart' element={<Cart/>}/>
         </Routes>
     </Router>
   )

@@ -23,6 +23,12 @@ const Header = () => {
     const navigateProduct =() =>{
       navigate('/Product');
     }
+    const navigateCart =() =>{
+      navigate('/Cart');
+    }
+    const navigateHome=() =>{
+      navigate('/');
+    }
     const toggleHover =() =>{
       this.setState({hover: !this.state.hover})
     }
@@ -34,7 +40,7 @@ const Header = () => {
     <div>
     <nav className="navBar" onMouseLeave={()=>{setpop(false); setpopbird(false); setpopdog(false); setpoprabbit(false);}}>
       {/* NAME OF THE WEBSITEEE */}
-      <div className="website_name">
+      <div className="website_name" onClick={navigateHome}>
           <span>F</span>urry
           <span>F</span>riends
           <span>H</span>ub
@@ -59,8 +65,8 @@ const Header = () => {
           <li className="list"> <a href onMouseEnter={()=>{setpop(false); setpopdog(false); setpopbird(false); setpoprabbit(true);}}  
           onClick={navigateProduct}> <GiRabbit className="servicelist"/> </a>
            {!popup && !popupdog && !popupbird && popuprabbit && <PopupRabbit closepop={setpoprabbit}/>}
-          </li>         
-          <li className="list"> <a href onClick={navigateProduct}> <BsFillHouseFill className="servicelist"/> </a></li>
+          </li>
+          <li className="list"> <a href onClick={navigateProduct}> <BsFillHouseFill className="servicelist"/> </a></li>         
           <li className="list"> <a href onClick={navigateProduct}> <FaWalking className="servicelist"/> </a></li>
         </ul>
      </div>
@@ -70,7 +76,7 @@ const Header = () => {
       <ul>
       <li className="list"> <div className="searchbox"><input type="text" placeholder="Search here" className="input" /> 
      </div></li>
-        <li className="list"> <div className="servicelist"> <BsFillCartFill className="cart"/> </div> </li>
+        <li className="list"> <div className="servicelist"> <BsFillCartFill className="cart" onClick={navigateCart}/> </div> </li>
         <li className="list"> <div className="servicelist"> <MdPeopleAlt  onClick={navigateSignUp}/></div>  </li>
       </ul>
     </div>

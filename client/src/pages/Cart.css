@@ -1,0 +1,31 @@
+.CartBody{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.CartForm{
+    height: 50vw;
+    width: 600px;
+}
+
+.CartHorizon{
+    display: flex;
+    justify-content: center;
+}
+.CartFormInfo{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.CartItems{
+    height: 50vw;
+    width: 600px;
+}
+
+.Cartdivider{
+    width: 1px;
+    height: 50vw;
+    background-color: cyan;
+}

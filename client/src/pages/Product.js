@@ -6,55 +6,71 @@ import OneProduct from './OneProduct'
 import SideBar from './SideBar'
 import "./Product.css"
 import ProductPopupInfo from "./productPopupInfo"
+import ProductModal from "../Components/Product/ProductModal";
 
 const Product = () => {
 
   const navigate = useNavigate();
   const[popuproduct,setpoproduct] = useState(false);
 
-  const click = () => {
+  function click(){
     // alert("clicked!!");
     setpoproduct(true);
   }
 
+  const oneProduct = ()=> {
+    return(
+      <div onClick={()=> setpoproduct(true)}>
+          <OneProduct/>
+      </div>
+    );
+  }
+
   return (
    <>
-   {/* HEEEEEEEEEEEEAAADERRRRRRR */}
+    {/* pop window showed to whole screen */}
+   {popuproduct && <ProductModal closepop = {setpoproduct}/>}
 
-      <Header/>
+   {/* pop window hidden */}
 
-  {/*PRODDDDDDDDDDDDDDDDDDDDDDDDDDDDUCTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT  */}
-  <div className="productbody">
-  <div className="product">
-      <div className="sidebar">
-        <SideBar/>
-      </div>
-      <div className="products">
-       <ul>
-        <li className="onerowproduct">
-          <div onClick={click}><OneProduct/>{popuproduct && <ProductPopupInfo closepop = {setpoproduct}/>}</div>  <OneProduct/> <OneProduct/>
-        </li>
-        <li  className="onerowproduct">
-          <OneProduct/> <OneProduct/> <OneProduct/>
-        </li>
-        <li  className="onerowproduct">
-          <OneProduct/> <OneProduct/> <OneProduct/>
-        </li>
-        <li  className="onerowproduct">
-          <OneProduct/> <OneProduct/> <OneProduct/>
-        </li>
-        <li  className="onerowproduct">
-          <OneProduct/> <OneProduct/> <OneProduct/>
-        </li>
-       </ul>
-      </div>
-    </div>
+   {!popuproduct && 
+    <div>
+          {/* HEEEEEEEEEEEEAAADERRRRRRR */}
 
-  </div>
-   
-  {/* FOOOOOOOOOOOOOOOOOOOOTTTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERRRRRR */}
-    <Footer/>
-  
+          <Header/>
+
+        {/*PRODDDDDDDDDDDDDDDDDDDDDDDDDDDDUCTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT  */}
+        <div className="productbody">
+        <div className="product">
+            <div className="sidebar">
+              <SideBar/>
+            </div>
+            <div className="products">
+            <ul>
+              <li className="onerowproduct">
+                {oneProduct()}  {oneProduct()} {oneProduct()}
+              </li>
+              <li  className="onerowproduct">
+                {oneProduct()}  {oneProduct()} {oneProduct()}
+              </li>
+              <li  className="onerowproduct">
+                {oneProduct()}  {oneProduct()} {oneProduct()}
+              </li>
+              <li  className="onerowproduct">
+                {oneProduct()}  {oneProduct()} {oneProduct()}
+              </li>
+              <li  className="onerowproduct">
+                {oneProduct()}  {oneProduct()} {oneProduct()}
+              </li>
+            </ul>
+            </div>
+          </div>
+
+        </div>
+        
+        {/* FOOOOOOOOOOOOOOOOOOOOTTTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERRRRRR */}
+          <Footer/>
+    </div>}
    </>
   )
 }
