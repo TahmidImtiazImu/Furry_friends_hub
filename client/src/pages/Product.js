@@ -32,7 +32,6 @@ const Product = () => {
    {popuproduct && <ProductModal closepop = {setpoproduct}/>}
 
    {/* pop window hidden */}
-
    {!popuproduct && 
     <div>
           {/* HEEEEEEEEEEEEAAADERRRRRRR */}
@@ -65,7 +64,6 @@ const Product = () => {
             </ul>
             </div>
           </div>
-
         </div>
         
         {/* FOOOOOOOOOOOOOOOOOOOOTTTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERRRRRR */}

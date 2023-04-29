@@ -11,6 +11,11 @@
     margin: 25px;
 }
 
-.ProductInfo:hover{
+/* .ProductInfo:hover{
     background-color: aqua;
+} */
+
+.productpopcancel{
+    width: 2px;
+    height: 2px;
 }
