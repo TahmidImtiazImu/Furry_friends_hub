@@ -1,0 +1,27 @@
+.keephorizon{
+    display: flex;
+}
+
+.inputquantity{
+    width: 50px;
+}
+
+.margin{
+    display: flex;
+    margin-left: 120px;
+}
+
+.Margin{
+    margin-left: 290px;
+}
+
+.interactor{
+    cursor: pointer;
+}
+
+.cartTrash{
+    scale: 0.8;
+    color: red;
+    margin-left: 50px;
+    cursor: pointer;
+}

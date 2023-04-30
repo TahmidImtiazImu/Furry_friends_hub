@@ -1,0 +1,22 @@
+.cartproductheader{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.margin-Right{
+    margin-right: 150px;
+}
+
+.marginwhole{
+    margin-top: 20px;
+}
+
+.carthorizontalLine{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 5px;
+    height: 1px;
+    width: 500px;
+    background-color: lightgray;
+}

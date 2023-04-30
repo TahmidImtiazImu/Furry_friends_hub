@@ -11,12 +11,28 @@
 
 .CartHorizon{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    margin-left: 20px;
+    margin-bottom: 10px;
 }
+
+.phone{
+    margin-left: 50px;
+}
+
+.inputarea{
+    margin-left: 5px;
+}
+
+.areaMargin{
+    /* display: flex; */
+    margin-left: 20px;
+}
+
 .CartFormInfo{
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    /* align-items: center; */
+    /* justify-content: space-around; */
 }
 
 .CartItems{
@@ -27,5 +43,35 @@
 .Cartdivider{
     width: 1px;
     height: 50vw;
+    margin-top: 20px;
+    margin-bottom: 20px;
     background-color: cyan;
+}
+
+.textareaNotes{
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    height: 80px;
+    width: 500px;
+    resize: none;
+}
+
+.buynowbtn{
+    font-size: large;
+    margin: 20px;
+    display: flex;
+    justify-content: flex-end;
+    background-color: lightgray;
+    border-color: lightcyan;
+}
+
+.individualcartItem{
+    height: 450px;
+    overflow: auto;
+}
+
+.buynowbtn:hover{
+    background-color: gray;
+    color: white;
 }

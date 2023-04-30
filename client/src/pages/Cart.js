@@ -4,6 +4,7 @@ import Header from './Header'
 import Footer from './Footer'
 import './Cart.css'
 import { BsDisplay } from "react-icons/bs";
+import CartItem from "../Components/CartItem/CartItem";
 
 function Cart() {
   return (
@@ -18,21 +19,50 @@ function Cart() {
                 <div className="CartFormInfo">
                     <div className="CartHorizon">
                         <div>Name:</div>
-                        <input type="text" placeholder="Name"/>
+                        <input className="inputarea" type="text" placeholder="Name"/>
                     </div>
-                    <div className="CartHorizon">
+                    <div className="CartHorizon phone">
                         <div>Phone:</div>
-                        <input type="text" placeholder="Phone"/>
+                        <input className="inputarea" type="text" placeholder="Phone"/>
                     </div>
-                    <div className="CartHorizon">
-                        <div>E-mail: </div>
-                        <input type="text" placeholder="E-mail"/>
-                    </div>
+                </div>
+                <div className="CartHorizon">
+                    <div>E-mail: </div>
+                    <input className="inputarea" type="text" placeholder="E-mail"/>
+                </div>
+                <div className="CartHorizon">
+                    <div>Street Address: </div>
+                    <input className="inputarea" type="text" placeholder="Street Address"/>
+                </div>
+                <div className="CartHorizon">
+                    <div>Post Office: </div>
+                    <input className="inputarea" type="text" placeholder="Post Office"/>
+                </div>
+                <div className="CartHorizon">
+                    <div>District: </div>
+                    <input className="inputarea" type="text" placeholder="District"/>
+                </div>
+                <div className="CartHorizon">
+                    <div>Post Code: </div>
+                    <input className="inputarea" type="text" placeholder="Post Code"/>
+                </div>
+                <div className="areaMargin">
+                    <div>Notes:</div>
+                    <textarea className="textareaNotes" type="text" placeholder="Finish Your Sentences under 300 length" maxLength={300}/>
                 </div>
             </div>
             <div className="Cartdivider"></div>
             <div className="CartItems">
                 <p>Your Order:</p>
+                <div className="individualcartItem">
+                    <CartItem shopName="Shop 1"/>
+                    <CartItem shopName="Shop 2"/>
+                    <CartItem shopName="Shop 3"/>
+                    <CartItem shopName="Shop 4"/>
+                    <CartItem shopName="Shop 5"/>
+                    <CartItem shopName="Shop 6"/>
+                </div>
+                <button className="buynowbtn">Buy Now</button>
             </div>
         </div>
 
