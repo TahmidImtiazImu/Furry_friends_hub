@@ -29,6 +29,9 @@ const Header = () => {
     const navigateHome=() =>{
       navigate('/');
     }
+    const navigatepetsitting=() =>{
+      navigate('/Petsitter');
+    }
     const toggleHover =() =>{
       this.setState({hover: !this.state.hover})
     }
@@ -67,7 +70,7 @@ const Header = () => {
            {!popup && !popupdog && !popupbird && popuprabbit && <PopupRabbit closepop={setpoprabbit}/>}
           </li>
           <li className="list"> <a href onClick={navigateProduct}> <BsFillHouseFill className="servicelist"/> </a></li>         
-          <li className="list"> <a href onClick={navigateProduct}> <FaWalking className="servicelist"/> </a></li>
+          <li className="list"> <a href onClick={navigatepetsitting}> <FaWalking className="servicelist"/> </a></li>
         </ul>
      </div>
 

@@ -8,6 +8,8 @@ import LogIn from './pages/LogIn'
 import ServiceSIgnup from './pages/ServiceSIgnup'
 import Cart from './pages/Cart'
 import "./App.css";
+import PetSitter from './pages/PetSitter'
+
 
 function App() {
   return(
@@ -20,6 +22,8 @@ function App() {
             <Route path="/Login" element={<LogIn/>} />
             <Route path="/ServiceSIgnup" element={<ServiceSIgnup/>} />
             <Route path='/Cart' element={<Cart/>}/>
+            <Route path='/Petsitter' element={<PetSitter/>}/>
+           
         </Routes>
     </Router>
   )

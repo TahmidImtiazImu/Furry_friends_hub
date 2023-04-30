@@ -1,0 +1,70 @@
+.petsitterbody ul{
+    list-style: none;
+    overflow: hidden;
+}
+
+.petsitting_info{
+    height: 20rem;
+    /* margin: 5px; */
+}
+.petsitting_container ul{
+    /* margin: 20px; */
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    list-style: none;
+}
+.petsitting_info_list{
+    flex-basis: 0;
+    flex-grow: 1;
+    margin: 20px;
+}
+.what_is_pet_sitting{
+  font-size: x-large;
+  font-style: inherit;
+}
+.pet_sitter_image{
+    height: 250px;
+    width: 500px;
+}
+.pet_sitting_form{
+    height: 25rem;
+    border: 1px solid black;
+}
+.form_container{
+    
+    margin: 30px;
+    padding: 20px;
+}
+.services_for{
+    display: flex;
+    justify-content: space-between 5px;
+}
+.checkbox-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between 5px;
+
+  }
+.service_checkbox_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between ;
+  }
+
+.option{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}  
+.search{
+    margin-left: 500px;
+    justify-content: center;
+    align-items: center;
+}
+
+.search_button{
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+}

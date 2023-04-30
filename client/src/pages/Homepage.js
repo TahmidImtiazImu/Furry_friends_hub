@@ -16,24 +16,22 @@ import CardImages from "./CardImages";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const StyledButton = styled.button`
-  font-size: 12px;
-`;
+
 
 const Homepage = () => {
 
-  const handleClick = () => {
-    alert("You clicked me!"); 
-  }  
+  // const handleClick = () => {
+  //   alert("You clicked me!"); 
+  // }  
   
-  const Card_homeimages = () =>{
-    return (
-    <div >
-      <img src={"/images/Cat.jpeg"} alt="React Image" className="pet_image"/> 
-          <button className="shopnow">Shop now</button>
-    </div>
-    )
-  }
+  // const Card_homeimages = () =>{
+  //   return (
+  //   <div >
+  //     <img src={"/images/Cat.jpeg"} alt="React Image" className="pet_image"/> 
+  //         <button className="shopnow">Shop now</button>
+  //   </div>
+  //   )
+  // }
 
 
   return (
@@ -47,7 +45,7 @@ const Homepage = () => {
       <div className="all_images">
         <ul>
         <ul className="images">
-          <li><img src={"/images/Cat.jpeg"} alt="React Image" className="pet_image"/></li>
+          <li><img src={"/images/Cat.jpeg"}  className="pet_image"/></li>
           <li><img src={"/images/dog.jpg"} alt="React Image" className="pet_image"/></li>
           <li><img src={"/images/rabbit.webp"} alt="React Image" className="pet_image"/></li>
         </ul>
@@ -86,5 +84,3 @@ const Homepage = () => {
 }
 
 export default Homepage;
-
-
