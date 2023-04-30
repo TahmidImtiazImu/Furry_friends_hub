@@ -31,9 +31,10 @@ const PetSitter = () => {
     <div>
       {/* HEADER */}
       <Header/>
+
+
      <div className='petsitterbody'>
      <ul>
-
       {/* info */}
       <li className='petsitting_info'>
         <div className='petsitting_container'>

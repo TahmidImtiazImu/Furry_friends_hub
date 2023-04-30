@@ -9,6 +9,8 @@ import ServiceSIgnup from './pages/ServiceSIgnup'
 import Cart from './pages/Cart'
 import "./App.css";
 import PetSitter from './pages/PetSitter'
+import Signupindividual from './pages/Signupindividual'
+import Signupshop from './pages/Signupshop'
 
 
 function App() {
@@ -23,7 +25,8 @@ function App() {
             <Route path="/ServiceSIgnup" element={<ServiceSIgnup/>} />
             <Route path='/Cart' element={<Cart/>}/>
             <Route path='/Petsitter' element={<PetSitter/>}/>
-           
+            <Route path='/Signupindividual' element={<Signupindividual/>}/>
+            <Route path='/Signupshop' element={<Signupshop/>}/>
         </Routes>
     </Router>
   )

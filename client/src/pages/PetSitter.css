@@ -1,3 +1,6 @@
+.petsitterbody{
+    /* width: 100vw; */
+}
 .petsitterbody ul{
     list-style: none;
     overflow: hidden;
@@ -11,7 +14,7 @@
     /* margin: 20px; */
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 100vw;
     list-style: none;
 }
 .petsitting_info_list{
@@ -29,6 +32,7 @@
 }
 .pet_sitting_form{
     height: 25rem;
+    /* width: 100vw; */
     border: 1px solid black;
 }
 .form_container{

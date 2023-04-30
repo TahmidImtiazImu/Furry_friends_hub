@@ -24,7 +24,8 @@ export const ProductModal= ({closepop}) => {
     <div className="popModalBackground">
         <div className="ProductModalInfo">
             <div className="PopProductCross">
-                <button  onClick={check}>{baal && <div className="makeitgray">X</div>}{!baal && <div className="makeitgray" onMouseEnter={()=>closepop(false)}>X</div>}</button>
+                <button  onClick={check}>{baal && <div className="makeitgray">X</div>}
+                {!baal && <div className="makeitgray" onMouseEnter={()=>closepop(false)}>X</div>}</button>
             </div>
             <div className="popProductTitle">{title}</div>
             <div className='PopModalcontent'>
