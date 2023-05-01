@@ -1,0 +1,85 @@
+/* html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+   */
+  /* body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+    overflow: hidden;
+  } */
+  
+  .signup-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .form-container {
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 500px;
+    background-color: lightcyan;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+  }
+  
+  .form-container h2 {
+    margin-top: 0;
+  }
+  
+  .form-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .form-container label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .checkbox-group {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  .checkbox-group label {
+    margin-right: 10px;
+  }
+  
+  .form-container button {
+    margin-top: 10px;
+  }
+  
+  .form-container button[type="submit"]:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+
+  .form-container button[type="submit"] {
+    background-color: #0072ff;
+    background-image: linear-gradient(to bottom, #0072ff, #0051ba);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .form-container button[type="submit"]:hover:not(:disabled) {
+    background-image: linear-gradient(to bottom, #0051ba, #0072ff);
+  }
+  

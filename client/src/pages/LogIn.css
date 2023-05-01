@@ -4,78 +4,71 @@
     justify-content: center;
 }
 
-.loginBorder{
-    text-align: center;
-    justify-content: center;
-    border-color: lightcyan;
+.login-form {
+    margin-top: 20%;
     display: flex;
-    width: 500px;
-    /* padding: 90px 0 90px 0; */
-    background-color: transparent;
-}
-
-.login{
-    display: grid;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 400px;
     height: 400px;
-    width: 200%;
-    box-shadow: 11px 12px 13px 12px rgb(207, 207, 207);
-    padding-top:  30px;
+    background-color: lightcyan;
     border-radius: 10px;
-    background-color: white;
-}
-
-.loginmail{
-    display: grid;
-    justify-content: center;
-    grid-template-columns: 1fr 1fr;
-    /* padding: 1%; */
-    /* height: 20px; */
-    text-align: center;
-}
-
-.cloginpass{
-    display: grid;
-    justify-content: center;
-    grid-template-columns: 1fr 1fr;
-    /* padding: 1%; */
-    /* height: 20px; */
-    text-align: center;
-}
-
-.LoggedIn{
-    display: grid;
-    justify-content: center;
-    /* cursor: not-allowed; */
-    padding: 1rem;
-    font-family: inherit;
-    font-weight: bold;
-    font-size: 10px;
-    margin: 1rem;
-    /* margin-left: -5rem; */
-    border: 2px solid black;
-    background: transparent;
-    color: black;
-    border-radius: 0.2rem;
-    transition: 0.3s;
-    animation: ease-in
-}
-
-.LoggedIn:hover{
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+  }
+  
+  .login-form h2 {
+    margin-top: 0;
+  }
+  
+  .login-form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .login-form input[type="email"],
+  .login-form input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  .login-form button[type="submit"] {
+    background-color: #0072ff;
+    background-image: linear-gradient(to bottom, #0072ff, #0051ba);
     color: white;
-    background: black;
-}
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .login-form button[type="submit"]:hover {
+    background-color: #45a049;
+  }
 
-.logintosigup{
+  .login-button-div{
     display: flex;
     justify-content: center;
-}
+    align-items: center;
+  }
+  
+  .login-form a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+  }
 
-.movetosignup{
-    padding-left: 5px;
-}
-
-.movetosignup:hover{
-    color: blue;
-}
+  .signup-link{
+    display: flex;
+    justify-content: center;
+  }
+  

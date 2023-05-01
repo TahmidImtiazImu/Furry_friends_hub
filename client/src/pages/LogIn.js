@@ -3,30 +3,33 @@ import './LogIn.css'
 
 export const LogIn = () => {
 
-    const logIn = () => {
-        alert("SUccessfully Logged In!")
-    }
-
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      // Submit form data
+    };
   return (
     <div className="loginWhole">
-        <h1>Log In</h1>
-        <div className="loginBorder">
-            <div className='login'>
-                <div className = 'loginmail'> 
-                    E-mail: <input type="text" placeholder="Email" className="inputmail"/>
+        <div className="login-form">
+            <h2>Log in</h2>
+            <form onSubmit={handleSubmit}>
+                <label>
+                Email:
+                <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                </label>
+                <label>
+                Password:
+                <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                </label>
+                <div className="login-button-div">
+                    <button type="submit">Log in</button>
                 </div>
-                <div className = 'cloginpass'> 
-                    Password: <input type="text" placeholder="Password" className="inputpass"/>
-                </div>
-                <div className="customersignwhole">
-                    <button className='LoggedIn' onClick={logIn}>Log In</button> 
-                    <p className="logintosigup">
-                        Create An account <a className="movetosignup" href='/Signup'>Sign Up</a>
-                    </p>
-                    
-                </div>
+            </form>
+            <div className="signup-link">Don't have an account?</div>
+            <div className="signup-link"><a href="/Signup">Sign up</a></div>
             </div>
-        </div>
     </div>
   )
 }
