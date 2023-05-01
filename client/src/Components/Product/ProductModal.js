@@ -1,30 +1,18 @@
 import React, { useState } from "react";
 import './ProductModal.css'
 import SingleShopCart from './SingleShopR'
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(<ProductModal />);
-// export const singleShopCart = (props)=> {
-//     // alert(props.shop_name);
-//     return (
-//         <h1>
-//         {props.shop_name}
-//         </h1>
-//     )
-// }
 
 export const ProductModal= ({closepop}) => { 
     var title = "Cat Food"
     const[baal,setbaal] = useState(true);
     function check() {
-        // alert("checking!");
-        // <div onMouseEnter={()=> closepop(false)}/>
         setbaal(false)
     }
   return (
     <div className="popModalBackground">
         <div className="ProductModalInfo">
             <div className="PopProductCross">
-                <button  onClick={check}>{baal && <div className="makeitgray">X</div>}
+                <button  className="PopProductCrossBtn" onClick={check}>{baal && <div className="makeitgray">X</div>}
                 {!baal && <div className="makeitgray" onMouseEnter={()=>closepop(false)}>X</div>}</button>
             </div>
             <div className="popProductTitle">{title}</div>

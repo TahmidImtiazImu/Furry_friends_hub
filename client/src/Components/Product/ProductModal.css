@@ -11,7 +11,7 @@
 .ProductModalInfo{
     height: 350px;
     width: 600px;
-    background-color: lightcyan;
+    background-color: white;
     border-radius: 12px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: flex;
@@ -69,19 +69,11 @@ margin-right: 15px;
 }
 
 .BuyNowfrompopupBtn{
-    background-color: lightgray;
+    background-color: rgb(41, 138, 109);
     border-radius: 5px;
     border-color: black;
+    color: white;
     border: none;
     font-size: 20px;
     cursor: pointer;
 }
-
-.BuyNowfrompopupBtn:hover{
-    background-color: gray;
-    color: white;
-}
-
-/* .ProductModalInfo:hover{
-    background-color: aqua;
-} */
