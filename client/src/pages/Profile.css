@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
   }
   
   .profile-image-wrapper {
@@ -66,7 +66,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 0.5rem 0;
+    margin: 0.1rem 0;
+    width: 70vw;
   }
   
   .profile-form-field label {
@@ -95,4 +96,8 @@
   
   .profile-action-button:hover {
     background-color: #3e8e41;
+  }
+  .service-provider-option{
+    display: flex;
+    flex-direction: row;
   }

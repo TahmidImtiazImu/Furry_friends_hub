@@ -166,7 +166,7 @@ const PetSitter = () => {
         
         <br></br> <br></br>
 
-        {/* Other thins to be selected */}
+        {/* Other things to be selected */}
         <div className="option">
           {/* Area */}
             <div className="area">
