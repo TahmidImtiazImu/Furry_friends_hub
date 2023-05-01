@@ -1,0 +1,98 @@
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  .profile-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .profile-image-wrapper {
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 1rem;
+  }
+  
+  .profile-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profile-name {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .profile-email,
+  .profile-address {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  
+  .profile-content {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 2rem;
+  }
+  
+  .profile-section {
+    margin-bottom: 2rem;
+  }
+  
+  .profile-section-header {
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .profile-section-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profile-form-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0.5rem 0;
+  }
+  
+  .profile-form-field label {
+    margin-right: 1rem;
+  }
+  
+  .profile-form-field select {
+    margin-left: 0.5rem;
+  }
+  
+  .profile-actions {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .profile-action-button {
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .profile-action-button:hover {
+    background-color: #3e8e41;
+  }

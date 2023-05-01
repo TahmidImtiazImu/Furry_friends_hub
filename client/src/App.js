@@ -10,8 +10,8 @@ import Cart from './pages/Cart'
 import "./App.css";
 import PetSitter from './pages/PetSitter'
 import Signupindividual from './pages/Signupindividual'
-import Signupshop from './pages/Signupshop'
 import PersonList from './pages/PersonList'
+import Profile from './pages/Profile'
 
 
 function App() {
@@ -27,8 +27,9 @@ function App() {
             <Route path='/Cart' element={<Cart/>}/>
             <Route path='/Petsitter' element={<PetSitter/>}/>
             <Route path='/Signupindividual' element={<Signupindividual/>}/>
-            <Route path='/Signupshop' element={<Signupshop/>}/>
             <Route path='/PersonList' element={<PersonList/>}/>
+            <Route path='/Profile' element={<Profile/>}/>
+
         </Routes>
     </Router>
   )

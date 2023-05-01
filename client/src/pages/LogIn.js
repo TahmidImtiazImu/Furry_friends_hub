@@ -28,7 +28,7 @@ export const LogIn = () => {
                 </div>
             </form>
             <div className="signup-link">Don't have an account?</div>
-            <div className="signup-link"><a href="/Signup">Sign up</a></div>
+            <div className="signup-link"><a href="/Signupindividual">Sign up</a></div>
             </div>
     </div>
   )

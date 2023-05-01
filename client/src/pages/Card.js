@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import './SIgnup.css'
 import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
-export const Card = ({title,img,singuppopup}) => {
+export const Card = ({title,img}) => {
 
     
 
@@ -13,7 +13,8 @@ export const Card = ({title,img,singuppopup}) => {
         }
         else {
             // alert("Service not yet available :(");
-            singuppopup(true);
+            navigate('/Signupindividual');
+           
         }
         
     }
