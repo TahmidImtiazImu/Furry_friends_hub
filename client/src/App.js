@@ -11,6 +11,7 @@ import "./App.css";
 import PetSitter from './pages/PetSitter'
 import Signupindividual from './pages/Signupindividual'
 import Signupshop from './pages/Signupshop'
+import PersonList from './pages/PersonList'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path='/Petsitter' element={<PetSitter/>}/>
             <Route path='/Signupindividual' element={<Signupindividual/>}/>
             <Route path='/Signupshop' element={<Signupshop/>}/>
+            <Route path='/PersonList' element={<PersonList/>}/>
         </Routes>
     </Router>
   )

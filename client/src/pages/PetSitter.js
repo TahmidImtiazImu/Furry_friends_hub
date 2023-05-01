@@ -27,6 +27,13 @@ const PetSitter = () => {
   const petsizehandleChange = (event) => {
     petsizesetSelectedValue(event.target.value);
   };
+
+  const navigate = useNavigate();
+
+    const navigatePersonList =() =>{
+        navigate('/PersonList');
+      }
+
   return (
     <div>
       {/* HEADER */}
@@ -210,7 +217,7 @@ const PetSitter = () => {
          
          <br></br> <br></br>
          {/*Search button  */}
-        <div className="search" > <button className="serach_button"> Search</button> </div>
+        <div className="search" > <button className="serach_button" onClick={navigatePersonList}> Search</button> </div>
         </div>
       </li>
      </ul>
