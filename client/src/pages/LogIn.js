@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import './LogIn.css'
 
 export const LogIn = () => {
+
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -10,6 +13,9 @@ export const LogIn = () => {
       e.preventDefault();
       // Submit form data
     };
+    function navigateSignup(){
+        navigate("/Signupindividual");
+    }
   return (
     <div className="loginWhole">
         <div className="login-form">
@@ -28,7 +34,7 @@ export const LogIn = () => {
                 </div>
             </form>
             <div className="signup-link">Don't have an account?</div>
-            <div className="signup-link"><a href="/Signupindividual">Sign up</a></div>
+            <div className="signup-link" onClick={navigateSignup}><a>Sign up</a></div>
             </div>
     </div>
   )

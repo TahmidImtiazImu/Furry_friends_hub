@@ -1,4 +1,4 @@
-from flask import  Flask, render_template
+from flask import  Flask, render_template, request, jsonify
 from flask_cors import CORS
 import sqlite3
 
@@ -7,6 +7,10 @@ import sqlite3
 
 app = Flask(__name__, static_folder="../client/build", static_url_path="")
 CORS(app)
+
+conn = sqlite3.connect('../db/database.db', check_same_thread= False)
+cursor = conn.cursor()
+cursor1 = conn.cursor()
 
 @app.route('/')
 def homepage():
@@ -41,9 +45,12 @@ def cart():
 def petsitter():
     return app.send_static_file('index.html')
 
-@app.route('/Signupindividual')
+@app.route('/Signupindividual', methods=['POST'])
 def singupindividual():
-    return app.send_static_file('index.html')
+    data = request.json
+    cursor.execute("INSERT INTO users (name, email) VALUES (?, ? )", (data['name'], data['email']))
+    conn.commit()
+    return jsonify({'status': 'success'})
 
 @app.route('/PersonList')
 def personlist():
@@ -52,12 +59,6 @@ def personlist():
 @app.route('/Profile')
 def profile():
     return app.send_static_file('index.html')
-
-conn = sqlite3.connect('../db/database.db')
-cursor = conn.cursor()
-cursor1 = conn.cursor()
-
-
 
 # # Create a pets table
 # cursor.execute('''CREATE TABLE pets (
@@ -73,20 +74,13 @@ cursor1 = conn.cursor()
 # cursor.execute("INSERT INTO pets (name, species, age) VALUES ('Gizmo', 'Hamster', 1)")
 
 # execute the query and fetch the results
-cursor.execute('SELECT * FROM users')
-cursor1.execute('SELECT *FROM pets')
-rows = cursor.fetchall()
+
+cursor1.execute('SELECT *FROM users')
+rows = cursor1.fetchall()
 
 # print the results
 for row in rows:
     print(row)
-
-rows2 = cursor1.fetchall()
-
-# print the results
-for row2 in rows2:
-    print(row2)
-
 
 # cursor.execute()
 
@@ -95,7 +89,7 @@ for row2 in rows2:
 
 conn.commit()
 
-conn.close()
+# conn.close()
 
 
 if __name__ == '__main__':

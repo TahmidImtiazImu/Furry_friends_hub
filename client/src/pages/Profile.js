@@ -40,6 +40,8 @@ const Profile = () => {
     large: false
   });  
 
+  var imgsource = "/images/bird.jpg";
+  const imgsrc = imgsource ? imgsource : "/images/service_provider.png";
 
   const handleSave = () => {
     setEditing(false);
@@ -84,7 +86,7 @@ const Profile = () => {
     <div className="profile-page">
       <div className="profile-header">
         <div className="profile-image-wrapper">
-          <img className="profile-image" src="https://i.imgur.com/L4Kj0IM.jpg" alt="Profile" />
+          <img className="profile-image" src={imgsrc} alt="Profile" />
         </div>
         <div className="profile-info">
           <h2 className="profile-name">{name}</h2>
@@ -92,10 +94,11 @@ const Profile = () => {
           <p className="profile-address">{address}</p>
         </div>
       </div>
-
-      <br></br> 
       <div className="profile-content">
         <div className="profile-section">
+          <h2>About</h2>
+          <p>I am a Bitboxer! Checkout my next performance!!</p>
+          <br/><br/><br/><br/>
           <h3 className="profile-section-header">Service Provider</h3>
           <div className="profile-section-content">
            
@@ -113,6 +116,9 @@ const Profile = () => {
            <input type="checkbox" checked={serviceProvider} onChange={(e) => setServiceProvider(e.target.checked)} disabled={!editing} />
             <label htmlFor="serviceProvider">Do you want to work as a service provider?</label>            
            </div>            
+           )}
+           {!editing && !serviceProvider && (
+            <div>You are not a service provider!</div>
            )}
 
             {editing && serviceProvider && ( 

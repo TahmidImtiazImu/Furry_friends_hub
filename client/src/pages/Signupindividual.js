@@ -12,6 +12,22 @@ const Signupindividual= () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Submit form data
+
+    fetch('/Signupindividual', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email
+      })
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+
+      //alert-----------
+      alert("Signedup successfully!");
   };
 
   return (
