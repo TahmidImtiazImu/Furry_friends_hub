@@ -33,14 +33,22 @@ def ServiceSignup():
 def cart():
     return app.send_static_file('index.html')
 
-@app.route('/PetSitter')
-def cart():
+@app.route('/Petsitter')
+def petsitter():
     return app.send_static_file('index.html')
+
+@app.route('/Signupindividual')
+def singupindividual():
+    return app.send_static_file('index.html')
+
+@app.route('/PersonList')
+def personlist():
+    return app.send_static_file('index.html')
+
+@app.route('/Profile')
+def profile():
+    return app.send_static_file('index.html')
+
 
 if __name__ == '__main__':
     app.run(host="127.0.0.1", port="5000")
-
-
-
-
-
