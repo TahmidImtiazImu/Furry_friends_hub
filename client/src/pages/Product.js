@@ -20,7 +20,7 @@ const Product = () => {
 
   const oneProduct = ()=> {
     return(
-      <div onClick={()=> setpoproduct(true)}>
+      <div onClick={click}>
           <OneProduct/>
       </div>
     );
@@ -32,7 +32,7 @@ const Product = () => {
    {popuproduct && <ProductModal closepop = {setpoproduct}/>}
 
    {/* pop window hidden */}
-   {!popuproduct && 
+   {
     <div>
           {/* HEEEEEEEEEEEEAAADERRRRRRR */}
 

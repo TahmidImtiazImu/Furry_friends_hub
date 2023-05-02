@@ -21,25 +21,25 @@ const Signupindividual= () => {
             <h2>Sign up</h2>
             <label>
               Name:
-              <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
+              <input className='signupName' type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
             </label>
             <label>
               Email:
-              <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <input className='signupEmail' type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
             </label>
             <label>
               Password:
-              <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+              <input className='signupPass' type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
             </label>
             <label>
               Confirm Password:
-              <input type="password" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+              <input className='signupConfirm' type="password" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
             </label>
             <div className="checkbox-group">
             </div>
               <label>
                 Address:
-                <input type="text" name="shopName" value={shopName} onChange={(e) => setShopName(e.target.value)} required />
+                <input className='signupAddress' type="text" name="shopName" value={shopName} onChange={(e) => setShopName(e.target.value)} required />
               </label>
             
             <label>
