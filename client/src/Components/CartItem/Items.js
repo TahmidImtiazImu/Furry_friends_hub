@@ -11,17 +11,13 @@ function Items(props) {
     <div className='keephorizon'>
         <div>
             <div className='keephorizon'>
-                <div>{props.serialId}. {props.ProductName}</div>
+                <div>{props.ProductName}</div>
                 <div className='margin'>
                     <FaMinus className='interactor'/>
                     <input className='inputquantity' type='text' value={props.quantity}/>
                     <FaPlus className='interactor'/>
                 </div>
                 <div className='margin'>180 tk</div>
-            </div>
-            <div className='keephorizon'>
-                Delivery Charge :
-                <div className='Margin'>1800 tk</div>
             </div>
         </div>
         <FaTrash className='cartTrash'/>

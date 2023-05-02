@@ -20,28 +20,10 @@
     overflow: hidden;
   }
 
-.ProductModalInfo{
-    height: 350px;
-    width: 600px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    padding: 25px;
-}
-
-.ProductModalInfo .PopModalcontent {
-    display: inline-block;
-    text-align: center;
-    margin-top: 10px;
-}
-
 .PopProductCross{
+    /* width: 250px; */
     display: flex;
     justify-content: flex-end;
-    
 }
 .PopProductCross button {
     background-color: transparent;
@@ -54,38 +36,67 @@
     color: gray;
 }
 
-.popupproductheader{
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
-    margin-top: 10px;
-}
-
-.finalproductresult{
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
-    margin-top: 10px;
-}
-
-.addcartpopup{
-    overflow: auto;
-    height: 120px;
-}
-
-.BuyNowfrompopup{
-display: flex;
-justify-content: flex-end;
-margin-top: 60px;
-margin-right: 15px;
-}
-
-.BuyNowfrompopupBtn{
-    background-color: rgb(41, 138, 109);
-    border-radius: 5px;
+/* New code------------------------------------------------------------------ */
+  .modal {
+    width: 300px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    display: grid;
+  }
+  
+  .modal h2 {
+    margin-top: 0;
+  }
+  
+  .modal img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .modal p {
+    margin: 0;
+  }
+  
+  .add-to-cart {
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    border: 2px solid black;
     border-color: black;
-    color: white;
-    border: none;
-    font-size: 20px;
+    border-radius: 5px;
     cursor: pointer;
-}
+    transition: background-color 0.2s;
+    font-size: 16px;
+  }
+  
+  .add-to-cart:hover:not(:disabled) {
+    background-color: black;
+    color: white;
+  }
+
+  .image-wrapper {
+    max-width: 200px;
+    max-height: 200px;
+    overflow: hidden;
+  }
+  
+  .image-wrapper img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .add-to-cart-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+  }
+  
+  

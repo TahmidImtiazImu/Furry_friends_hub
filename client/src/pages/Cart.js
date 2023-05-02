@@ -55,13 +55,16 @@ function Cart() {
             <div className="CartItems">
                 <p>Your Order:</p>
                 <div className="individualcartItem">
-                    <CartItem shopName="Shop 1"/>
-                    <CartItem shopName="Shop 2"/>
-                    <CartItem shopName="Shop 3"/>
-                    <CartItem shopName="Shop 4"/>
-                    <CartItem shopName="Shop 5"/>
-                    <CartItem shopName="Shop 6"/>
+                    <CartItem />
+                    <CartItem/>
+                    <CartItem/>
+                    <CartItem/>
+                    <CartItem/>
+                    <CartItem/>
+                    <CartItem/>
+                    <CartItem/>
                 </div>
+                <p> Delivery Charge: 1600 tk</p>
                 <button className="buynowbtn">Buy Now</button>
             </div>
         </div>
