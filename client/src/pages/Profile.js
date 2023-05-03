@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import './Profile.css';
+import Uploadprofilepic from '../Components/Uploadprofilepic/Uploadprofilepic';
+// import profilepic from "../../db/profile_picture/firstimage.jpg";
+import axios from 'axios';
 
-const Profile = () => {
+const Profile = (props) => {
+
+  const [imagepopup, setimagepopup] = useState(false) ;
   const [editing, setEditing] = useState(false);
   const [save, setSave] = useState(false) ;
   const [name, setName] = useState('John Doe');
@@ -40,8 +45,6 @@ const Profile = () => {
     large: false
   });  
 
-  var imgsource = "/images/bird.jpg";
-  const imgsrc = imgsource ? imgsource : "/images/service_provider.png";
 
   const handleSave = () => {
     setEditing(false);
@@ -80,13 +83,29 @@ const Profile = () => {
       [e.target.name]: e.target.checked
     });
   }  
-    
-
+  const [pictureUrl, setPictureUrl] = useState('');
+  
+  props.username = 'mf@gmail.com';
+  useEffect(() => {
+    axios.get(`/Profile/${props.username}`)
+      .then(response => {
+        const blob = new Blob([response.data], {type: 'image/jpg'});
+        const url = URL.createObjectURL(blob);
+        setPictureUrl(url);
+      })
+      .catch(error => console.error(error));
+  },[props.username]);    
+  
+  var imgsource = {pictureUrl};
+  const imgsrc = imgsource ? imgsource : "/images/service_provider.png";
   return (
     <div className="profile-page">
+
+      {imagepopup && <Uploadprofilepic close={setimagepopup}/>}
       <div className="profile-header">
         <div className="profile-image-wrapper">
-          <img className="profile-image" src={imgsrc} alt="Profile" />
+          
+          <img className="profile-image" src={imgsrc} alt="Profile" onClick={()=>{setimagepopup(true);}} />
         </div>
         <div className="profile-info">
           <h2 className="profile-name">{name}</h2>

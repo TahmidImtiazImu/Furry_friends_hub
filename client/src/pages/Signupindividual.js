@@ -13,6 +13,11 @@ const Signupindividual= () => {
     e.preventDefault();
     // Submit form data
 
+    if (password !== confirmPassword) {
+      alert('Password and password confirmation must be the same');
+      return;
+    }
+
     fetch('/Signupindividual', {
       method: 'POST',
       headers: {
@@ -20,7 +25,8 @@ const Signupindividual= () => {
       },
       body: JSON.stringify({
         name: name,
-        email: email
+        email: email,
+        password : password
       })
     })
       .then(response => response.json())

@@ -29,6 +29,7 @@ function App() {
             <Route path='/Signupindividual' element={<Signupindividual/>}/>
             <Route path='/PersonList' element={<PersonList/>}/>
             <Route path='/Profile' element={<Profile/>}/>
+            <Route path='/Profile' element={<Profile/>}/>
 
         </Routes>
     </Router>

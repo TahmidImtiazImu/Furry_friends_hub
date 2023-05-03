@@ -1,4 +1,4 @@
-from flask import  Flask, render_template, request, jsonify
+from flask import  Flask, render_template, request, jsonify, make_response
 from flask_cors import CORS
 import sqlite3
 
@@ -20,9 +20,29 @@ def homepage():
 def singup():
     return app.send_static_file('index.html')
 
-@app.route('/Login')
+@app.route('/Login', methods=['POST'])
 def login():
-    return app.send_static_file('index.html')
+    print("hello000000000000000000000000000000000000000000000000000000000000000000")
+    email = request.json['email']
+    password = request.json['password']
+    logincursor = conn.cursor()
+    
+    print("check")
+    # Retrieve user from database
+    logincursor.execute("SELECT * FROM users WHERE email=? AND password=?", (email, password))
+    user = logincursor.fetchone()
+
+    # Check if user exists and password is correct
+    if user:
+        # Return success message
+        response = {'message': 'Login successful'}
+        print('successful')
+        return jsonify({'verified': True})
+    else:
+        # Return error message
+        response = {'message': 'Invalid username or password'}
+        print('Invalid')
+        return jsonify({'verified': False})
 
 @app.route('/Product')
 def product():
@@ -47,8 +67,9 @@ def petsitter():
 
 @app.route('/Signupindividual', methods=['POST'])
 def singupindividual():
+    print('signupppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp')
     data = request.json
-    cursor.execute("INSERT INTO users (name, email) VALUES (?, ? )", (data['name'], data['email']))
+    cursor.execute("INSERT INTO users (name, email,password) VALUES (?, ? ,?)", (data['name'], data['email'],data['password']))
     conn.commit()
     return jsonify({'status': 'success'})
 
@@ -56,9 +77,35 @@ def singupindividual():
 def personlist():
     return app.send_static_file('index.html')
 
-@app.route('/Profile')
+@app.route('/Profile',methods=['POST'])
 def profile():
-    return app.send_static_file('index.html')
+    print('profile pic')
+    file = request.files['file']
+    file_data = file.read()
+    email = 'mf@gmail.com'  # assuming the username is sent in the request body
+
+    # Connect to the SQLite3 database
+    profilecurson = conn.cursor()
+
+    # Store the file data in the database for the specified user
+    profilecurson.execute("UPDATE users SET picture_data = ? WHERE email = ?", (file_data, email))
+    conn.commit()
+
+    return {'status': 'success'}
+
+@app.route('/Profile<email>',methods=['GET'])
+def profile_get(email):
+    profile_get = conn.cursor()
+    print('imagr1')
+    profile_get.execute("SELECT picture_data FROM users WHERE email=?", (email,))
+    picture_data = profile_get.fetchone()[10]
+
+    # conn.close()
+    print('image image')
+    response = make_response(picture_data)
+    response.headers.set('Content-Type', 'image/jpg')
+    response.headers.set('Content-Disposition', 'attachment', filename='profile_picture.jpg')
+    return response
 
 # # Create a pets table
 # cursor.execute('''CREATE TABLE pets (

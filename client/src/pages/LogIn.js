@@ -12,6 +12,33 @@ export const LogIn = () => {
     const handleSubmit = (e) => {
       e.preventDefault();
       // Submit form data
+      
+      // alert('hello there');
+      // const { email, password } = this.state;
+      fetch('/Login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.verified) {
+          // Login successful
+          console.log("Login successful");
+          alert('Login successfully') ;
+          navigate('/');
+        } else {
+          // Login failed
+          console.log("Login failed");
+          alert('Login failed');
+        }
+      })
+      .catch(error => console.error(error));
     };
     function navigateSignup(){
         navigate("/Signupindividual");
