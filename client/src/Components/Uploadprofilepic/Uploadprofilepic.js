@@ -1,13 +1,17 @@
 import React, { useState, useRef, useEffect  } from "react";
-import './uploadprofilepic.css'
+import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import axios from "axios"
+import './uploadprofilepic.css'
+
 
 const Uploadprofilepic = ({close}) => {
 
+    const navigate = useNavigate();
     const popimagemodalbackground = `popimagemodalbackground  ${close ? 'show' : ''}`;
     const popupRef = useRef(null);
     const [file, setFile] = useState(null);
     const[baal,setbaal] = useState(true);
+    var email = "mf@gmail.com";
     const handleFileInputChange = (e) => {
         setFile(e.target.files[0]);
       };
@@ -22,7 +26,7 @@ const Uploadprofilepic = ({close}) => {
         // Send a POST request to the Flask backend with the FormData object
         try {
           console.log('no erorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
-          const response = await axios.post("/Profile", formData, {
+          const response = await axios.post(`/Profile/${email}`, formData, {
             headers: {
               "Content-Type": "multipart/form-data",
             },
@@ -31,6 +35,7 @@ const Uploadprofilepic = ({close}) => {
         } catch (error) {
           console.error('eorrrrrrrrrroooooooorrrrrrrr');
         }
+        window.location.reload();
       };  
     useEffect(() => {
 

@@ -8,5 +8,5 @@ CREATE TABLE users (
      preferable_pet TEXT ,
      preferable_services TEXT ,
      preferable_timerange TEXT ,
-    preferable_petsize TEXT
+     preferable_petsize TEXT
  );

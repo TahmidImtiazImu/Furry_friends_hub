@@ -85,18 +85,24 @@ const Profile = (props) => {
   }  
   const [pictureUrl, setPictureUrl] = useState('');
   
-  props.username = 'mf@gmail.com';
+  var email_id = 'mf@gmail.com';
   useEffect(() => {
-    axios.get(`/Profile/${props.username}`)
-      .then(response => {
-        const blob = new Blob([response.data], {type: 'image/jpg'});
-        const url = URL.createObjectURL(blob);
-        setPictureUrl(url);
-      })
-      .catch(error => console.error(error));
-  },[props.username]);    
+    // axios.get(`/Profile/${email_id}`)
+      // .then(response => {
+      //   const blob = new Blob([response.data], {type: 'image/jpg'});
+      //   const url = URL.createObjectURL(blob);
+      //   setPictureUrl(url);
+      // })
+      // .catch(error => console.error(error));
+      fetch(`/Profile/${email_id}`)
+            .then(response => response.blob())
+            .then(blob => {
+                const objectURL = URL.createObjectURL(blob);
+                setPictureUrl(objectURL);
+            });
+  },[email_id]);    
   
-  var imgsource = {pictureUrl};
+  var imgsource = pictureUrl;
   const imgsrc = imgsource ? imgsource : "/images/service_provider.png";
   return (
     <div className="profile-page">
