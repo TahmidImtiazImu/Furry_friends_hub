@@ -9,7 +9,7 @@ const Signupindividual= () => {
   const [address, setAddress] = useState('');
   const [termsChecked, setTermsChecked] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async  (e) => {
     e.preventDefault();
     // Submit form data
 
@@ -17,6 +17,8 @@ const Signupindividual= () => {
       alert('Password and password confirmation must be the same');
       return;
     }
+    const response = await fetch('/images/service_provider.png');
+    const blob = await response.blob();
 
     fetch('/Signupindividual', {
       method: 'POST',
@@ -27,7 +29,8 @@ const Signupindividual= () => {
         name: name,
         email: email,
         password : password,
-        address: address
+        address: address,
+        picture_data : blob
       })
     })
       .then(response => response.json())

@@ -1,19 +1,22 @@
-import React from 'react'
+import {React,useContext} from 'react'
 import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import "./PopupAccount.css"
+import { GlobalContext } from '../Global';
 
 const PopupAccount = ({closepop}) => {
+  const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail } = useContext(GlobalContext);
+
     const navigate = useNavigate();
     const navigateAccount =() =>{
         navigate('/Profile');
       }
       
-      const navigateLogin =() =>{
-        navigate('/LogIn');
-      }
-
       const LogOut =() =>{
-        alert("Logged Out!");
+        // setglobalEmail('') ;
+        window.location.reload();  
+        setglobalLoggedIn(false) ;
+        
+        // navigate('./');
       }
 
     return (
@@ -21,8 +24,6 @@ const PopupAccount = ({closepop}) => {
       <div className="modalContainerAccount">
         <ui>
             <li className="Account-Item" onClick={navigateAccount}>Account</li>
-            <hr></hr>
-            <li className="Account-Item" onClick={navigateLogin}>Log In</li>
             <hr></hr>
             <li className="Account-Item" onClick={LogOut}>Log Out</li>
         </ui>

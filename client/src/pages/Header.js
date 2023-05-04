@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext  } from "react";
 import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import {BsSearch,BsPeople} from 'react-icons/bs'
 import styled from "styled-components";
@@ -14,9 +14,12 @@ import PopupBird from "./PopupBird";
 import PopupRabbit from "./PopupRabbit";
 import CardImages from "./CardImages";
 import PopupAccount from "./PopupAccount";
+import { GlobalContext } from '../Global';
 
 const Header = () => {
+    const { globalloggedIn } = useContext(GlobalContext);
     const navigate = useNavigate();
+    
 
     const navigateSignUp = () => {
       navigate('/Login');
@@ -83,8 +86,12 @@ const Header = () => {
       <li className="list"> <div className="searchbox"><input type="text" placeholder="Search here" className="input" /> 
      </div></li>
         <li className="list"> <div className="servicelist"> <BsFillCartFill className="cart" onClick={navigateCart}/> </div> </li>
-        <li className="list"> <div className="servicelist"> <MdPeopleAlt  onMouseEnter={()=>{setpop(false); setpopdog(false); setpopbird(false); setpoprabbit(false); setpopaccount(true);}}
-        onClick={navigateSignUp}/></div> 
+        <li className="list"> <div className="servicelist"> 
+        {globalloggedIn && < MdPeopleAlt  
+        onMouseEnter={()=>{  setpop(false); setpopdog(false); setpopbird(false); setpoprabbit(false); setpopaccount(true);}}
+        onClick={navigateSignUp}/>  }
+        {!globalloggedIn && <div className="notloggedin" onClick={navigateSignUp}> LogIn </div>}
+        </div> 
          {!popup && !popupdog && !popupbird && !popuprabbit && popaccount && <PopupAccount/>}
         </li>
       </ul>

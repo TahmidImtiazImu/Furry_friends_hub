@@ -28,6 +28,10 @@ cursor1 = conn.cursor()
 def homepage():
     return app.send_static_file('index.html')
 
+@app.route('/Profile')
+def profile():
+    return app.send_static_file('index.html')
+
 @app.route('/Signup')
 def singup():
     return app.send_static_file('index.html')
@@ -85,7 +89,7 @@ def singupindividualreload():
 def singupindividual():
     print('signupppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp')
     data = request.json
-    cursor.execute("INSERT INTO users (name, email,password, address) VALUES (?, ? ,? ,?)", (data['name'], data['email'], data['password'], data['address']))
+    cursor.execute("INSERT INTO users (name, email,password, address,picture_data) VALUES (?, ? ,? ,?,?)", (data['name'], data['email'], data['password'], data['address'], data['picture_data']))
     conn.commit()
     return jsonify({'status': 'success'})
 
@@ -127,9 +131,7 @@ def personlist():
 #     conn.commit()
 #     print('Uploaded image--------')
 #     return {'status': 'success'}
-@app.route('/Profile')
-def profile():
-    return app.send_static_file('index.html')
+
 
 @app.route('/Profile/<email>', methods=['GET', 'POST'])
 def update_profile(email):

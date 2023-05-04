@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import './LogIn.css'
+import { GlobalContext } from '../Global';
+
 
 export const LogIn = () => {
+    
+    const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail } = useContext(GlobalContext);
 
     const navigate = useNavigate();
 
@@ -31,6 +35,8 @@ export const LogIn = () => {
           // Login successful
           console.log("Login successful");
           alert('Login successfully') ;
+          setglobalLoggedIn(true); 
+          setglobalEmail(email);
           navigate('/');
         } else {
           // Login failed

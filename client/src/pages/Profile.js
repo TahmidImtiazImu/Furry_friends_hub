@@ -1,10 +1,15 @@
-import React, { useState ,useEffect} from 'react';
+import React, { useState ,useEffect,useContext} from 'react';
 import './Profile.css';
 import Uploadprofilepic from '../Components/Uploadprofilepic/Uploadprofilepic';
 // import profilepic from "../../db/profile_picture/firstimage.jpg";
 import axios from 'axios';
+import { GlobalContext } from '../Global';
+
 
 const Profile = (props) => {
+
+  const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail } = useContext(GlobalContext);
+
 
   const [imagepopup, setimagepopup] = useState(false) ;
   const [editing, setEditing] = useState(false);
@@ -83,7 +88,7 @@ const Profile = (props) => {
     });
   }  
   
-  var email_id = 'mf@gmail.com';
+  var email_id = globalemail;
   const [pictureUrl, setPictureUrl] = useState('');
   const [userData, setUserData] = useState(null);
   useEffect(() => {
@@ -120,6 +125,7 @@ const address = userData ? userData.address : "Not Provided";
         </div>
         <div className="profile-info">
           <h2 className="profile-name">{name}</h2>
+          
           <p className="profile-email">{email_id}</p>
           <p className="profile-address">{address}</p>
         </div>

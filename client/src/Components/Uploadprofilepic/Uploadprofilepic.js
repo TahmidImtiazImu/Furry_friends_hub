@@ -1,17 +1,20 @@
-import React, { useState, useRef, useEffect  } from "react";
+import React, { useState, useRef, useEffect ,useContext } from "react";
 import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import axios from "axios"
 import './uploadprofilepic.css'
+import { GlobalContext } from '../../Global';
 
 
 const Uploadprofilepic = ({close}) => {
+  const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail } = useContext(GlobalContext);
+
 
     const navigate = useNavigate();
     const popimagemodalbackground = `popimagemodalbackground  ${close ? 'show' : ''}`;
     const popupRef = useRef(null);
     const [file, setFile] = useState(null);
     const[baal,setbaal] = useState(true);
-    var email = "mf@gmail.com";
+    var email = globalemail;
     const handleFileInputChange = (e) => {
         setFile(e.target.files[0]);
       };
