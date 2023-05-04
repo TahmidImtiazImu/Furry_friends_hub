@@ -6,7 +6,7 @@ const Signupindividual= () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [shopName, setShopName] = useState('');
+  const [address, setAddress] = useState('');
   const [termsChecked, setTermsChecked] = useState(false);
 
   const handleSubmit = (e) => {
@@ -26,7 +26,8 @@ const Signupindividual= () => {
       body: JSON.stringify({
         name: name,
         email: email,
-        password : password
+        password : password,
+        address: address
       })
     })
       .then(response => response.json())
@@ -61,7 +62,7 @@ const Signupindividual= () => {
             </div>
               <label>
                 Address:
-                <input className='signupAddress' type="text" name="shopName" value={shopName} onChange={(e) => setShopName(e.target.value)} required />
+                <input className='signupAddress' type="text" name="address" value={address} onChange={(e) => setAddress(e.target.value)} required />
               </label>
             
             <label>

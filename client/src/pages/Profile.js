@@ -8,10 +8,9 @@ const Profile = (props) => {
 
   const [imagepopup, setimagepopup] = useState(false) ;
   const [editing, setEditing] = useState(false);
+  const [pictureBlob, setPictureBlob] = useState(null);
+  const [name_data, setName] = useState('');
   const [save, setSave] = useState(false) ;
-  const [name, setName] = useState('John Doe');
-  const [email, setEmail] = useState('johndoe@example.com');
-  const [address, setAddress] = useState('123 Main St, Anytown USA');
   const [serviceProvider, setServiceProvider] = useState(false);
   const [preferablePets, setPreferablePets] = useState({
     dog: false,
@@ -83,27 +82,33 @@ const Profile = (props) => {
       [e.target.name]: e.target.checked
     });
   }  
-  const [pictureUrl, setPictureUrl] = useState('');
   
   var email_id = 'mf@gmail.com';
+  const [pictureUrl, setPictureUrl] = useState('');
+  const [userData, setUserData] = useState(null);
   useEffect(() => {
-    // axios.get(`/Profile/${email_id}`)
-      // .then(response => {
-      //   const blob = new Blob([response.data], {type: 'image/jpg'});
-      //   const url = URL.createObjectURL(blob);
-      //   setPictureUrl(url);
-      // })
-      // .catch(error => console.error(error));
-      fetch(`/Profile/${email_id}`)
-            .then(response => response.blob())
-            .then(blob => {
-                const objectURL = URL.createObjectURL(blob);
-                setPictureUrl(objectURL);
-            });
-  },[email_id]);    
-  
-  var imgsource = pictureUrl;
-  const imgsrc = imgsource ? imgsource : "/images/service_provider.png";
+    Promise.all([
+      fetch(`/Profile/${email_id}`).then(response => response.blob()),
+      fetch(`/Profile/texts/${email_id}`).then(response => response.json())
+    ])
+      .then(([pictureBlob, data]) => {
+        const pictureObjectURL = URL.createObjectURL(pictureBlob);
+        setPictureUrl(pictureObjectURL);
+        console.log("Checking console");
+        console.log(pictureUrl.length);
+        setUserData({name: data.name, address: data.address});
+      })
+      .catch(error => console.error(error));
+}, [email_id]);
+// var imgsource = pictureUrl;
+// var imgsrc = pictureUrl;
+if(pictureUrl.length == 0){
+  // pictureUrl = "/images/service_provider.png";
+  setPictureUrl("/images/service_provider.png");
+}
+console.log(pictureUrl.length);
+const name = userData ? userData.name : "Unknown";
+const address = userData ? userData.address : "Not Provided";
   return (
     <div className="profile-page">
 
@@ -111,11 +116,11 @@ const Profile = (props) => {
       <div className="profile-header">
         <div className="profile-image-wrapper">
           
-          <img className="profile-image" src={imgsrc} alt="Profile" onClick={()=>{setimagepopup(true);}} />
+          <img className="profile-image" src={pictureUrl} alt="Profile" onClick={()=>{setimagepopup(true);}} />
         </div>
         <div className="profile-info">
           <h2 className="profile-name">{name}</h2>
-          <p className="profile-email">{email}</p>
+          <p className="profile-email">{email_id}</p>
           <p className="profile-address">{address}</p>
         </div>
       </div>

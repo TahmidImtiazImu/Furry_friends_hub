@@ -14,14 +14,14 @@ cursor = conn.cursor()
 cursor1 = conn.cursor()
 
 # Testing image----------------------------------------------------------------
-img_cursor = conn.cursor()
-# Retrieve image data for image with ID 1
-img_cursor.execute("SELECT picture_data FROM users WHERE email=?",("mf@gmail.com",) )
-img_result = img_cursor.fetchone()
+# img_cursor = conn.cursor()
+# # Retrieve image data for image with ID 1
+# img_cursor.execute("SELECT picture_data FROM users WHERE email=?",("mf@gmail.com",) )
+# img_result = img_cursor.fetchone()
 
-# Write image data to a file for inspection
-with open('retrieved_image2.jpg', 'wb') as f:
-    f.write(img_result[0])
+# # Write image data to a file for inspection
+# with open('retrieved_image2.jpg', 'wb') as f:
+#     f.write(img_result[0])
 # Finish Testing image --------------------------------------------------------
 
 @app.route('/')
@@ -77,11 +77,15 @@ def cart():
 def petsitter():
     return app.send_static_file('index.html')
 
+@app.route('/Signupindividual')
+def singupindividualreload():
+    return app.send_static_file('index.html')
+
 @app.route('/Signupindividual', methods=['POST'])
 def singupindividual():
     print('signupppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp')
     data = request.json
-    cursor.execute("INSERT INTO users (name, email,password) VALUES (?, ? ,?)", (data['name'], data['email'],data['password']))
+    cursor.execute("INSERT INTO users (name, email,password, address) VALUES (?, ? ,? ,?)", (data['name'], data['email'], data['password'], data['address']))
     conn.commit()
     return jsonify({'status': 'success'})
 
@@ -151,16 +155,28 @@ def update_profile(email):
         picture_data = profile_get.fetchone()[0]
         print('image image')
         response = make_response(picture_data)
-        response.headers.set('Content-Type', 'image/jpg')
-        # response.headers.set('Content-Disposition', 'attachment', filename='profile_picture/firstimage.jpg')
-        response.headers.set('Content-Disposition', 'attachment; filename=firstimage.jpg')
-        response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate')
-        response.headers.set('Pragma', 'no-cache')
-        response.headers.set('Expires', '0')
+        # response.headers.set('Content-Type', 'image/jpg')
+        # # response.headers.set('Content-Disposition', 'attachment', filename='profile_picture/firstimage.jpg')
+        # response.headers.set('Content-Disposition', 'attachment; filename=firstimage.jpg')
+        # response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate')
+        # response.headers.set('Pragma', 'no-cache')
+        # response.headers.set('Expires', '0')
         
         print('img img img img')
         return response
 
+@app.route('/Profile/texts/<email>', methods=['GET'])
+def get_profile_name(email):
+    profile_get = conn.cursor()
+    profile_get.execute("SELECT name, address FROM users WHERE email=?", (email,))
+    name_data, address_data = profile_get.fetchone()
+
+    response = {
+        "name": name_data,
+        "address": address_data
+    }
+
+    return response
 
         # profile_get = conn.cursor()
         # print('imagr1===============________________-------------+=======++++++_+_+_+_+_+_+++++++___')
