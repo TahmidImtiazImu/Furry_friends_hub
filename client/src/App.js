@@ -12,6 +12,7 @@ import PetSitter from './pages/PetSitter'
 import Signupindividual from './pages/Signupindividual'
 import PersonList from './pages/PersonList'
 import Profile from './pages/Profile'
+import AdminUpload from './Components/Admin/AdminUpload'
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
             <Route path='/Signupindividual' element={<Signupindividual/>}/>
             <Route path='/PersonList' element={<PersonList/>}/>
             <Route path='/Profile' element={<Profile/>}/>
-
+            <Route path='/Admin' element={<AdminUpload/>}/>
         </Routes>
     </Router>
   )

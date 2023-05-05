@@ -16,7 +16,7 @@ cursor1 = conn.cursor()
 # Testing image----------------------------------------------------------------
 # img_cursor = conn.cursor()
 # # Retrieve image data for image with ID 1
-# img_cursor.execute("SELECT picture_data FROM users WHERE email=?",("mf@gmail.com",) )
+# img_cursor.execute("SELECT productImg FROM products WHERE ID=?",("P123",) )
 # img_result = img_cursor.fetchone()
 
 # # Write image data to a file for inspection
@@ -96,6 +96,33 @@ def singupindividual():
 @app.route('/PersonList')
 def personlist():
     return app.send_static_file('index.html')
+
+@app.route('/Admin')
+def adminupload():
+    return app.send_static_file('index.html')
+
+@app.route('/Admin/<pID>', methods=['POST'])
+def Admin_upload_product_image(pID):
+    print('profile pic')
+    file = request.files['file']
+    file_data = file.read()
+
+    # Connect to the SQLite3 database
+    Admincursor = conn.cursor()
+
+    # Store the file data in the database for the specified user
+    Admincursor.execute("UPDATE products SET productImg = ? WHERE ID = ?", (file_data, pID))
+    conn.commit()
+    print('Uploaded product image--------')
+    return {'status': 'success'}    
+
+@app.route('/Admin/texts', methods=['POST'])
+def Admin_upload_product_texts():
+    print('signupppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp')
+    data = request.json
+    cursor.execute("INSERT INTO products (ID, productName, productPrice, productStock, productDetail) VALUES (?, ? ,? ,?, ?)", (data['ID'], data['product_name'], data['price'], data['stock'], data['detail'] ))
+    conn.commit()
+    return jsonify({'status': 'success'})
 
 # @app.route('/Profile/<email>', methods=['GET'])
 # def getprofile(email):

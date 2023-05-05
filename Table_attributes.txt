@@ -10,3 +10,12 @@ CREATE TABLE users (
      preferable_timerange TEXT ,
      preferable_petsize TEXT
  );
+
+CREATE TABLE products (
+  ID TEXT PRIMARY KEY,
+  productName TEXT NOT NULL,
+  productPrice NUMERIC NOT NULL,
+  productStock INTEGER NOT NULL,
+  productImg BLOB ,
+  productDetail TEXT
+);
