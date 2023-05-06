@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import "./ProductModal.css";
 
 const ProductModal = ({title, image, price, stock, about, closepop }) => {
-  const popModalBackgroundclass = `popModalBackground ${
-    closepop ? "show" : ""
-  }`;
+  const popModalBackgroundclass = `popModalBackground ${closepop ? 'show' : ''}`;
+  var title = "Cat Food";
+  const [baal, setbaal] = useState(true);
   const popupRef = useRef(null);
 
   function check() {
@@ -22,14 +22,14 @@ const ProductModal = ({title, image, price, stock, about, closepop }) => {
 
     // Disable scrolling when the popup is open
     if (closepop) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = 'auto';
     }
 
     // Re-enable scrolling when the component unmounts
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = 'auto';
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [closepop, popupRef]);
@@ -37,13 +37,13 @@ const ProductModal = ({title, image, price, stock, about, closepop }) => {
   if (!closepop) return null;
 
   return (
-    <div className={popModalBackgroundclass} onClick={check}>
+    <div className={popModalBackgroundclass} onClick={closepop}>
       <div className="modal" ref={popupRef}>
-        <div className="PopProductCross">
+        {/* <div className="PopProductCross">
           <button className="PopProductCrossBtn" onClick={check}>
             <div className="makeitgray">X</div>
           </button>
-        </div>
+        </div> */}
         <h2>{title}</h2>
         <div className="image-wrapper">
           <img src={image} alt="Cat Food" />
