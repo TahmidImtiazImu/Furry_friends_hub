@@ -33,7 +33,34 @@ const PetSitter = () => {
     const navigatePersonList =() =>{
         navigate('/PersonList');
       }
-
+      const handleSubmit = (event) => {
+        event.preventDefault();
+        const formdata = {
+          selected: selected,
+          serviceselected: serviceselected,
+          timerangeselectedValue: timerangeselectedValue,
+          petsizeselectedValue: petsizeselectedValue
+        };
+    
+        fetch('/api/petsitting', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formdata)
+        })
+        .then(response => {
+          if (response.ok) {
+            alert('Form submitted successfully!');
+          } else {
+            throw new Error('Form submission failed.');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          alert('Form submission failed.');
+        });
+      };  
   return (
     <div>
       {/* HEADER */}
@@ -64,6 +91,7 @@ const PetSitter = () => {
 
 
       {/* Form */}
+     <form onSubmit={handleSubmit}>
       <li className='pet_sitting_form'>
         <div className='form_container'> 
         
@@ -220,6 +248,7 @@ const PetSitter = () => {
         <div className="search" > <button className="serach_button" onClick={navigatePersonList}> Search</button> </div>
         </div>
       </li>
+      </form> 
      </ul>
       </div> 
 
