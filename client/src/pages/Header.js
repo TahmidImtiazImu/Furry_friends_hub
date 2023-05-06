@@ -88,8 +88,7 @@ const Header = () => {
         <li className="list"> <div className="servicelist"> <BsFillCartFill className="cart" onClick={navigateCart}/> </div> </li>
         <li className="list"> <div className="servicelist"> 
         {globalloggedIn && < MdPeopleAlt  
-        onMouseEnter={()=>{  setpop(false); setpopdog(false); setpopbird(false); setpoprabbit(false); setpopaccount(true);}}
-        onClick={navigateSignUp}/>  }
+        onMouseEnter={()=>{  setpop(false); setpopdog(false); setpopbird(false); setpoprabbit(false); setpopaccount(true);}}/>  }
         {!globalloggedIn && <div className="notloggedin" onClick={navigateSignUp}> LogIn </div>}
         </div> 
          {!popup && !popupdog && !popupbird && !popuprabbit && popaccount && <PopupAccount/>}

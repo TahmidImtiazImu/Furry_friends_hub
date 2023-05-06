@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import Header from './Header'
 import Footer from './Footer'
@@ -12,24 +12,44 @@ const Product = () => {
 
   const navigate = useNavigate();
   const[popuproduct,setpoproduct] = useState(false);
+  const [product, setProduct] = useState(null);
+  useEffect(() => {
+    if (!popuproduct) {
+      setProduct(null);
+    }
+  }, [popuproduct]);
 
-  function click(){
-    // alert("clicked!!");
+  const click = (Rname, Rstock, Rprice, Rimage, Rabout) => {
+    setProduct({
+      name: Rname,
+      stock: Rstock,
+      price: Rprice,
+      image: Rimage,
+      about: Rabout,
+    });
     setpoproduct(true);
-  }
+  };
 
-  const oneProduct = ()=> {
-    return(
-      <div onClick={click}>
-          <OneProduct/>
+  const oneProduct = (name, stock, price, image, about) => {
+    const clickHandler = () => {
+      click(name, stock, price, image, about);
+    };
+  
+    return (
+      <div onClick={clickHandler}>
+        <OneProduct name={name} stock={stock} price={price} image={image} />
       </div>
     );
-  }
-
+  };
+  
+  const singleProduct = () => {
+    return oneProduct("Cat Food", "3", 180, "/images/cat_food.jpg", "about");
+  };
+  
   return (
    <>
     {/* pop window showed to whole screen */}
-   {popuproduct && <ProductModal closepop = {setpoproduct}/>}
+   {popuproduct && <ProductModal title = {product.name} image = {product.image} price = {product.price} stock = {product.stock} about = {product.about} closepop = {setpoproduct}/>}
 
    {/* pop window hidden */}
    {
@@ -47,19 +67,19 @@ const Product = () => {
             <div className="products">
             <ul>
               <li className="onerowproduct">
-                {oneProduct()}  {oneProduct()} {oneProduct()}
+                {singleProduct()}  {singleProduct()} {singleProduct()}
               </li>
               <li  className="onerowproduct">
-                {oneProduct()}  {oneProduct()} {oneProduct()}
+                {singleProduct()}  {singleProduct()} {singleProduct()}
               </li>
               <li  className="onerowproduct">
-                {oneProduct()}  {oneProduct()} {oneProduct()}
+                {singleProduct()}  {singleProduct()} {singleProduct()}
               </li>
               <li  className="onerowproduct">
-                {oneProduct()}  {oneProduct()} {oneProduct()}
+                {singleProduct()}  {singleProduct()} {singleProduct()}
               </li>
               <li  className="onerowproduct">
-                {oneProduct()}  {oneProduct()} {oneProduct()}
+                {singleProduct()}  {singleProduct()} {singleProduct()}
               </li>
             </ul>
             </div>

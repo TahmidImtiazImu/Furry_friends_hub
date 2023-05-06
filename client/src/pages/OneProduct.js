@@ -3,7 +3,7 @@ import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import "./OneProduct.css"
 import ProductPopupInfo from "./productPopupInfo"
 
-const OneProduct = () => {
+const OneProduct = (props) => {
   const navigate = useNavigate();
   const[popuproduct,setpoproduct] = useState(false);
 
@@ -17,16 +17,16 @@ const OneProduct = () => {
     <div className="oneproduct" >
       {/* {popuproduct && <ProductPopupInfo/>} */}
         <div className="stock">
-         Stock:3
+         Stock: {props.stock}
         </div>
         <div>
-          <img className="productimage" src="/images/cat_food.jpg"></img>
+          <img className="productimage" src={props.image}></img>
         </div>
         <div>
-          Cat food
+          {props.name}
         </div>
         <div>
-            180tk
+            {props.price} tk
         </div>
 
     </div>
