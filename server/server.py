@@ -5,7 +5,8 @@ from io import BytesIO
 import base64
 import time
 # from server.admin2 import  admin2_bp
-# from server.admin1 import  admin1_bp
+from admin1 import admin1_bp
+from admin2 import admin2_bp
 
 
 
@@ -13,8 +14,9 @@ import time
 app = Flask(__name__, static_folder="../client/build", static_url_path="")
 CORS(app)
 
-# # Register the blueprints for each app
-# app.register_blueprint(admin1_bp)
+# Register the blueprints for each app
+app.register_blueprint(admin1_bp, url_prefix='/admin1')
+app.register_blueprint(admin2_bp, url_prefix='admin2')
 # app.register_blueprint(admin2_bp)
 
 conn = sqlite3.connect('../db/database.db', check_same_thread= False)
