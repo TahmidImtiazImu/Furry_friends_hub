@@ -3,9 +3,9 @@ import "./ProductModal.css";
 
 const ProductModal = ({title, image, price, stock, about, closepop }) => {
   const popModalBackgroundclass = `popModalBackground ${closepop ? 'show' : ''}`;
-  var title = "Cat Food";
   const [baal, setbaal] = useState(true);
   const popupRef = useRef(null);
+  console.log("title in modal: " + title);
 
   function check() {
     closepop(false);
@@ -46,7 +46,7 @@ const ProductModal = ({title, image, price, stock, about, closepop }) => {
         </div> */}
         <h2>{title}</h2>
         <div className="image-wrapper">
-          <img src={image} alt="Cat Food" />
+          <img src={image} alt="product image" />
         </div>
         <p>Price: {price} tk</p>
         <p>Stock: {stock}</p>

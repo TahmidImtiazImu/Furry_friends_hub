@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
+import React, { useState, useEffect, useContext } from "react";
+import {Routes, Route, useNavigate, Navigate, useLocation} from 'react-router-dom';
 import Header from './Header'
 import Footer from './Footer'
 import OneProduct from './OneProduct'
@@ -7,44 +7,80 @@ import SideBar from './SideBar'
 import "./Product.css"
 import ProductPopupInfo from "./productPopupInfo"
 import ProductModal from "../Components/Product/ProductModal";
+import { GlobalContext } from '../Global';
 
 const Product = () => {
+  const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType } = useContext(GlobalContext);
 
   const navigate = useNavigate();
   const[popuproduct,setpoproduct] = useState(false);
   const [product, setProduct] = useState(null);
+  const [products, setProducts] = useState([]);
+  // const productType = useLocation();
+  // if (productType && productType.type) {
+  //   const data = productType.type;
+  //   console.log(data.type);
+  // } else {
+  //   console.log('productType is null or undefined');
+  // }
+
+  const type = globalType;
   useEffect(() => {
+    fetch('/Product/all')
+      .then(response => response.json())
+      .then(data => setProducts(data))
+      .catch(error => console.error(error));
+      console.log(products + "Hello------");
     if (!popuproduct) {
       setProduct(null);
     }
-  }, [popuproduct]);
+  }, [popuproduct], []);
 
-  const click = (Rname, Rstock, Rprice, Rimage, Rabout) => {
-    setProduct({
-      name: Rname,
+  const click = (Rname, newName, Rstock, Rprice, Rimage, Rabout) => {
+    const newProduct = {
+      name: newName,
       stock: Rstock,
       price: Rprice,
       image: Rimage,
       about: Rabout,
-    });
+    };
+    setProduct(newProduct);
+    console.log("nameonclick: " + newName);
+    console.log("productname: " + newProduct.name);
     setpoproduct(true);
   };
 
-  const oneProduct = (name, stock, price, image, about) => {
+  const oneProduct = (name, stock, price, image, about, type) => {
     const clickHandler = () => {
-      click(name, stock, price, image, about);
+      click(name, name,stock, price, image, about);
+      console.log("direct name: " + name);
     };
   
     return (
-      <div onClick={clickHandler}>
-        <OneProduct name={name} stock={stock} price={price} image={image} />
+      <div>
+        {checkType(type) && <div className="wrapproductcard" onClick={clickHandler}>
+          <OneProduct name={name} stock={stock} price={price} image={image} />
+        </div>}
       </div>
     );
   };
   
-  const singleProduct = () => {
-    return oneProduct("Cat Food", "3", 180, "/images/cat_food.jpg", "about");
-  };
+  // const singleProduct = () => {
+  //   return oneProduct("Cat Food", "3", 180, "/images/cat_food.jpg", "about");
+  // };
+
+  function checkType(Ptypes){
+    console.log(Ptypes);
+    if(type == "all"){
+      return true;
+    }
+    else if(Ptypes == type){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
   
   return (
    <>
@@ -65,23 +101,10 @@ const Product = () => {
               <SideBar/>
             </div>
             <div className="products">
-            <ul>
-              <li className="onerowproduct">
-                {singleProduct()}  {singleProduct()} {singleProduct()}
-              </li>
-              <li  className="onerowproduct">
-                {singleProduct()}  {singleProduct()} {singleProduct()}
-              </li>
-              <li  className="onerowproduct">
-                {singleProduct()}  {singleProduct()} {singleProduct()}
-              </li>
-              <li  className="onerowproduct">
-                {singleProduct()}  {singleProduct()} {singleProduct()}
-              </li>
-              <li  className="onerowproduct">
-                {singleProduct()}  {singleProduct()} {singleProduct()}
-              </li>
-            </ul>
+            {/* //////////////////cards in a loop///////////////////// */}
+              {products.map((singleproduct) => (
+                oneProduct(singleproduct.name, singleproduct.stock, singleproduct.price,`data:image/jpg;base64,${singleproduct.image}`, singleproduct.about, singleproduct.type)
+              ))}
             </div>
           </div>
         </div>

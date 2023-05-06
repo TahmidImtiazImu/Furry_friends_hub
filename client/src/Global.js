@@ -5,6 +5,7 @@ export const GlobalContext = createContext();
 export const GlobalProvider = ({ children }) => {
   const [globalloggedIn, setglobalLoggedIn] = useState(false);
   const [globalemail, setglobalEmail] = useState('');
+  const [globalType, setGlobalType] = useState('');
 
   useEffect(() => {
     const loggedIn = localStorage.getItem('globalloggedIn');
@@ -18,10 +19,11 @@ export const GlobalProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('globalloggedIn', JSON.stringify(globalloggedIn));
     localStorage.setItem('globalemail', JSON.stringify(globalemail));
-  }, [globalloggedIn, globalemail]);
+    localStorage.setItem('globalType', JSON.stringify(globalType))
+  }, [globalloggedIn, globalemail, globalType]);
 
   return (
-    <GlobalContext.Provider value={{ globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail }}>
+    <GlobalContext.Provider value={{ globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType }}>
       {children}
     </GlobalContext.Provider>
   );

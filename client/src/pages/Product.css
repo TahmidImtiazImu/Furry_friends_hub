@@ -1,7 +1,26 @@
 .product{
-    display: grid;
+    display: flex;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     height: 50rem;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 100px;
+    margin-top: 30px;
+    align-content: flex-start;
+    overflow-y: auto;
+  }
+  
+  @media (max-width: 767px) {
+    .products {
+      justify-content: center;
+    }
+  }
+
+.wrapproductcard{
+    display: inline-block;
 }
 
 .sidebar{
@@ -9,14 +28,15 @@
     margin-top: 15px;
     grid-column: 1/2;
     width: 80%;
+    width: 200px;
 }
 
-.products{
+/* .products{
     overflow: auto;
     display: block;
      grid-column: 2/6;
 
-}
+} */
 .products ul{
     display: grid;
     grid-template-rows: 2fr 2fr 2fr;

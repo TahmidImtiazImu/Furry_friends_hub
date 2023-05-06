@@ -16,6 +16,7 @@ CREATE TABLE products (
   productName TEXT NOT NULL,
   productPrice NUMERIC NOT NULL,
   productStock INTEGER NOT NULL,
+  productType TEXT NOT NULL,
   productImg BLOB ,
   productDetail TEXT
 );
