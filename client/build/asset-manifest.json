@@ -1,16 +1,6 @@
 {
   "files": {
     "main.css": "/static/css/main.c7599669.css",
-<<<<<<< HEAD
-    "main.js": "/static/js/main.d86abc12.js",
-    "index.html": "/index.html",
-    "main.c7599669.css.map": "/static/css/main.c7599669.css.map",
-    "main.d86abc12.js.map": "/static/js/main.d86abc12.js.map"
-  },
-  "entrypoints": [
-    "static/css/main.c7599669.css",
-    "static/js/main.d86abc12.js"
-=======
     "main.js": "/static/js/main.90923c72.js",
     "index.html": "/index.html",
     "main.c7599669.css.map": "/static/css/main.c7599669.css.map",
@@ -19,6 +9,5 @@
   "entrypoints": [
     "static/css/main.c7599669.css",
     "static/js/main.90923c72.js"
->>>>>>> refs/remotes/origin/master
   ]
 }
