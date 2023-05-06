@@ -3,6 +3,13 @@ import axios from "axios"
 import withAuth from '../Authentication/withAuth';
 import './AdminUpload.css'
 
+const options = [
+  { value: 'cat', label: 'Cat' },
+  { value: 'dog', label: 'Dog' },
+  { value: 'bird', label: 'Bird' },
+  { value: 'rabbit', label: 'Rabbit' }
+];
+
 function AdminUpload() {
     const [pName, setPName] = useState('');
     const [pStock, setPStock] = useState(0);
@@ -10,6 +17,12 @@ function AdminUpload() {
     const [file, setFile] = useState(null);
     const [pID, setPID] = useState('');
     const [pDetail, setPDetail] = useState("");
+    const [selectedOption, setSelectedOption] = useState('');
+
+  function handleChange(event) {
+    setSelectedOption(event.target.value);
+    console.log(selectedOption);
+  }
 
     const handleFileInputChange = (e) => {
         setFile(e.target.files[0]);
@@ -47,7 +60,8 @@ function AdminUpload() {
               product_name: pName,
               price: pPrice,
               stock : pStock,
-              detail: pDetail
+              detail: pDetail,
+              type: selectedOption
             })
           })
             .then(response => response.json())
@@ -90,12 +104,25 @@ function AdminUpload() {
                 type="file"
                 accept="image/*"
                 onChange={handleFileInputChange}
+                required
             />
+        </div>
+
+        <div>
+          <label htmlFor="limited-options-input">Select an option:</label>
+          <select id="limited-options-input" value={selectedOption} onChange={handleChange} required>
+            <option value="">--Select an option--</option>
+            {options.map(option => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className='AdminAlign'>
             Product Details:
-            <textarea className='AdminTextArea' type="text" value={pDetail} onChange={(e) => setPDetail(e.target.value)} placeholder="Finish Your Sentences under 300 length" maxLength={300}/>
+            <textarea className='AdminTextArea' type="text" value={pDetail} onChange={(e) => setPDetail(e.target.value)} placeholder="Finish Your Sentences under 300 length" maxLength={300} required/>
         </div>
 
         <button className='AdminUploadBtn' type='submit'>ReStock</button>

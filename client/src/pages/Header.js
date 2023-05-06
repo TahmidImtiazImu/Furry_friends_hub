@@ -17,15 +17,47 @@ import PopupAccount from "./PopupAccount";
 import { GlobalContext } from '../Global';
 
 const Header = () => {
-    const { globalloggedIn } = useContext(GlobalContext);
+  const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType } = useContext(GlobalContext);
     const navigate = useNavigate();
     
 
     const navigateSignUp = () => {
       navigate('/Login');
     }
-    const navigateProduct =() =>{
-      navigate('/Product');
+    const navigateProductCat = () => {
+      setGlobalType('cat');
+      console.log(globalType);
+      navigate({
+        pathname: '/Product',
+      });
+    }
+    const navigateProductDog =() =>{
+      setGlobalType('dog');
+      console.log(globalType);
+      navigate({
+        pathname: '/Product',
+      });
+    }
+    const navigateProductBird =() =>{
+      setGlobalType('bird');
+      console.log(globalType);
+      navigate({
+        pathname: '/Product',
+      });
+    }
+    const navigateProductRabbit =() =>{
+      setGlobalType('rabbit');
+      console.log(globalType);
+      navigate({
+        pathname: '/Product',
+      });
+    }
+    const navigateProductAll =() =>{
+      setGlobalType('all');
+      console.log(globalType);
+      navigate({
+        pathname: '/Product',
+      });
     }
     const navigateCart =() =>{
       navigate('/Cart');
@@ -60,22 +92,22 @@ const Header = () => {
         <ul>
           <li className="list"> 
           <a href onMouseEnter={()=>{setpop(true); setpopdog(false); setpopbird(false); setpoprabbit(false); setpopaccount(false);}}  
-          onClick={navigateProduct}><FaCat className="servicelist"/> </a>
+          onClick={navigateProductCat}><FaCat className="servicelist"/> </a>
            {popup && !popupdog && !popupbird && !popuprabbit && !popaccount && <Popup closepop={setpop}/>}
            </li>
           <li className="list" > <a href  onMouseEnter={()=>{setpop(false); setpopdog(true); setpopbird(false); setpoprabbit(false); setpopaccount(false);}} 
-          onClick={navigateProduct}><FaDog className="servicelist"/> </a>
+          onClick={navigateProductDog}><FaDog className="servicelist"/> </a>
            {!popup && popupdog && !popupbird && !popuprabbit && !popaccount && <PopupDog closepop={setpopdog}/>}
           </li>
           <li className="list"> <a href onMouseEnter={()=>{setpop(false); setpopdog(false); setpopbird(true); setpoprabbit(false); setpopaccount(false);}}  
-          onClick={navigateProduct}> <FaKiwiBird className="servicelist"/> </a>
+          onClick={navigateProductBird}> <FaKiwiBird className="servicelist"/> </a>
            {!popup && !popupdog && popupbird && !popuprabbit && !popaccount && <PopupBird closepop={setpopbird}/>}
           </li>
           <li className="list"> <a href onMouseEnter={()=>{setpop(false); setpopdog(false); setpopbird(false); setpoprabbit(true); setpopaccount(false);}}  
-          onClick={navigateProduct}> <GiRabbit className="servicelist"/> </a>
+          onClick={navigateProductRabbit}> <GiRabbit className="servicelist"/> </a>
            {!popup && !popupdog && !popupbird && popuprabbit && !popaccount && <PopupRabbit closepop={setpoprabbit}/>}
           </li>
-          <li className="list"> <a href onClick={navigateProduct}> <BsFillHouseFill className="servicelist"/> </a></li>         
+          <li className="list"> <a href onClick={navigateProductAll}> <BsFillHouseFill className="servicelist"/> </a></li>         
           <li className="list"> <a href onClick={navigatepetsitting}> <FaWalking className="servicelist"/> </a></li>
         </ul>
      </div>
