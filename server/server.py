@@ -1,13 +1,21 @@
-from flask import  Flask, render_template, request, jsonify, make_response, send_file
+from flask import  Flask, Blueprint,render_template, request, jsonify, make_response, send_file
 from flask_cors import CORS
 import sqlite3
 from io import BytesIO
 import base64
 import time
+# from server.admin2 import  admin2_bp
+# from server.admin1 import  admin1_bp
+
+
 
 
 app = Flask(__name__, static_folder="../client/build", static_url_path="")
 CORS(app)
+
+# # Register the blueprints for each app
+# app.register_blueprint(admin1_bp)
+# app.register_blueprint(admin2_bp)
 
 conn = sqlite3.connect('../db/database.db', check_same_thread= False)
 cursor = conn.cursor()
