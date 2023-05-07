@@ -238,6 +238,41 @@ def get_profile_name(email):
 
     return response
 
+
+@app.route('/Profile/api', methods=['POST'])
+def submit_form():
+    print("hello from admin1")
+    data = request.json
+    # Retrieve form data from request object
+    print(data['email'] + 'emaillllllllllllllllllllllllllllll')
+    selected = ', '.join([key for key, value in data.get('selected').items() if value])
+    serviceselected = ', '.join([key for key, value in data.get('serviceselected').items() if value])
+    timerangeselectedValue = ', '.join([key for key, value in data.get('timerangeselectedValue').items() if value])
+    petsizeselectedValue = ', '.join([key for key, value in data.get('petsizeselectedValue').items() if value])
+    
+    print("Hello from middle admin1")
+    # selected = request.form.getlist('selected')
+    # serviceselected = request.form.getlist('serviceselected')
+    # timerangeselectedValue = request.form['timerangeselectedValue']
+    # petsizeselectedValue = request.form['petsizeselectedValue']
+
+    # Create connection to SQLite3 database and cursor object
+    api_profile = conn.cursor()
+
+    # Create table to store form data
+    api_profile.execute('''CREATE TABLE IF NOT EXISTS pet_sitter
+                 (email TEXT NOT NULL,selected TEXT, serviceselected TEXT, timerangeselectedValue TEXT, petsizeselectedValue TEXT)''')
+
+    # Insert form data into table
+    api_profile.execute("INSERT INTO pet_sitter (email, selected, serviceselected, timerangeselectedValue, petsizeselectedValue) VALUES (?, ?, ?, ?, ?)", (data['email'], selected, serviceselected,  timerangeselectedValue, petsizeselectedValue))
+
+    # Commit changes and close connection
+    conn.commit()
+
+    return 'Form submitted successfully!'
+
+
+
         # profile_get = conn.cursor()
         # print('imagr1===============________________-------------+=======++++++_+_+_+_+_+_+++++++___')
         # profile_get.execute("SELECT picture_data FROM users WHERE email=?", (email,))

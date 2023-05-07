@@ -50,10 +50,9 @@ const Profile = (props) => {
   });  
 
 
-  const handleSave = () => {
-    setEditing(false);
-    setSave(true);
-  };
+  // const handleSave = () => {
+
+  // };
 
   const handleEdit = () => {
     setEditing(true);
@@ -114,6 +113,40 @@ if(pictureUrl.length == 0){
 console.log(pictureUrl.length);
 const name = userData ? userData.name : "Unknown";
 const address = userData ? userData.address : "Not Provided";
+
+const handleSubmit = async  (e) =>{
+  console.log("hello from form submit save");
+  setEditing(false);
+  setSave(true);
+  e.preventDefault();
+  const formdata = {
+    email: globalemail,
+    selected: preferablePets,
+    serviceselected: preferableservices,
+    timerangeselectedValue: preferableTimerange,
+    petsizeselectedValue: preferablePetsize
+  };
+  console.log(formdata + 'fromdata') ;
+  console.log(globalemail) ;
+  fetch('/Profile/api', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formdata)
+  })
+  .then(response => {
+    if (response.ok) {
+      alert('Form submitted successfully!');
+    } else {
+      throw new Error('Form submission failed.');
+    }
+  })
+  .catch(error => {
+    console.error(error);
+    alert('Form submission failed.');
+  });
+};  
   return (
     <div className="profile-page">
 
@@ -158,7 +191,7 @@ const address = userData ? userData.address : "Not Provided";
            )}
 
             {editing && serviceProvider && ( 
-                <div>
+                <form onSubmit={handleSubmit}>
 
                     {/*preferabel pet  */}
               <div className="profile-form-field">
@@ -260,7 +293,7 @@ const address = userData ? userData.address : "Not Provided";
                 </div>   
               </div>                  
 
-                </div>   
+                </form>   
              )}
           </div>
         </div>
@@ -284,7 +317,7 @@ const address = userData ? userData.address : "Not Provided";
       </div>
       <div className="profile-actions">
         {editing ? (
-          <button className="profile-action-button" onClick={handleSave}>Save</button>
+          <button className="profile-action-button" onClick={handleSubmit}>Save</button>
           ) : (
             <button className="profile-action-button" onClick={handleEdit}>Edit</button>
           )}
