@@ -1,15 +1,16 @@
 CREATE TABLE users (
-     id INTEGER PRIMARY KEY AUTOINCREMENT,
+     email TEXT PRIMARY KEY,
      name TEXT NOT NULL,
-     email TEXT NOT NULL,
      address TEXT ,
      about TEXT ,
      password TEXT ,
+     picture_data BLOB ,
+     pet_sitter TEXT,
      preferable_pet TEXT ,
      preferable_services TEXT ,
      preferable_timerange TEXT ,
      preferable_petsize TEXT
- );
+);
 
 CREATE TABLE products (
   ID TEXT PRIMARY KEY,
@@ -21,7 +22,7 @@ CREATE TABLE products (
   productDetail TEXT
 );
 CREATE TABLE IF NOT EXISTS pet_sitter
-      (email TEXT NOT NULL,
+      (email TEXT PRIMARY KEY,
       selected TEXT, 
       serviceselected TEXT,
       timerangeselectedValue TEXT,

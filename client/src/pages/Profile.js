@@ -113,13 +113,17 @@ if(pictureUrl.length == 0){
 console.log(pictureUrl.length);
 const name = userData ? userData.name : "Unknown";
 const address = userData ? userData.address : "Not Provided";
-
+var pet_sitter;
 const handleSubmit = async  (e) =>{
   console.log("hello from form submit save");
   setEditing(false);
   setSave(true);
   e.preventDefault();
+  console.log( 'service_provider'+serviceProvider);
+  if(serviceProvider) pet_sitter = 'YES';
+  else pet_sitter = 'NO' ;
   const formdata = {
+    pet_sitter : pet_sitter,
     email: globalemail,
     selected: preferablePets,
     serviceselected: preferableservices,

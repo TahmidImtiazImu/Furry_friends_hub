@@ -120,7 +120,10 @@ def singupindividualreload():
 def singupindividual():
     print('signupppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp')
     data = request.json
-    cursor.execute("INSERT INTO users (name, email,password, address,picture_data) VALUES (?, ? ,? ,?,?)", (data['name'], data['email'], data['password'], data['address'], data['picture_data']))
+    print(data['email'] )
+    print(data['picture_data'])
+    petsitter = 'NO'
+    cursor.execute("INSERT INTO users (email,name,password, address, pet_sitter) VALUES (?, ? ,? ,?, ?)", (data['email'], data['name'], data['password'], data['address'], petsitter))
     conn.commit()
     return jsonify({'status': 'success'})
 
@@ -149,7 +152,6 @@ def Admin_upload_product_image(pID):
 
 @app.route('/Admin/texts', methods=['POST'])
 def Admin_upload_product_texts():
-    print('signupppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp')
     data = request.json
     cursor.execute("INSERT INTO products (ID, productName, productPrice, productStock, productDetail, productType) VALUES (?, ? ,? ,?, ?, ?)", (data['ID'], data['product_name'], data['price'], data['stock'], data['detail'], data['type'] ))
     conn.commit()
@@ -245,6 +247,7 @@ def submit_form():
     data = request.json
     # Retrieve form data from request object
     print(data['email'] + 'emaillllllllllllllllllllllllllllll')
+    print(data['pet_sitter'] + 'pet stiiiiiiiiiiiiiiiiiiiiieeeeeeeeeeeeeerrrrrrrr')
     selected = ', '.join([key for key, value in data.get('selected').items() if value])
     serviceselected = ', '.join([key for key, value in data.get('serviceselected').items() if value])
     timerangeselectedValue = ', '.join([key for key, value in data.get('timerangeselectedValue').items() if value])
@@ -259,12 +262,10 @@ def submit_form():
     # Create connection to SQLite3 database and cursor object
     api_profile = conn.cursor()
 
-    # Create table to store form data
-    api_profile.execute('''CREATE TABLE IF NOT EXISTS pet_sitter
-                 (email TEXT NOT NULL,selected TEXT, serviceselected TEXT, timerangeselectedValue TEXT, petsizeselectedValue TEXT)''')
-
     # Insert form data into table
-    api_profile.execute("INSERT INTO pet_sitter (email, selected, serviceselected, timerangeselectedValue, petsizeselectedValue) VALUES (?, ?, ?, ?, ?)", (data['email'], selected, serviceselected,  timerangeselectedValue, petsizeselectedValue))
+    # UPDATE users SET picture_data = ? WHERE email = ?", (file_data, email)
+    api_profile.execute("UPDATE users SET pet_sitter =?,preferable_pet =?, preferable_services = ?, preferable_timerange = ?, preferable_petsize =? WHERE email=?",(data['pet_sitter'],selected, serviceselected,  timerangeselectedValue, petsizeselectedValue,data['email'])) 
+                        # (email, selected, serviceselected, timerangeselectedValue, petsizeselectedValue) VALUES (?, ?, ?, ?, ?)", (data['email'], selected, serviceselected,  timerangeselectedValue, petsizeselectedValue))
 
     # Commit changes and close connection
     conn.commit()
