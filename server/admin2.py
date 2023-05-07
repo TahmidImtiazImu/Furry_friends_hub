@@ -32,6 +32,7 @@ def get_all_products():
         print(products)
     return jsonify(products)
 
+
 # @app.route('/Product/all', methods=['GET'])
 # def get_all_products():
 #     cursor = conn2.cursor()

@@ -36,7 +36,7 @@ const Product = () => {
     }
   }, [popuproduct], []);
 
-  const click = (Rname, newName, Rstock, Rprice, Rimage, Rabout) => {
+  const click = (newName, Rstock, Rprice, Rimage, Rabout) => {
     const newProduct = {
       name: newName,
       stock: Rstock,
@@ -47,12 +47,20 @@ const Product = () => {
     setProduct(newProduct);
     console.log("nameonclick: " + newName);
     console.log("productname: " + newProduct.name);
-    setpoproduct(true);
+    console.log("Stonks: " + Rstock);
+    if(Rstock != '0'){
+      setpoproduct(true);
+    }
+    else{
+      setpoproduct(false);
+      console.log("Stock Out!!!");
+    }
+    // setpoproduct(true);
   };
 
-  const oneProduct = (name, stock, price, image, about, type) => {
+  const oneProduct = (id, name, stock, price, image, about, type) => {
     const clickHandler = () => {
-      click(name, name,stock, price, image, about);
+      click(name,stock, price, image, about);
       console.log("direct name: " + name);
     };
   
@@ -70,7 +78,7 @@ const Product = () => {
   // };
 
   function checkType(Ptypes){
-    console.log(Ptypes);
+    console.log("In product page: " + Ptypes);
     if(type == "all"){
       return true;
     }
@@ -103,7 +111,7 @@ const Product = () => {
             <div className="products">
             {/* //////////////////cards in a loop///////////////////// */}
               {products.map((singleproduct) => (
-                oneProduct(singleproduct.name, singleproduct.stock, singleproduct.price,`data:image/jpg;base64,${singleproduct.image}`, singleproduct.about, singleproduct.type)
+                oneProduct(singleproduct.id, singleproduct.name, singleproduct.stock, singleproduct.price,`data:image/jpg;base64,${singleproduct.image}`, singleproduct.about, singleproduct.type)
               ))}
             </div>
           </div>

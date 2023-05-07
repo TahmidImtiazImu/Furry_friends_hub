@@ -24,10 +24,22 @@
 
 }
 
-/* .stock{
-    display: grid;
-    grid-template-columns: 0fr 0fr;
-} */
+.stock-out {
+    /* position: absolute; */
+    background-color: rgba(255, 255, 0, 0.5);
+    /* padding: 5px; */
+    border-radius: 5px;
+    font-weight: bold;
+    /* z-index: 1; */
+  }
+  
+  
+
+.stock{
+    font-weight: bold;
+    /* display: grid;
+    grid-template-columns: 0fr 0fr; */
+}
 
 .oneproductlist{
     /* display: grid;
