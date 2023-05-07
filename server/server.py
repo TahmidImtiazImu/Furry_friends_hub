@@ -74,25 +74,25 @@ def login():
 def product():
     return app.send_static_file('index.html')
 
-@app.route('/Product/all', methods=['GET'])
-def get_all_products():
-    cursorp = conn.cursor()
-    cursorp.execute("SELECT * FROM products")
-    rows = cursorp.fetchall()
-    products = []
-    for row in rows:
-        product = {
-            "id": row[0],
-            "name": row[1],
-            "price": row[2],
-            "stock": row[3],
-            "type": row[4],
-            "image": base64.b64encode(row[5]).decode('utf-8'), # convert bytes to base64 string
-            "detail": row[6]
-        }
-        products.append(product)
-        print(products)
-    return jsonify(products)
+# @app.route('/Product/all', methods=['GET'])
+# def get_all_products():
+#     cursorp = conn.cursor()
+#     cursorp.execute("SELECT * FROM products")
+#     rows = cursorp.fetchall()
+#     products = []
+#     for row in rows:
+#         product = {
+#             "id": row[0],
+#             "name": row[1],
+#             "price": row[2],
+#             "stock": row[3],
+#             "type": row[4],
+#             "image": base64.b64encode(row[5]).decode('utf-8'), # convert bytes to base64 string
+#             "detail": row[6]
+#         }
+#         products.append(product)
+#         print(products)
+#     return jsonify(products)
 
 
 @app.route('/customerSignup')

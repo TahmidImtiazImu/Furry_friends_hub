@@ -15,7 +15,10 @@ conn2 = sqlite3.connect('../db/database.db', check_same_thread= False)
 @app.route('/Product/all', methods=['GET'])
 def get_all_products():
     cursorp = conn2.cursor()
-    cursorp.execute("SELECT * FROM products")
+    page = request.args.get('page', 1, type=int)
+    limit = request.args.get('limit', 2, type=int)
+    offset = (page - 1) * limit
+    cursorp.execute("SELECT * FROM products LIMIT %s OFFSET %s", (limit, offset))
     rows = cursorp.fetchall()
     products = []
     for row in rows:
@@ -29,8 +32,8 @@ def get_all_products():
             "detail": row[6]
         }
         products.append(product)
-        print(products)
     return jsonify(products)
+
 
 # @app.route('/Product/all', methods=['GET'])
 # def get_all_products():
