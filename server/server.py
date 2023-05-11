@@ -273,6 +273,23 @@ def submit_form():
     return 'Form submitted successfully!'
 
 
+@app.route('/search')
+def search():
+    print("searching")
+    query = request.args.get('q')
+    print("query: ", query)
+
+    if not query:
+        return jsonify({'error': 'No query specified'})
+
+    cur = conn.cursor()
+
+    cur.execute("SELECT productName FROM products WHERE productName LIKE ?", ('%' + query + '%',))
+    rows = cur.fetchall()
+
+    suggestions = [row[0] for row in rows]
+
+    return jsonify({'suggestions': suggestions})
 
         # profile_get = conn.cursor()
         # print('imagr1===============________________-------------+=======++++++_+_+_+_+_+_+++++++___')

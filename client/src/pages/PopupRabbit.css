@@ -10,8 +10,8 @@
   } */
   
   .modalContainerrabbit {
-    width: 100px;
-    height: 90px;
+    width: 125px;
+    height: 85px;
     border-radius: 12px;
     background-color: white;
     position: fixed;
@@ -31,6 +31,11 @@
 .cancelrow{
     display: grid;
 }
+
+.Rabbit_product{
+  cursor: pointer;
+}
+
 .Rabbit_product:hover{
     color: lightgrey;
 }

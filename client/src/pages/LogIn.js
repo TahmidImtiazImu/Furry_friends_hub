@@ -1,5 +1,5 @@
 import React, { useState,useContext } from "react";
-import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
+import {Routes, Route, useNavigate, Navigate, Link} from 'react-router-dom';
 import './LogIn.css'
 import { GlobalContext } from '../Global';
 
@@ -66,8 +66,9 @@ export const LogIn = () => {
                     <button type="submit">Log in</button>
                 </div>
             </form>
-            <div className="signup-link">Don't have an account?</div>
-            <div className="signup-link" onClick={navigateSignup}><a>Sign up</a></div>
+            <div className="signup-link">Don't have an account? </div>
+            <Link className="signup-link" to="/Signupindividual">Sign up</Link>
+            {/* <div className="signup-link" onClick={navigateSignup}><a>Sign up</a></div> */}
             </div>
     </div>
   )

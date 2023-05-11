@@ -15,6 +15,7 @@ import PopupRabbit from "./PopupRabbit";
 import CardImages from "./CardImages";
 import Header from "./Header";
 import Footer from "./Footer";
+import SearchBar from "../Components/SearchBar/SearchBar";
 
 
 
@@ -73,6 +74,7 @@ const Homepage = () => {
         </ul>
         
       </body>
+      {/* <SearchBar/> */}
       <Footer/>
 
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Signupindividual.css'
+import { Link } from 'react-router-dom';
 
 const Signupindividual= () => {
   const [name, setName] = useState('');
@@ -70,11 +71,11 @@ const Signupindividual= () => {
             
             <label>
               <input type="checkbox" name="terms" checked={termsChecked} onChange={(e) => setTermsChecked(e.target.checked)} />
-              I agree to the <a href="https://example.com/terms-and-policies" target="_blank" rel="noopener noreferrer">terms and policies</a>
+              I agree to the <Link to="https://example.com/terms-and-policies" target="_blank" rel="noopener noreferrer">terms and policies</Link>
             </label>
             <button type="submit" disabled={!termsChecked}>Signup</button>
             <p>
-                Already have an account? <a className='movetologin' href='/LogIn'>Log In</a>
+                Already have an account? <Link className='movetologin' to='/LogIn'>Log In</Link>
             </p>
           </form>
         </div>

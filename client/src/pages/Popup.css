@@ -10,9 +10,8 @@
   }
    */
   .modalContainer {
-    /* position: absolute; */
-    width: 100px;
-    height: 230px;
+    width: 125px;
+    height: 80px;
     border-radius: 12px;
     background-color: white;
     position: fixed;
@@ -32,6 +31,11 @@
 .cancelrow{
     display: grid;
 }
+
+.cat_product{
+  cursor: pointer;
+}
+
 .cat_product:hover{
     color: lightgrey;
 }

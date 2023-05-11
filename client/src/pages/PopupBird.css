@@ -10,7 +10,7 @@
   } */
   
   .modalContainerbird {
-    width: 100px;
+    width: 125px;
     height: 80px;
     border-radius: 12px;
     background-color: white;
@@ -31,6 +31,11 @@
 .cancelrow{
     display: grid;
 }
+
+.Bird_product{
+  cursor: pointer;
+}
+
 .Bird_product:hover{
     color: lightgrey;
 }

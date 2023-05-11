@@ -1,10 +1,16 @@
-import React from 'react'
+import {React, useContext} from 'react'
 import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import "./Popup.css"
+import { GlobalContext } from '../Global';
+
 
 const Popup = ({closepop}) => {
+  const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType } = useContext(GlobalContext);
+
     const navigate = useNavigate();
     const navigateProduct =() =>{
+        setGlobalType('cat');
+        console.log("From popup menu: " + globalType);
         navigate('/Product');
       }
   return (
@@ -13,17 +19,9 @@ const Popup = ({closepop}) => {
         <ui>
             <li className="cat_product" onClick={navigateProduct}>Cat Food</li>
             <hr></hr>
-            <li className="cat_product" onClick={navigateProduct}>Cat Toy</li>
+            <li className="cat_product" onClick={navigateProduct}>Cat Care</li>
             <hr></hr>
-            <li className="cat_product" onClick={navigateProduct}>Cat Shampoo</li>
-            <hr></hr>
-            <li className="cat_product" onClick={navigateProduct}>Cat Dress</li>
-            <hr></hr>
-            <li className="cat_product" onClick={navigateProduct}>Cat Litter</li>
-            <hr></hr>
-            <li className="cat_product" onClick={navigateProduct}>Cat Bowl</li>
-            <hr></hr>
-            <li className="cat_product" onClick={navigateProduct}>Cat Perfume</li>            
+            <li className="cat_product" onClick={navigateProduct}>Cat Accessories</li>          
         </ui>
 
       </div>

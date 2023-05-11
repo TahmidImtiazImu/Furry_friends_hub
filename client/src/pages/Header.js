@@ -14,6 +14,7 @@ import PopupBird from "./PopupBird";
 import PopupRabbit from "./PopupRabbit";
 import CardImages from "./CardImages";
 import PopupAccount from "./PopupAccount";
+import SearchBar from "../Components/SearchBar/SearchBar";
 import { GlobalContext } from '../Global';
 
 const Header = () => {
@@ -112,11 +113,12 @@ const Header = () => {
         </ul>
      </div>
 
+     {/* Searchbar */}
+     <div className="headersearch"><SearchBar/></div>
+
      {/* SIGNUP and CART */}
     <div className="signup_and_cart">
       <ul>
-      <li className="list"> <div className="searchbox"><input type="text" placeholder="Search here" className="input" /> 
-     </div></li>
         <li className="list"> <div className="servicelist"> <BsFillCartFill className="cart" onClick={navigateCart}/> </div> </li>
         <li className="list"> <div className="servicelist"> 
         {globalloggedIn && < MdPeopleAlt  

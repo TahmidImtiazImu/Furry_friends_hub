@@ -10,8 +10,8 @@
   } */
   
   .modalContainerdog {
-    width: 100px;
-    height: 160px;
+    width: 125px;
+    height: 80px;
     border-radius: 12px;
     background-color: white;
     position: fixed;
@@ -31,6 +31,11 @@
 .cancelrow{
     display: grid;
 }
+
+.Dog_product{
+  cursor: pointer;
+}
+
 .Dog_product:hover{
     color: lightgrey;
 }
