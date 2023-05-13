@@ -84,8 +84,8 @@
   }
   
   .profile-action-button {
-    padding: 0.5rem 1rem;
-    font-size: 1.2rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 1rem;
     font-weight: bold;
     background-color: #4CAF50;
     color: white;
@@ -100,4 +100,37 @@
   .service-provider-option{
     display: flex;
     flex-direction: row;
+  }
+  .missing_value_error_message{
+    color: red;
+    font-weight: bold;
+  }
+  .service-provider-edit{
+    display: flex;
+    justify-content: space-between;
+  }
+  .changepassword-save-cancel{
+    justify-content:center;
+  }
+  .changepassword-cancel-button{
+    margin-left: 200px;
+    padding: 0.4rem 0.8rem;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  .changepassword-save-button{
+    margin-left: 15px;
+    padding: 0.4rem 0.8rem;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
   }
