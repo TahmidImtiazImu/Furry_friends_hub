@@ -4,19 +4,30 @@ import Uploadprofilepic from '../Components/Uploadprofilepic/Uploadprofilepic';
 // import profilepic from "../../db/profile_picture/firstimage.jpg";
 import axios from 'axios';
 import { GlobalContext } from '../Global';
+import Dialogue from './Dialogue';
 
 
 const Profile = (props) => {
 
   const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail } = useContext(GlobalContext);
 
-
+  console.log(globalemail+ "aaaaaaa") ;
   const [imagepopup, setimagepopup] = useState(false) ;
   const [editing, setEditing] = useState(false);
+  const [password_editing, setpassword_editing] = useState(false);
   const [pictureBlob, setPictureBlob] = useState(null);
   const [name_data, setName] = useState('');
   const [save, setSave] = useState(false) ;
-  const [serviceProvider, setServiceProvider] = useState(false);
+  const [passwordsave, setpasswordsave] = useState(false) ;
+  const [serviceProvider, setServiceProvider] = useState(true);
+  var service = false;
+  const [missing_value, setmissing_value] = useState(false);
+  const [changepass, setchangepass] = useState(false);
+  const [passwords, setPasswords] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
   const [preferablePets, setPreferablePets] = useState({
     dog: false,
     cat: false,
@@ -54,11 +65,86 @@ const Profile = (props) => {
 
   // };
 
+  // const servicehandler = () =>{
+  //   setservice(true) ;
+  // }
+
   const handleEdit = () => {
     setEditing(true);
     setSave(false);
   };
 
+  const changePassword = () => {
+    setpassword_editing(true) ;
+  };
+
+  function savenewpass(newPassword) {
+    // Make POST request to Flask API
+    fetch('/change-password', {
+      method: 'POST',
+      body: JSON.stringify({
+        email : globalemail,
+        newPassword: newPassword
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error saving password!');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+      // Display success message to user
+      alert('Password changed successfully!');
+    })
+    .catch(error => {
+      console.error(error);
+      // Display error message to user
+      alert('Error changing password!');
+    });
+  }
+  
+  const changePasswordcancelfalse = () => {
+    setpassword_editing(false);
+  }
+
+  const changePasswordsavefalse = () => {
+    if (
+      !passwords.currentPassword ||
+      !passwords.newPassword ||
+      !passwords.confirmPassword
+    ) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    // check if new password and confirm password match
+    if (passwords.newPassword !== passwords.confirmPassword) {
+      alert("New password and confirm password do not match");
+      return;
+    }
+
+    // call the svenewpass function and pass the password data
+    savenewpass(passwords.newPassword);
+    setpassword_editing(false) ;
+  }
+  
+
+  const handlepass = () => {
+    setchangepass(true);
+  };
+  
+  const handleChange = (event) => {
+    setPasswords({
+      ...passwords,
+      [event.target.name]: event.target.value,
+    });
+  };
+  
   const handlePetCheckboxChange = (e) => {
     setPreferablePets({
       ...preferablePets,
@@ -88,8 +174,18 @@ const Profile = (props) => {
   }  
   
   var email_id = globalemail;
+  console.log("gloab email id" + globalemail) ;
+  console.log(" email id " + email_id ) ;
   const [pictureUrl, setPictureUrl] = useState('');
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({
+    name : null,
+    address :  null,
+    pet_sitter : null,
+    preferable_pet : null,
+    preferable_services : null,
+    preferable_timerange : null,
+    preferable_petsize : null
+  });
   useEffect(() => {
     Promise.all([
       fetch(`/Profile/${email_id}`).then(response => response.blob()),
@@ -100,10 +196,27 @@ const Profile = (props) => {
         setPictureUrl(pictureObjectURL);
         console.log("Checking console");
         console.log(pictureUrl.length);
-        setUserData({name: data.name, address: data.address});
+        setUserData({name: data.name, address: data.address, pet_sitter : data.pet_sitter,preferable_pet: data.preferable_pet,
+        preferable_services : data.preferable_services, preferable_timerange : data.preferable_timerange,
+        preferable_petsize : data.preferable_petsize
+        });
       })
       .catch(error => console.error(error));
-}, [email_id]);
+
+}, [email_id,userData.pet_sitter]);
+if (userData.pet_sitter == "YES") {
+  service = true; console.log(service + "true") ;
+} else {
+  service = false; console.log(service + "false") ;
+}
+
+
+console.log(email_id);
+// console.log("pet sitter"+userData.pet_sitter);
+console.log("name"+userData.name);
+console.log("address"+userData.address);
+console.log("pet sitter" + userData.pet_sitter);
+
 // var imgsource = pictureUrl;
 // var imgsrc = pictureUrl;
 if(pictureUrl.length == 0){
@@ -111,10 +224,31 @@ if(pictureUrl.length == 0){
   setPictureUrl("/images/service_provider.png");
 }
 console.log(pictureUrl.length);
+
 const name = userData ? userData.name : "Unknown";
 const address = userData ? userData.address : "Not Provided";
+const petsitting = userData ? userData.pet_sitter : "NULL" ;
+const pets = userData ? userData.preferable_pet: "NULL" ;
+const petservices = userData ? userData.preferable_services : "NULL" ;
+const pettimerange = userData ? userData.preferable_timerange : "NULL" ;
+const petsizes = userData ? userData.preferable_petsize : "NULL" ;
+
+
+function check_object(object) {
+  return Object.values(object).some(value => value);
+}
+
 var pet_sitter;
+function handleCloseDialog() {
+  setmissing_value(false);
+}
 const handleSubmit = async  (e) =>{
+  console.log("testing petsize" + preferablePetsize.small);
+  
+  if((serviceProvider)  &&( !check_object(preferablePets) || !check_object(preferablePetsize) || !check_object(preferableTimerange) || !check_object(preferableservices) ))
+   {   setmissing_value(true);
+    console.log("missing value" + missing_value);return;}
+    else {setmissing_value(false);}  
   console.log("hello from form submit save");
   setEditing(false);
   setSave(true);
@@ -141,15 +275,21 @@ const handleSubmit = async  (e) =>{
   })
   .then(response => {
     if (response.ok) {
-      alert('Form submitted successfully!');
+      // alert('Form submitted successfully!');
+      console.log("form submitted successfully");
     } else {
       throw new Error('Form submission failed.');
     }
   })
   .catch(error => {
     console.error(error);
-    alert('Form submission failed.');
+    console.log('Form submission failed.');
   });
+  setPreferablePets({});
+  setPreferablePetsize({});
+  setPreferableTimerange({}) ;
+  setPreferableservices({}) ;
+  window.location.reload();
 };  
   return (
     <div className="profile-page">
@@ -172,15 +312,25 @@ const handleSubmit = async  (e) =>{
           <h2>About</h2>
           <p>I am a Bitboxer! Checkout my next performance!!</p>
           <br/><br/><br/><br/>
+          <div className='service-provider-edit'>
           <h3 className="profile-section-header">Service Provider</h3>
+          {missing_value && ( <Dialogue className='missing_value_error_message' message="Please fill up every option." onClose={handleCloseDialog}/>)}
+         <div className="profile-actions">
+        {editing ? (
+          <button className="profile-action-button" onClick={handleSubmit}>Save</button>
+          ) : (
+            <button className="profile-action-button" onClick={handleEdit}>Edit</button>
+          )}
+        </div>
+        </div>
           <div className="profile-section-content">
            
-           {serviceProvider &&  (
+           {service && (
             <div> 
-                <div> Preferable Pet : Cat, Dog</div>
-                <div> Preferable services : House siting, Day care</div>
-                <div> Preferable Timerange : 12pm-6pm</div>
-                <div> Preferable Petsize : Small</div>
+                <div> Preferable Pet : {pets}</div>
+                <div> Preferable services : {petservices} </div>
+                <div> Preferable Timerange : {pettimerange} </div>
+                <div> Preferable Petsize : {petsizes} </div>
             </div>
            ) }
 
@@ -190,7 +340,7 @@ const handleSubmit = async  (e) =>{
             <label htmlFor="serviceProvider">Do you want to work as a service provider?</label>            
            </div>            
            )}
-           {!editing && !serviceProvider && (
+           {!editing && !service && (
             <div>You are not a service provider!</div>
            )}
 
@@ -302,30 +452,32 @@ const handleSubmit = async  (e) =>{
           </div>
         </div>
         <div className="profile-section">
-          <h3 className="profile-section-header">Change Password</h3>
-          <div className="profile-section-content">
-            <div className="profile-form-field">
+          <h3 className="profile-section-header" onClick={changePassword}>Change Password</h3>
+          { password_editing && (<div className="profile-section-content">
+             <div className="profile-form-field">
               <label htmlFor="currentPassword">Current Password:</label>
-              <input type="password" id="currentPassword" name="currentPassword" disabled={!editing} />
+              <input type="password" id="currentPassword" name="currentPassword" value={passwords.currentPassword}
+              onChange={handleChange} />
             </div>
             <div className="profile-form-field">
               <label htmlFor="newPassword">New Password:</label>
-              <input type="password" id="newPassword" name="newPassword" disabled={!editing} />
+              <input type="password" id="newPassword" name="newPassword"    value={passwords.newPassword}
+              onChange={handleChange}/>
             </div>
             <div className="profile-form-field">
               <label htmlFor="confirmPassword">Confirm Password:</label>
-              <input type="password" id="confirmPassword" name="confirmPassword" disabled={!editing} />
+              <input type="password" id="confirmPassword" name="confirmPassword"   value={passwords.confirmPassword}
+              onChange={handleChange}/>
             </div>
-          </div>
+            <br></br> 
+            <div className='changepassword-save-cancel'>
+                <button className='changepassword-cancel-button' onClick={changePasswordcancelfalse}> Cancel</button>
+                <button className='changepassword-save-button' onClick={changePasswordsavefalse}> Save</button>
+            </div>
+          </div>)}
         </div>
       </div>
-      <div className="profile-actions">
-        {editing ? (
-          <button className="profile-action-button" onClick={handleSubmit}>Save</button>
-          ) : (
-            <button className="profile-action-button" onClick={handleEdit}>Edit</button>
-          )}
-        </div>
+
       </div>
       );
       };

@@ -230,12 +230,18 @@ def update_profile(email):
 @app.route('/Profile/texts/<email>', methods=['GET'])
 def get_profile_name(email):
     profile_get = conn.cursor()
-    profile_get.execute("SELECT name, address FROM users WHERE email=?", (email,))
-    name_data, address_data = profile_get.fetchone()
-
+    print("hello from profile/text/email")
+    profile_get.execute("SELECT name, address, pet_sitter,preferable_pet,preferable_services,preferable_timerange,preferable_petsize FROM users WHERE email=?", (email,))
+    name_data, address_data, pet_sitter_data,preferable_pet_data,preferable_services_data,preferable_timerange_data,preferable_petsize_data = profile_get.fetchone()
+    
     response = {
         "name": name_data,
-        "address": address_data
+        "address": address_data,
+        "pet_sitter" : pet_sitter_data,
+        "preferable_pet" : preferable_pet_data,
+        "preferable_services" : preferable_services_data,
+        "preferable_timerange" : preferable_timerange_data,
+        "preferable_petsize" : preferable_petsize_data
     }
 
     return response
@@ -290,6 +296,29 @@ def search():
     suggestions = [row[0] for row in rows]
 
     return jsonify({'suggestions': suggestions})
+
+
+@app.route('/change-password', methods=['POST'])
+def change_password():
+    # Get the current user's ID from the session or request headers
+    print("hello from password change")
+    change_pass = conn.cursor()
+
+    # Get the current password, new password, and confirm password from the request
+    data = request.json
+    email = data['email']
+    new_password = data['newPassword']
+
+
+    # TODO: Check that the current password is correct
+
+    # Save the new password to the database
+    print(new_password + 'new password')
+    print(email + "email")
+    change_pass.execute('UPDATE users SET password = ? WHERE email = ?', (new_password, email))
+    conn.commit()
+
+    return jsonify({'success': True})
 
         # profile_get = conn.cursor()
         # print('imagr1===============________________-------------+=======++++++_+_+_+_+_+_+++++++___')
