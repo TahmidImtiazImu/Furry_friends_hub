@@ -26,4 +26,10 @@ CREATE TABLE IF NOT EXISTS pet_sitter
       selected TEXT, 
       serviceselected TEXT,
       timerangeselectedValue TEXT,
-      petsizeselectedValue TEXT)
+      petsizeselectedValue TEXT);
+
+CREATE TABLE cart (
+  email TEXT,
+  items TEXT,
+  quantity NUMERIC
+);

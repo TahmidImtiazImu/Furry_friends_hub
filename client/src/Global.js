@@ -7,6 +7,7 @@ export const GlobalProvider = ({ children }) => {
   const [globalemail, setglobalEmail] = useState('');
   const [globalType, setGlobalType] = useState('');
   const [globalSubtype, setGlobalSubtype] = useState('');
+  const [globalsearch, setGlobalserch] = useState(false);
 
   useEffect(() => {
     const loggedIn = localStorage.getItem('globalloggedIn');
@@ -18,6 +19,7 @@ export const GlobalProvider = ({ children }) => {
       setglobalEmail(JSON.parse(email));
       setGlobalType(JSON.parse(type));
       setGlobalSubtype(JSON.parse(subtype));
+      setGlobalserch(JSON.parse(globalsearch));
     }
   }, []);
 
@@ -26,10 +28,11 @@ export const GlobalProvider = ({ children }) => {
     localStorage.setItem('globalemail', JSON.stringify(globalemail));
     localStorage.setItem('globalType', JSON.stringify(globalType));
     localStorage.setItem('globalSubtype', JSON.stringify(globalSubtype));
-  }, [globalloggedIn, globalemail, globalType, globalSubtype]);
+    localStorage.setItem('globalsearch', JSON.stringify(globalsearch));
+  }, [globalloggedIn, globalemail, globalType, globalSubtype, globalsearch]);
 
   return (
-    <GlobalContext.Provider value={{ globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType }}>
+    <GlobalContext.Provider value={{ globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType, globalSubtype, setGlobalSubtype, globalsearch, setGlobalserch }}>
       {children}
     </GlobalContext.Provider>
   );

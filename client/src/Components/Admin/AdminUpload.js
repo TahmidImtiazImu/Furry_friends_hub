@@ -10,6 +10,12 @@ const options = [
   { value: 'rabbit', label: 'Rabbit' }
 ];
 
+const suboptions = [
+  {value: 'food', label: 'Food'},
+  {value: 'care', label: 'Care'},
+  {value: 'accessories', label: 'Accessories'}
+];
+
 function AdminUpload() {
     const [pName, setPName] = useState('');
     const [pStock, setPStock] = useState(0);
@@ -18,10 +24,16 @@ function AdminUpload() {
     const [pID, setPID] = useState('');
     const [pDetail, setPDetail] = useState("");
     const [selectedOption, setSelectedOption] = useState('');
+    const [subtype, setsubtype] = useState('');
 
-  function handleChange(event) {
+  function handletypeChange(event) {
     setSelectedOption(event.target.value);
     console.log(selectedOption);
+  }
+
+  function handleSubtypechange(event) {
+    setsubtype(event.target.value);
+    console.log(subtype);
   }
 
     const handleFileInputChange = (e) => {
@@ -61,7 +73,8 @@ function AdminUpload() {
               price: pPrice,
               stock : pStock,
               detail: pDetail,
-              type: selectedOption
+              type: selectedOption,
+              subtype: subtype
             })
           })
             .then(response => response.json())
@@ -110,10 +123,22 @@ function AdminUpload() {
 
         <div>
           <label htmlFor="limited-options-input">Select an option:</label>
-          <select id="limited-options-input" value={selectedOption} onChange={handleChange} required>
+          <select id="limited-options-input" value={selectedOption} onChange={handletypeChange} required>
             <option value="">--Select an option--</option>
             {options.map(option => (
-              <option key={option.value} value={option.value}>
+              <option key={option.value} value={option.value} required>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="limited-suboptions-input">Select an option:</label>
+          <select id="limited-suboptions-input" value={subtype} onChange={handleSubtypechange} required>
+            <option value="">--Select an option--</option>
+            {suboptions.map(option => (
+              <option key={option.value} value={option.value} required>
                 {option.label}
               </option>
             ))}

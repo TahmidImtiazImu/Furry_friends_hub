@@ -18,7 +18,7 @@ import SearchBar from "../Components/SearchBar/SearchBar";
 import { GlobalContext } from '../Global';
 
 const Header = () => {
-  const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType } = useContext(GlobalContext);
+  const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType, globalSubtype, setGlobalSubtype } = useContext(GlobalContext);
     const navigate = useNavigate();
     
 
@@ -27,6 +27,7 @@ const Header = () => {
     }
     const navigateProductCat = () => {
       setGlobalType('cat');
+      setGlobalSubtype('all');
       console.log(globalType);
       navigate({
         pathname: '/Product',
@@ -34,6 +35,7 @@ const Header = () => {
     }
     const navigateProductDog =() =>{
       setGlobalType('dog');
+      setGlobalSubtype('all');
       console.log(globalType);
       navigate({
         pathname: '/Product',
@@ -41,6 +43,7 @@ const Header = () => {
     }
     const navigateProductBird =() =>{
       setGlobalType('bird');
+      setGlobalSubtype('all');
       console.log(globalType);
       navigate({
         pathname: '/Product',
@@ -48,6 +51,7 @@ const Header = () => {
     }
     const navigateProductRabbit =() =>{
       setGlobalType('rabbit');
+      setGlobalSubtype('all');
       console.log(globalType);
       navigate({
         pathname: '/Product',
@@ -55,6 +59,7 @@ const Header = () => {
     }
     const navigateProductAll =() =>{
       setGlobalType('all');
+      setGlobalSubtype('all');
       console.log(globalType);
       navigate({
         pathname: '/Product',

@@ -4,22 +4,34 @@ import { GlobalContext } from '../Global';
 import "./PopupBird.css"
 
 const PopupBird = ({closepop}) => {
-  const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType } = useContext(GlobalContext);
+  const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType, globalSubtype, setGlobalSubtype } = useContext(GlobalContext);
 
     const navigate = useNavigate();
-    const navigateProduct =() =>{
+    const navigateProductfood =() =>{
       setGlobalType('bird');
+      setGlobalSubtype('food');
         navigate('/Product');
+      }
+    const navigateProductcare =() =>{
+        setGlobalType('bird');
+        setGlobalSubtype('care');
+          navigate('/Product');
+      }
+
+    const navigateProductaccessories =() =>{
+          setGlobalType('bird');
+          setGlobalSubtype('accessories');
+            navigate('/Product');
       }
   return (
     <div className="modalBackgroundbird">
       <div className="modalContainerbird">
         <ui>
-            <li className="Bird_product" onClick={navigateProduct} >Bird Food</li>
+            <li className="Bird_product" onClick={navigateProductfood} >Bird Food</li>
             <hr></hr>
-            <li className="Bird_product" onClick={navigateProduct}>Bird Care</li>
+            <li className="Bird_product" onClick={navigateProductcare}>Bird Care</li>
             <hr></hr>
-            <li className="Bird_product" onClick={navigateProduct}>Bird Accessories</li>
+            <li className="Bird_product" onClick={navigateProductaccessories}>Bird Accessories</li>
         </ui>
 
       </div>

@@ -20,7 +20,7 @@ function App() {
     <Router>
         <Routes>
             <Route path="/" element={<Homepage/>}  />
-            <Route path="/Product" element={<Product/>}  />
+            <Route path="/Product/:query?" exact Component={Product}  />
             <Route path="/Signup" element={<Signup/>} />
             <Route path="/customerSignup" element={<CustomerSignup/>} />
             <Route path="/Login" element={<LogIn/>} />

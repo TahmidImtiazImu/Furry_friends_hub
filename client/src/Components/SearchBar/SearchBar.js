@@ -1,13 +1,18 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
+import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import axios from 'axios';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { GlobalContext } from '../../Global';
 import "./SearchBar.css";
 
 const SearchBar = () => {
+  const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType, globalSubtype, setGlobalSubtype, globalsearch, setGlobalserch } = useContext(GlobalContext);
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [expanded, setExpanded] = useState(false);
   const [searchResult, setSearchResult] = useState(null);
+
+  const navigate = useNavigate()
 
   const searchInputRef = useRef();
 
@@ -76,6 +81,20 @@ const SearchBar = () => {
     };
   }, []);
 
+  function navigatesearch() {
+    if(query.length > 0){
+      setGlobalType('all');
+      setGlobalSubtype('all');
+      setGlobalserch(true);
+      // window.location.reload();
+      navigate(`/Product/${query}`);
+    }
+    else{
+      setGlobalserch(false);
+    }
+
+  }
+
   return (
     <div className={`search-bar ${expanded ? "expanded" : ""}`}>
       <div className="search-input-container" onClick={handleInputClick}>
@@ -86,7 +105,7 @@ const SearchBar = () => {
           onChange={handleChange}
           ref={searchInputRef}
         />
-        <button className="search-btn">
+        <button className="search-btn" onClick={navigatesearch}>
           <i className="fas fa-search"></i>
         </button>
         {suggestions.length > 0 && (
