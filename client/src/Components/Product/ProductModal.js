@@ -1,11 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
+import { GlobalContext } from '../../Global';
 import "./ProductModal.css";
 
-const ProductModal = ({title, image, price, stock, about, closepop }) => {
+const ProductModal = ({id, title, image, price, stock, about, closepop }) => {
+  const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType, globalSubtype, setGlobalSubtype } = useContext(GlobalContext);
   const popModalBackgroundclass = `popModalBackground ${closepop ? 'show' : ''}`;
   const [baal, setbaal] = useState(true);
   const popupRef = useRef(null);
-  console.log("title in modal: " + title);
+  console.log("title in modal: " + title + " id of product: " + id);
 
   function check() {
     closepop(false);
@@ -36,6 +38,40 @@ const ProductModal = ({title, image, price, stock, about, closepop }) => {
 
   if (!closepop) return null;
 
+  const handleAddToCart = () => {
+    if(globalloggedIn){
+      addToCart(globalemail, id);
+      alert("Product added to cart!");
+    }
+    else{
+      alert("Please Sign In before any purchase!");
+    }
+   
+  }
+
+  const addToCart = (email, productId) => {
+    alert("Inside add to cart!");
+    fetch('/add-to-cart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: `email=${email}&product_id=${productId}`
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          console.log('Product added to cart!')
+        } else {
+          console.error('Failed to add product to cart')
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error)
+      })
+  }
+  
+
   return (
     <div className={popModalBackgroundclass} onClick={closepop}>
       <div className="modal" ref={popupRef}>
@@ -52,7 +88,7 @@ const ProductModal = ({title, image, price, stock, about, closepop }) => {
         <p>Stock: {stock}</p>
         <p>{about}</p>
         <div className="add-to-cart-container">
-          <button className="add-to-cart">Add to Cart</button>
+          <button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</button>
         </div>
       </div>
     </div>

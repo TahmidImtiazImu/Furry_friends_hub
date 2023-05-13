@@ -1,13 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
+import axios from "axios";
 import Header from './Header'
 import Footer from './Footer'
 import './Cart.css'
 import { BsDisplay } from "react-icons/bs";
 import CartItem from "../Components/CartItem/CartItem";
+import { GlobalContext } from '../Global';
 
 function Cart() {
-  return (
+    const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType, globalSubtype, setGlobalSubtype } = useContext(GlobalContext);
+    const [cartItems, setCartItems] = useState([]);
+    useEffect(() => {
+        async function fetchData() {
+          const response = await axios.get(`/api/cart/${globalemail}`);
+          setCartItems(response.data);
+        }
+        fetchData();
+      }, [globalemail]);
+
+    function logCartItems() {
+        cartItems.map(item => console.log(item.item));
+    }
+    return (
     <>
         {/* ----------------Header--------------- */}
         <Header/>
@@ -55,17 +70,13 @@ function Cart() {
             <div className="CartItems">
                 <p>Your Order:</p>
                 <div className="individualcartItem">
-                    <CartItem />
-                    <CartItem/>
-                    <CartItem/>
-                    <CartItem/>
-                    <CartItem/>
-                    <CartItem/>
-                    <CartItem/>
-                    <CartItem/>
+                    {/* Loop through cartItems array and render CartItem component */}
+                    {cartItems.map(item => (
+                        <CartItem id ={item.item} quantity = {item.quantity} />
+                    ))}
                 </div>
                 <p> Delivery Charge: 1600 tk</p>
-                <button className="buynowbtn">Buy Now</button>
+                <button className="buynowbtn" onClick={logCartItems}>Buy Now</button>
             </div>
         </div>
 

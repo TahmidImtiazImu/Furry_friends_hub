@@ -4,22 +4,35 @@ import { GlobalContext } from '../Global';
 import "./Popupdog.css"
 
 const PopupDog = ({closepop}) => {
-  const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType } = useContext(GlobalContext);
+  const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType, globalSubtype, setGlobalSubtype } = useContext(GlobalContext);
 
     const navigate = useNavigate();
-    const navigateProduct =() =>{
+    const navigateProductfood =() =>{
       setGlobalType('dog');
+      setGlobalSubtype('food')
         navigate('/Product');
       }
+    const navigateProductcare =() =>{
+        setGlobalType('dog');
+        setGlobalSubtype('care');
+          navigate('/Product');
+      }
+
+    const navigateProductaccessories =() =>{
+        setGlobalType('dog');
+        setGlobalSubtype('accessories');
+          navigate('/Product');
+      }
+
   return (
     <div className="modalBackgrounddog">
       <div className="modalContainerdog">
         <ui>
-            <li className="Dog_product" onClick={navigateProduct}>Dog Food</li>
+            <li className="Dog_product" onClick={navigateProductfood}>Dog Food</li>
             <hr></hr>
-            <li className="Dog_product" onClick={navigateProduct}>Dog care</li>
+            <li className="Dog_product" onClick={navigateProductcare}>Dog care</li>
             <hr></hr>
-            <li className="Dog_product" onClick={navigateProduct}>Dog Accessories</li>
+            <li className="Dog_product" onClick={navigateProductaccessories}>Dog Accessories</li>
         </ui>
 
       </div>

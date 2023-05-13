@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import {Routes, Route, useNavigate, Navigate, useLocation} from 'react-router-dom';
+import {Routes, Route, useNavigate, Navigate, useLocation, useParams} from 'react-router-dom';
 import Header from './Header'
 import Footer from './Footer'
 import OneProduct from './OneProduct'
@@ -10,7 +10,8 @@ import ProductModal from "../Components/Product/ProductModal";
 import { GlobalContext } from '../Global';
 
 const Product = () => {
-  const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType } = useContext(GlobalContext);
+  const {query} = useParams();
+  const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType, globalSubtype, setGlobalSubtype } = useContext(GlobalContext);
 
   const navigate = useNavigate();
   const[popuproduct,setpoproduct] = useState(false);
@@ -25,8 +26,15 @@ const Product = () => {
   // }
 
   const type = globalType;
+  const subtype = globalSubtype;
+  console.log("Printing query: " + query);
+  var pathroute = `/Product/all`;
+  if(query){
+    pathroute = `/Product/search/${query}`
+  }
+  console.log("changing pathroute: " + pathroute);
   useEffect(() => {
-    fetch('/Product/all')
+    fetch(pathroute)
       .then(response => response.json())
       .then(data => setProducts(data))
       .catch(error => console.error(error));
@@ -34,10 +42,11 @@ const Product = () => {
     if (!popuproduct) {
       setProduct(null);
     }
-  }, [popuproduct], []);
+  }, [popuproduct, pathroute], []);
 
-  const click = (newName, Rstock, Rprice, Rimage, Rabout) => {
+  const click = (Rid, newName, Rstock, Rprice, Rimage, Rabout) => {
     const newProduct = {
+      id: Rid,
       name: newName,
       stock: Rstock,
       price: Rprice,
@@ -58,15 +67,15 @@ const Product = () => {
     // setpoproduct(true);
   };
 
-  const oneProduct = (id, name, stock, price, image, about, type) => {
+  const oneProduct = (id, name, stock, price, image, about, type, subtype) => {
     const clickHandler = () => {
-      click(name,stock, price, image, about);
+      click(id, name,stock, price, image, about);
       console.log("direct name: " + name);
     };
   
     return (
       <div>
-        {checkType(type) && <div className="wrapproductcard" onClick={clickHandler}>
+        {checkType(type) && checksubType(subtype) && <div className="wrapproductcard" onClick={clickHandler}>
           <OneProduct name={name} stock={stock} price={price} image={image} />
         </div>}
       </div>
@@ -89,11 +98,24 @@ const Product = () => {
       return false;
     }
   }
+
+function checksubType(Ptypes){
+    console.log("In product page sub : " + Ptypes);
+    if(subtype == "all"){
+      return true;
+    }
+    else if(Ptypes == subtype){
+      return true;
+    }
+    else{
+      return false;
+    }
+}
   
   return (
    <>
     {/* pop window showed to whole screen */}
-   {popuproduct && <ProductModal title = {product.name} image = {product.image} price = {product.price} stock = {product.stock} about = {product.about} closepop = {setpoproduct}/>}
+   {popuproduct && <ProductModal id={product.id} title = {product.name} image = {product.image} price = {product.price} stock = {product.stock} about = {product.about} closepop = {setpoproduct}/>}
 
    {/* pop window hidden */}
    {
@@ -111,7 +133,7 @@ const Product = () => {
             <div className="products">
             {/* //////////////////cards in a loop///////////////////// */}
               {products.map((singleproduct) => (
-                oneProduct(singleproduct.id, singleproduct.name, singleproduct.stock, singleproduct.price,`data:image/jpg;base64,${singleproduct.image}`, singleproduct.about, singleproduct.type)
+                oneProduct(singleproduct.id, singleproduct.name, singleproduct.stock, singleproduct.price,`data:image/jpg;base64,${singleproduct.image}`, singleproduct.about, singleproduct.type, singleproduct.subtype)
               ))}
             </div>
           </div>

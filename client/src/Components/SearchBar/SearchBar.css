@@ -71,16 +71,12 @@
   }
 
   .search-btn {
-    background-color: #fff;
-    border: none;
-    cursor: pointer;
-    height: 40px;
-    padding: 0 10px;
-    /* border-radius: 0 10px 10px 0; */
-  }
-  
-  .search-btn:hover {
     background-color: black;
     color: white;
-  }
+    border: none;
+    cursor: pointer;
+    height: 35px;
+    padding: 0 10px;
+    margin-right: -5px;
+  }  
   

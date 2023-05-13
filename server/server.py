@@ -4,6 +4,7 @@ import sqlite3
 from io import BytesIO
 import base64
 import time
+import urllib.parse
 # from server.admin2 import  admin2_bp
 from admin1 import admin1_bp
 from admin2 import admin2_bp
@@ -88,10 +89,33 @@ def get_all_products():
             "stock": row[3],
             "type": row[4],
             "image": base64.b64encode(row[5]).decode('utf-8'), # convert bytes to base64 string
-            "detail": row[6]
+            "detail": row[6],
+            "subtype": row[7]
         }
         products.append(product)
-        print(products)
+        # print(products)
+    return jsonify(products)
+
+@app.route('/Product/search/<query>', methods=['GET'])
+def get_all_search_products(query):
+    decoded_query = urllib.parse.unquote(query)
+    cursorp = conn.cursor()
+    cursorp.execute("SELECT * FROM products WHERE productName LIKE ?", ('%' + decoded_query + '%',))
+    rows = cursorp.fetchall()
+    products = []
+    for row in rows:
+        product = {
+            "id": row[0],
+            "name": row[1],
+            "price": row[2],
+            "stock": row[3],
+            "type": row[4],
+            "image": base64.b64encode(row[5]).decode('utf-8'), # convert bytes to base64 string
+            "detail": row[6],
+            "subtype": row[7]
+        }
+        products.append(product)
+        # print(products)
     return jsonify(products)
 
 
@@ -102,6 +126,89 @@ def customerSignup():
 @app.route('/ServiceSIgnup')
 def ServiceSignup():
     return app.send_static_file('index.html')
+
+
+# Add to cart from product---------------------------------------
+@app.route('/add-to-cart', methods=['POST'])
+def add_to_cart():
+    try:
+        email = request.form['email']
+        product_id = request.form['product_id']
+        quantity = 1
+        curs = conn.cursor()
+        print("Inserting product id")
+        print(product_id)
+        print(email)
+        curs.execute("INSERT INTO cart (email, items, quantity) VALUES (?, ?, ?)", (email, product_id, quantity))
+        conn.commit()
+        return jsonify({'success': True})
+    except Exception as e:
+        print("Error: ", e)
+        return jsonify({'success': False})
+ 
+
+#  Retrive from crat items--------------------------------
+@app.route('/api/cart/<email>')
+def get_cart(email):
+    print("Email and id in cart:")
+    print(email)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM cart WHERE email=?", (email,))
+    rows = cur.fetchall()
+    cart_items = [{'item': row[1], 'quantity': row[2]} for row in rows]
+    for id in cart_items:
+        print("ids: ")
+        print(id['item'])
+        print(id['quantity'])
+
+    return jsonify(cart_items)
+
+# Retreive from products for cart items
+@app.route('/products/<int:product_id>')
+def get_product(product_id):
+    conn = sqlite3.connect('products.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT productName, productPrice FROM products WHERE id = ?', (product_id,))
+    row = cursor.fetchone()
+    if row:
+        product = {'name': row[0], 'price': row[1]}
+        return jsonify(product)
+    else:
+        return jsonify({'error': 'Product not found'})
+
+# # Add to cart from product---------------------------------------
+# @app.route('/add-to-cart', methods=['POST'])
+# def add_to_cart():
+    # email = request.form['email']
+    # product_id = request.form['product_id']
+#     c = conn.cursor()
+
+#     # Check if the customer already has a cart
+#     c.execute("SELECT * FROM cart WHERE email=?", (email,))
+#     result = c.fetchone()
+#     # print(result[1])
+
+#     if result:
+#         # Customer already has a cart, so update it
+#         cart_items = result[1].split(',') if result[1] else []
+#         if product_id not in cart_items:
+#             cart_items.append(product_id)
+#         cart_items_str = ','.join(cart_items)
+#         print('the-cart-item-after-added----------------:    ')
+#         print(cart_items_str)
+#         c.execute("UPDATE cart SET items=? WHERE email=?", (cart_items_str, email))
+#     else:
+#         # Customer doesn't have a cart yet, so create a new one
+#         print("Data is being inserted")
+#         print(product_id)
+#         c.execute("INSERT INTO cart (email, items) VALUES (?, ?)", (email, product_id))
+
+#     # # Commit the changes to the database and close the connection
+#     # conn.commit()
+#     # conn.close()
+
+#     return jsonify({'success': True})
+
 
 
 @app.route('/Cart')
@@ -153,7 +260,7 @@ def Admin_upload_product_image(pID):
 @app.route('/Admin/texts', methods=['POST'])
 def Admin_upload_product_texts():
     data = request.json
-    cursor.execute("INSERT INTO products (ID, productName, productPrice, productStock, productDetail, productType) VALUES (?, ? ,? ,?, ?, ?)", (data['ID'], data['product_name'], data['price'], data['stock'], data['detail'], data['type'] ))
+    cursor.execute("INSERT INTO products (ID, productName, productPrice, productStock, productDetail, productType, productSubtype) VALUES (?, ? ,? ,?, ?, ?, ?)", (data['ID'], data['product_name'], data['price'], data['stock'], data['detail'], data['type'], data['subtype'] ))
     conn.commit()
     return jsonify({'status': 'success'})
 
