@@ -5,6 +5,8 @@ import Footer from './Footer';
 import './PetSitter.css'
 
 const PetSitter = () => {
+
+
   const [selected, setSelected] = useState("");
 
   const handleCheck = (event) => {
@@ -27,11 +29,35 @@ const PetSitter = () => {
   const petsizehandleChange = (event) => {
     petsizesetSelectedValue(event.target.value);
   };
+  
+  const [area, setarea] = useState("");
+  
+  const handleareaeChange = (event) => {
+    setarea(event.target.value);
+  };
 
   const navigate = useNavigate();
 
     const navigatePersonList =() =>{
-        navigate('/PersonList');
+        console.log("Hello from user searching for pet sitter") ;
+        console.log(selected) ;
+        console.log(serviceselected);
+        console.log(timerangeselectedValue);
+        console.log(petsizeselectedValue);
+        console.log(area);
+        if(!selected || !serviceselected || !timerangeselectedValue || !petsizeselectedValue || !area) 
+        {
+          alert("please fill up every option") ;
+          return ;
+        }
+        const searchData = {
+          selected,
+          serviceselected,
+          timerangeselectedValue,
+          petsizeselectedValue,
+          area
+        };
+        navigate('/PersonList', { state: { searchData } });
       }
       const handleSubmit = (event) => {
         event.preventDefault();
@@ -199,7 +225,7 @@ const PetSitter = () => {
           {/* Area */}
             <div className="area">
                <div> Area </div>
-               <div> <input></input> </div>
+               <div> <input value={area} onChange={handleareaeChange}/> </div>
             </div>
 
             {/* time range */}
@@ -226,14 +252,9 @@ const PetSitter = () => {
               <div> 
               <select value={petsizeselectedValue} onChange={petsizehandleChange}>
                 <option value="">Select an option</option>
-                <option value="1 month">1 month</option>
-                <option value="2 months">2 months</option>
-                <option value="3 months">3 months</option>
-                <option value="4-6 months">4-6 months</option>
-                <option value="1 year">1 year</option>
-                <option value="2 yearss">2 years</option>
-                <option value="3 years">3 years</option>
-                <option value="Above 3 years">Above 3 years</option>
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
                 </select>                
               </div>
             </div>

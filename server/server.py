@@ -427,6 +427,62 @@ def change_password():
 
     return jsonify({'success': True})
 
+
+@app.route('/api/users/<pet>/<service>/<timerange>/<petsize>/<area>', methods=['GET'])
+def fetch_petsitters(pet,service,timerange,petsize,area):
+    petsitter = conn.cursor()
+    # Extract search criteria from request parameters
+    # service = request.args.get('service')
+    # timerange = request.args.get('timerange')
+    # petsize = request.args.get('petsize')
+    # area = request.args.get('area')
+    # print("hello from petsitter data retrieve")
+    # data = request.json
+    
+    print(pet)
+    print(timerange)
+    print(service)
+    print(petsize)
+    print(area)
+
+    # # Define SQL query to fetch users based on search criteria
+    # query = """
+    # SELECT *
+    # FROM users
+    # WHERE (pet LIKE ? OR pet LIKE ? OR pet LIKE ?)
+    # AND (service LIKE ? OR service LIKE ? OR service LIKE ?)
+    # AND (petsize LIKE ? OR petsize LIKE ? OR petsize LIKE ?)
+    # AND (timerange LIKE ? OR timerange LIKE ? OR timerange LIKE ?)
+    # AND (location LIKE ?)
+    # """
+
+    # # Define search strings for each category
+    # pet_search_strings = [f'%{val}%' for val in service.split()]
+    # service_search_strings = [f'%{val}%' for val in service.split()]
+    # petsize_search_strings = [f'%{val}%' for val in petsize.split()]
+    # timerange_search_strings = [f'%{val}%' for val in timerange.split()]
+
+    # Execute SQL query with search criteria
+    petsitter.execute("SELECT *FROM users")
+    # petsitter.execute(query, tuple(pet_search_strings + service_search_strings + petsize_search_strings + timerange_search_strings + [area]))
+    rows = petsitter.fetchall()
+
+    # Format results as JSON response
+    result =  []
+    for row in rows:
+        user = {
+            'email': row[0],
+            'name': row[1],
+            'location': row[2],
+            'img': base64.b64encode(row[5]).decode('utf-8'),
+        }
+        result.append(user)
+    conn.commit()
+    return jsonify(result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
         # profile_get = conn.cursor()
         # print('imagr1===============________________-------------+=======++++++_+_+_+_+_+_+++++++___')
         # profile_get.execute("SELECT picture_data FROM users WHERE email=?", (email,))

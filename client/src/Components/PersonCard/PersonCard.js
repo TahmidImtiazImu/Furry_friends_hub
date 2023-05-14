@@ -6,6 +6,7 @@ const PersonCard = (props) => {
     function notified() {
         alert("Notification Sent!");
     }
+  const blobUrl = `data:image/jpg;base64,${props.image}`;
 
   return (
     <div>
