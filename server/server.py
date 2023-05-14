@@ -164,17 +164,56 @@ def get_cart(email):
     return jsonify(cart_items)
 
 # Retreive from products for cart items
-@app.route('/products/<int:product_id>')
+@app.route('/products/cart/<product_id>')
 def get_product(product_id):
-    conn = sqlite3.connect('products.db')
-    cursor = conn.cursor()
-    cursor.execute('SELECT productName, productPrice FROM products WHERE id = ?', (product_id,))
-    row = cursor.fetchone()
+    print("retireving data for the cart!!!!!")
+    cur = conn.cursor()
+    cur.execute('SELECT productName, productPrice FROM products WHERE id = ?', (product_id,))
+    row = cur.fetchone()
     if row:
-        product = {'name': row[0], 'price': row[1]}
+        product = {'name': row[0], 'price': int(row[1])}
         return jsonify(product)
     else:
         return jsonify({'error': 'Product not found'})
+    
+# updating cart for quantity
+@app.route('/api/cart/update', methods=['PUT'])
+def update_cart_item_quantity():
+    try:
+        data = request.get_json()
+        email = data.get('email')
+        product_id = data.get('id')
+        quantity = data.get('quantity')
+        print(email)
+        print(product_id)
+        print(quantity)
+        print("those are for update")
+        curs = conn.cursor()
+        curs.execute("UPDATE cart SET quantity = ? WHERE email = ? AND items = ?", (quantity, email, product_id))
+        conn.commit()
+        return jsonify({'message': 'Cart item updated successfully'})
+    except Exception as e:
+        print("Error: ", e)
+        return jsonify({'success': False})
+    
+# Delete items from cart
+@app.route('/api/cart/delete', methods=['DELETE'])
+def delete_cart_item():
+    try:
+        data = request.get_json()
+        email = data.get('email')
+        product_id = data.get('id')
+        print(email)
+        print(product_id)
+        print("Deleting item from the cart")
+        curs = conn.cursor()
+        curs.execute("DELETE FROM cart WHERE email = ? AND items = ?", (email, product_id))
+        conn.commit()
+        return jsonify({'message': 'Cart item deleted successfully'})
+    except Exception as e:
+        print("Error: ", e)
+        return jsonify({'success': False})
+
 
 # # Add to cart from product---------------------------------------
 # @app.route('/add-to-cart', methods=['POST'])
