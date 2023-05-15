@@ -17,6 +17,7 @@ import Notification from './Components/Notification/Notification'
 
 import AdminRestock from './Components/Admin/AdminRestock'
 import AdminOrderLsit from './Components/Admin/AdminOrderLsit'
+import TermsAndPolicies from './Components/TermsAndPolicies/TermsAndPolicies'
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             <Route path='/Notification' element={<Notification/>}/>
             <Route path='/Admin/Restock' element={<AdminRestock/>}/>
             <Route path='/Admin/Orders' element={<AdminOrderLsit/>}/>
+            <Route path='/TermsAndPolicies' element={<TermsAndPolicies/>}/>
         </Routes>
     </Router>
   )

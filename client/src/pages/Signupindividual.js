@@ -71,7 +71,7 @@ const Signupindividual= () => {
             
             <label>
               <input type="checkbox" name="terms" checked={termsChecked} onChange={(e) => setTermsChecked(e.target.checked)} />
-              I agree to the <Link to="https://example.com/terms-and-policies" target="_blank" rel="noopener noreferrer">terms and policies</Link>
+              I agree to the <Link to="/TermsAndPolicies" target="_blank" rel="noopener noreferrer">terms and policies</Link>
             </label>
             <button type="submit" disabled={!termsChecked}>Signup</button>
             <p>
