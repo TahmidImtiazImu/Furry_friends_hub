@@ -33,3 +33,16 @@ CREATE TABLE cart (
   items TEXT,
   quantity NUMERIC
 );
+ CREATE TABLE  notifications (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id TEXT NOT NULL,
+            serviceprovider_id TEXT NOT NULL,
+            petsitting TEXT,
+            mobile TEXT,
+            confirmation TEXT,
+            pet TEXT,
+            service TEXT,
+            timerange TEXT,
+            petsize TEXT,
+            area TEXT
+            );

@@ -44,6 +44,11 @@ const PersonList = ({ props }) => {
             name={person.name}
             email={person.email}
             location={person.location}
+            pet={searchData.selected}
+            service={searchData.serviceselected}
+            timerange={searchData.timerangeselectedValue}
+            petsize={searchData.petsizeselectedValue}
+            area={searchData.area}
           />
         ))}
       </div>

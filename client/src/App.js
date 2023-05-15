@@ -13,6 +13,7 @@ import Signupindividual from './pages/Signupindividual'
 import PersonList from './pages/PersonList'
 import Profile from './pages/Profile'
 import AdminUpload from './Components/Admin/AdminUpload'
+import Notification from './Components/Notification/Notification'
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Route path='/PersonList' element={<PersonList/>}/>
             <Route path='/Profile' element={<Profile/>}/>
             <Route path='/Admin' element={<AdminUpload/>}/>
+            <Route path='/Notification' element={<Notification/>}/>
         </Routes>
     </Router>
   )

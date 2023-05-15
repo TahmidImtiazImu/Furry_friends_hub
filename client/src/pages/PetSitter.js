@@ -174,8 +174,8 @@ const PetSitter = () => {
         <label>
         <input
           type="checkbox"
-          value="house_sitting"
-          checked={serviceselected === "house_sitting"}
+          value="housesitting"
+          checked={serviceselected === "housesitting"}
           onChange={servicehandleCheck}
         />
         House Sitting
@@ -192,8 +192,8 @@ const PetSitter = () => {
       <label>
         <input
           type="checkbox"
-          value="day_care"
-          checked={serviceselected === "day_care"}
+          value="daycare"
+          checked={serviceselected === "daycare"}
           onChange={servicehandleCheck}
         />
         Day Care
@@ -201,8 +201,8 @@ const PetSitter = () => {
       <label>
         <input
           type="checkbox"
-          value="pet_walking"
-          checked={serviceselected === "pet_walking"}
+          value="petwalking"
+          checked={serviceselected === "petwalking"}
           onChange={servicehandleCheck}
         />
         Pet Walking
@@ -210,8 +210,8 @@ const PetSitter = () => {
       <label>
         <input
           type="checkbox"
-          value="pet_training"
-          checked={serviceselected === "pet_training"}
+          value="pettraining"
+          checked={serviceselected === "pettraining"}
           onChange={servicehandleCheck}
         />
         Pet Training
@@ -234,10 +234,10 @@ const PetSitter = () => {
               <div>
               <select value={timerangeselectedValue} onChange={timerangehandleChange}>
                 <option value="">Select an option</option>
-                <option value="6am-12pm">6am-12pm</option>
-                <option value="12pm-6pm">12pm-6pm</option>
-                <option value="6pm-12pm">6pm-12pm</option>
-                <option value="12pm-6am">12pm-6am</option>
+                <option value="first">6am-12pm</option>
+                <option value="second">12pm-6pm</option>
+                <option value="third">6pm-12pm</option>
+                <option value="forth">12pm-6am</option>
                 <option value="1 day">1 day</option>
                 <option value="2 days">2 days</option>
                 <option value="3 days">3 days</option>

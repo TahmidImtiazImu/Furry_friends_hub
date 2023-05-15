@@ -6,6 +6,7 @@ import {FaCat, FaDog, FaKiwiBird,FaWalking} from "react-icons/fa"
 import {GiRabbit} from "react-icons/gi"
 import {MdPeopleAlt,MdOutlineSecurity,MdSentimentSatisfiedAlt} from "react-icons/md"
 import {BsFillCartFill,BsFillHouseFill,BsFacebook,BsWhatsapp,BsInstagram,BsTwitter,BsYoutube} from "react-icons/bs"
+import {IoNotificationsSharp} from "react-icons/io5"
 import {AiOutlineSearch} from "react-icons/ai"
 import {GrDeliver} from "react-icons/gr"
 import Popup from "./Popup";
@@ -74,6 +75,10 @@ const Header = () => {
     const navigatepetsitting=() =>{
       navigate('/Petsitter');
     }
+
+    const navigatenotification=()=>{
+      navigate('/Notification') ;
+    }
     const toggleHover =() =>{
       this.setState({hover: !this.state.hover})
     }
@@ -124,6 +129,7 @@ const Header = () => {
      {/* SIGNUP and CART */}
     <div className="signup_and_cart">
       <ul>
+        <li classname='list'> <div className="servicelist"> <IoNotificationsSharp onClick={navigatenotification}/> </div> </li>
         <li className="list"> <div className="servicelist"> <BsFillCartFill className="cart" onClick={navigateCart}/> </div> </li>
         <li className="list"> <div className="servicelist"> 
         {globalloggedIn && < MdPeopleAlt  

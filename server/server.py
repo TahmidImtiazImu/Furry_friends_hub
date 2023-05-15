@@ -262,6 +262,10 @@ def petsitter():
 def singupindividualreload():
     return app.send_static_file('index.html')
 
+@app.route('/Notification')
+def Notification():
+    return app.send_static_file('index.html')
+
 @app.route('/Signupindividual', methods=['POST'])
 def singupindividual():
     print('signupppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp')
@@ -502,7 +506,14 @@ def fetch_petsitters(pet,service,timerange,petsize,area):
     # timerange_search_strings = [f'%{val}%' for val in timerange.split()]
 
     # Execute SQL query with search criteria
-    petsitter.execute("SELECT *FROM users")
+    query = """
+        SELECT * FROM users 
+        WHERE preferable_pet LIKE '%{pet}%'  
+        AND preferable_services LIKE '%{service}%'
+        AND preferable_timerange LIKE '%{timerange}%' 
+        AND preferable_petsize LIKE '%{petsize}%' 
+        """.format(pet=pet, service=service, timerange=timerange, petsize=petsize)
+    petsitter.execute(query)
     # petsitter.execute(query, tuple(pet_search_strings + service_search_strings + petsize_search_strings + timerange_search_strings + [area]))
     rows = petsitter.fetchall()
 
@@ -518,6 +529,169 @@ def fetch_petsitters(pet,service,timerange,petsize,area):
         result.append(user)
     conn.commit()
     return jsonify(result)
+
+@app.route('/api/notifications', methods=['POST'])
+def send_notification():
+    data = request.get_json()
+    customer_id = data['customer_id']
+    server_id = data['server_id']
+    pet_sitting = data['pet_sitting']
+    mobile = data['mobile']
+    confirmation = data['confirmation']
+    pet = data['pet']
+    service = data['service']
+    timerange = data['timerange']
+    petsize = data['petsize']
+    area = data['area']
+
+    notification = conn.cursor()
+    notification.execute('INSERT INTO notifications (customer_id, serviceprovider_id, petsitting, mobile, confirmation,pet,service,timerange,petsize,area) VALUES (?, ?, ?, ? ,?,?,?,?,?,?)', (customer_id, server_id,pet_sitting,mobile,confirmation,pet,service,timerange,petsize,area))
+    conn.commit()
+    return jsonify({'status': 'success'})
+
+@app.route('/api/notifications/service/reject', methods=['POST'])
+def reject_service_notification():
+    data = request.get_json()
+    delete = conn.cursor()
+    id = data['id']
+    print("iddddddddddddddddddddddddd")
+    print(id )
+    delete.execute("DELETE FROM notifications WHERE id = ?", (id,))
+    customer_id = data['customer_id']
+    server_id = data['server_id']
+    pet_sitting = data['pet_sitting']
+    mobile = data['mobile']
+    confirmation = data['confirmation']
+    pet = data['pet']
+    service = data['service']
+    timerange = data['timerange']
+    petsize = data['petsize']
+    area = data['area']
+
+    notification = conn.cursor()
+    notification.execute('INSERT INTO notifications (customer_id, serviceprovider_id, petsitting, mobile, confirmation,pet,service,timerange,petsize,area) VALUES (?, ?, ?, ? ,?,?,?,?,?,?)', (customer_id, server_id,pet_sitting,mobile,confirmation,pet,service,timerange,petsize,area))
+    conn.commit()
+    return jsonify({'status': 'success'})
+
+
+@app.route('/Notification/api/server/<email>', methods=['GET'])
+def get_service_by_email(email):
+    print("hi from /notificaition/server/api")
+    notification_server = conn.cursor()
+    notification_server.execute('SELECT * FROM notifications WHERE serviceprovider_id = ? AND confirmation = ?', (email,"NULL"))
+    users = notification_server.fetchall()
+    print(users)
+    result =  []
+    for row in users:
+        user = {
+            'id' : row[0],
+            'customer_id' : row[1],
+            'serviceprovider_id': row[2],
+            'pet' : row[6],
+            'service' : row[7],
+            'timerange' : row[8],
+            'petsize' : row[9],
+            'area' : row[10],
+        }
+        result.append(user)
+    conn.commit()
+    return jsonify(result)
+
+@app.route('/Notification/api/customer/<email>', methods=['GET'])
+def get_customer_by_email(email):
+    print("hi from /notificaition/customer/api")
+    Notification_customer = conn.cursor()
+    notification_customer = conn.cursor()
+    Notification_customer.execute("SELECT * FROM notifications WHERE customer_id = ? AND confirmation IN ('NO', 'YES') ORDER BY id DESC", (email,))
+
+
+    # Notification_customer.execute('SELECT * FROM notifications WHERE customer_id = ? AND confirmation = ?', (email, 'NO'))
+    # notification_customer.execute('SELECT * FROM notifications WHERE customer_id = ? AND confirmation = ?', (email, 'YES'))
+
+    users = Notification_customer.fetchall()
+    # users2 = notification_customer.fetchall()
+    print(users)
+    result =  []
+    for row in users:
+        user = {
+            'id' : row[0],
+            'customer_id': row[1],
+            'serviceprovider_id' : row[2],
+            'mobile' : row[4],
+            'confirmation' : row[5],
+        }
+        result.append(user)
+    # for row in users2:
+    #     user = {
+    #         'customer_id': row[1],
+    #         'serviceprovider_id' : row[2],
+    #         'mobile' : row[4],
+    #         'confirmation' : row[5],
+    #     }
+    #     result.append(user)    
+    conn.commit()
+    return jsonify(result)
+
+@app.route('/user/api/server/<email>', methods=['GET'])
+def get_serviceprovidername_notification(email):
+    print("hi from /user/api/customer/")
+    Notification_customer = conn.cursor()
+    Notification_customer.execute('SELECT name FROM users WHERE email = ?', (email,))
+    user_name = Notification_customer.fetchone()[0]
+    print(user_name)
+   
+    conn.commit()
+    return jsonify(user_name)
+
+@app.route('/user/api/customer/<email>', methods=['GET'])
+def get_customername_notification(email):
+    print("hi from /user/api/customer/")
+    notification_customer = conn.cursor()
+    notification_customer.execute('SELECT name FROM users WHERE email = ?', (email,))
+    user_name1 = notification_customer.fetchone()[0]
+    print(user_name1)
+   
+    conn.commit()
+    return jsonify(user_name1)
+
+
+@app.route('/api/cusotmerdelete/notification', methods=['POST'])
+def customerdelete_notification():
+    data = request.get_json()
+    notification_delete = conn.cursor()
+    id = data['id']
+    print("iddddddddddddddddddddddddd")
+    print(id )
+    notification_delete.execute("DELETE FROM notifications WHERE id = ?", (id,))
+    conn.commit()
+    return jsonify({'status': 'success'})
+
+    # profile_get.execute("SELECT name, address, pet_sitter,preferable_pet,preferable_services,preferable_timerange,preferable_petsize FROM users WHERE email=?", (email,))
+    # name_data, address_data, pet_sitter_data,preferable_pet_data,preferable_services_data,preferable_timerange_data,preferable_petsize_data = profile_get.fetchone()
+    
+    # response = {
+    #     "name": name_data,
+    #     "address": address_data,
+    #     "pet_sitter" : pet_sitter_data,
+    #     "preferable_pet" : preferable_pet_data,
+    #     "preferable_services" : preferable_services_data,
+    #     "preferable_timerange" : preferable_timerange_data,
+    #     "preferable_petsize" : preferable_petsize_data
+    # }
+
+# @app.route('/api/notifications', methods=['POST'])
+# def send_notification():
+#     data = request.get_json()
+#     customer_id = data['customer_id']
+#     server_id = data['server_id']
+#     pet_sitting = data['pet_sitting']
+#     mobile = data['mobile']
+#     confirmation = data['confirmation']
+
+#     notification = conn.cursor()
+#     notification.execute('INSERT INTO notifications (customer_id, serviceprovider_id, petsitting, mobile, confirmation) VALUES (?, ?, ?, ? ,?)', (customer_id, server_id,pet_sitting,mobile,confirmation))
+#     conn.commit()
+#     return jsonify({'status': 'success'})
 
 if __name__ == '__main__':
     app.run(debug=True)

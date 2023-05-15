@@ -1,0 +1,53 @@
+.notification-card {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .notification-message {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .confirm-button,
+  .reject-button {
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .confirm-button {
+    background-color: #5cb85c;
+    color: #fff;
+  }
+  
+  .confirm-button:hover {
+    background-color: #449d44;
+  }
+  
+  .reject-button {
+    background-color: #d9534f;
+    color: #fff;
+  }
+  
+  .reject-button:hover {
+    background-color: #c9302c;
+  }
+  
+  /* Add additional styles as needed */
+  .delete-icon {
+    color: #c0392b;
+    cursor: pointer;
+  }
+  
+  .delete-icon:hover {
+    color: #a93226;
+  }  
