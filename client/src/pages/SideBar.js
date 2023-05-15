@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import {React, useContext, useState} from 'react'
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import { AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
+import { GlobalContext } from '../Global';
 import './SideBar.css';
 
 const SideBar = () => {
+  const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType, globalSubtype, setGlobalSubtype } = useContext(GlobalContext);
+
   const navigate = useNavigate();
   const [isCatOpen, setIsCatOpen] = useState(false);
   const [isDogOpen, setIsDogOpen] = useState(false);
@@ -40,13 +43,8 @@ const SideBar = () => {
           {isCatOpen && (
             <ul className="sidebar_sublist">
               <li onClick={navigateProduct}>Cat Food</li>
-              <li onClick={navigateProduct}>Cat Toys</li>
-              <li onClick={navigateProduct}>Cat Food</li>
-              <li onClick={navigateProduct}>Cat Toys</li>
-              <li onClick={navigateProduct}>Cat Food</li>
-              <li onClick={navigateProduct}>Cat Toys</li>
-              <li onClick={navigateProduct}>Cat Food</li>
-              <li onClick={navigateProduct}>Cat Toys</li>
+              <li onClick={navigateProduct}>Cat Care</li>
+              <li onClick={navigateProduct}>Cat Accessories</li>
             </ul>
           )}
         </li>
@@ -58,7 +56,8 @@ const SideBar = () => {
           {isDogOpen && (
             <ul className="sidebar_sublist">
               <li onClick={navigateProduct}>Dog Food</li>
-              <li onClick={navigateProduct}>Dog Toys</li>
+              <li onClick={navigateProduct}>Dog Care</li>
+              <li onClick={navigateProduct}>Dog Accessories</li>
             </ul>
           )}
         </li>
@@ -70,7 +69,8 @@ const SideBar = () => {
           {isBirdOpen && (
             <ul className="sidebar_sublist">
               <li onClick={navigateProduct}>Bird Food</li>
-              <li onClick={navigateProduct}>Bird Toys</li>
+              <li onClick={navigateProduct}>Bird Care</li>
+              <li onClick={navigateProduct}>Bird Accessories</li>
             </ul>
           )}
         </li>
@@ -82,7 +82,8 @@ const SideBar = () => {
           {isRabbitOpen && (
             <ul className="sidebar_sublist">
               <li onClick={navigateProduct}>Rabbit Food</li>
-              <li onClick={navigateProduct}>Rabbit Toys</li>
+              <li onClick={navigateProduct}>Care Care</li>
+              <li onClick={navigateProduct}>Accessories Accessories</li>
             </ul>
           )}
         </li>

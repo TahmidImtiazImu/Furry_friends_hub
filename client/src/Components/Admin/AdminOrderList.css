@@ -1,0 +1,66 @@
+/* AdminOrderList.css */
+  .h1 {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .card {
+    margin: 20px auto;
+    max-width: 600px;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
+  
+  .card-title {
+    font-weight: bold;
+  }
+  
+  .card-text {
+    margin-bottom: 5px;
+  }
+  
+  .btn {
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+  
+  /* AdminOrderList.css */
+  .button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .shipment-button {
+    background-color: lightcyan;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .shipment-button:hover {
+    background-color: #008080;
+    color: #fff;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  
+  

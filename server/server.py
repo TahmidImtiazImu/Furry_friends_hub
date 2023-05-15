@@ -8,7 +8,7 @@ import urllib.parse
 # from server.admin2 import  admin2_bp
 from admin1 import admin1_bp
 from admin2 import admin2_bp
-
+import json
 
 
 
@@ -73,6 +73,14 @@ def login():
 
 @app.route('/Product')
 def product():
+    return app.send_static_file('index.html')
+
+@app.route('/Admin/Restock')
+def Admin_restock():
+    return app.send_static_file('index.html')
+
+@app.route('/Admin/Orders')
+def Admin_orders():
     return app.send_static_file('index.html')
 
 @app.route('/Product/all', methods=['GET'])
@@ -163,15 +171,26 @@ def get_cart(email):
 
     return jsonify(cart_items)
 
+#  Retrive only quantity from crat items--------------------------------
+@app.route('/cart/products/<email>/<id>')
+def get_cart_quantity(email, id):
+    print("Email and id in cart from only quantity:")
+    print(email)
+    print(id)
+    curs = conn.cursor()
+    curs.execute("SELECT quantity FROM cart WHERE email=? AND items=?", (email,id))
+    quantity = curs.fetchall()[0]
+    return jsonify(quantity)
+
 # Retreive from products for cart items
 @app.route('/products/cart/<product_id>')
 def get_product(product_id):
     print("retireving data for the cart!!!!!")
     cur = conn.cursor()
-    cur.execute('SELECT productName, productPrice FROM products WHERE id = ?', (product_id,))
+    cur.execute('SELECT productName, productPrice, productStock FROM products WHERE id = ?', (product_id,))
     row = cur.fetchone()
     if row:
-        product = {'name': row[0], 'price': int(row[1])}
+        product = {'name': row[0], 'price': int(row[1]), 'stock': int(row[2])}
         return jsonify(product)
     else:
         return jsonify({'error': 'Product not found'})
@@ -215,6 +234,45 @@ def delete_cart_item():
         return jsonify({'success': False})
 
 
+# Define a route to handle the insertion of order data
+@app.route('/api/order', methods=['POST'])
+def handleBuyNow():
+    try:
+        # Extract data from request
+        data = request.json
+        email = data['email']
+        cartItems = data['cartItems']
+        totalPrice = data['price']
+        status = data['status']
+        customerName = data['name']
+        phone = data['phone']
+        contact = data['contact']
+        address = data['address']
+        note = data['note']
+
+        print("Storing thess data on order command: ")
+        print(email, totalPrice, status, customerName, phone, contact, address, note)
+        
+        # Serialize cartItems to a JSON string
+        products_str = json.dumps(cartItems)
+
+        # Insert order into the orders table
+        connection = sqlite3.connect('../db/orders.db', check_same_thread= False)
+        c = connection.cursor()
+        c.execute("INSERT INTO orders (email, products, total_price, status, Name, Phone, Contact_mail, Address, Note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (email, products_str, totalPrice, status, customerName, phone, contact, address, note))
+        connection.commit()
+        connection.close()
+
+        curs = conn.cursor()
+        for items in cartItems:
+            print("decrementing stock for product")
+            print(items)
+            curs.execute("UPDATE products SET productStock = productStock - ? WHERE ID = ?", (int(items['quantity']), items['item']))
+        conn.commit()
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)})
+
 # # Add to cart from product---------------------------------------
 # @app.route('/add-to-cart', methods=['POST'])
 # def add_to_cart():
@@ -248,6 +306,56 @@ def delete_cart_item():
 
 #     return jsonify({'success': True})
 
+# Admin orders checking -------------------------------------------------------------------------
+@app.route('/api/orders', methods=['GET'])
+def get_orders():
+    print("Getting data from orders: ")
+    c = sqlite3.connect('../db/orders.db', check_same_thread= False)
+    db = c.cursor()
+    db.execute('SELECT * FROM orders')
+    orders = db.fetchall()
+    Orders = []
+    for order in orders:
+        Order = {
+            "id": order[0],
+            "email": order[1],
+            "products": order[2],
+            "total_price": order[3],
+            "status": order[4],
+            "date": order[5],
+            "Name": order[6],
+            "Phone": order[7],
+            "Contact_mail": order[8],
+            "Address": order[9],
+            "Note": order[10]
+        }
+        Orders.append(Order)
+    print(Orders)
+    c.commit()
+    c.close()
+    return jsonify(Orders)
+
+@app.route('/api/orders/<int:order_id>', methods=['DELETE'])
+def delete_order(order_id):
+    print("Deleting data from orders: ")
+    print(order_id)
+    c = sqlite3.connect('../db/orders.db', check_same_thread= False)
+    db = c.cursor()
+    db.execute('DELETE FROM orders WHERE id = ?', (order_id,))
+    c.commit()
+    c.close()
+    return '', 204
+
+@app.route('/api/orders/<int:order_id>/shipment', methods=['PUT'])
+def update_order_shipment(order_id):
+    print("Updating shipment status for order: ")
+    print(order_id)
+    c = sqlite3.connect('../db/orders.db', check_same_thread= False)
+    db = c.cursor()
+    db.execute('UPDATE orders SET status = ? WHERE id = ?', ('Shipped', order_id,))
+    c.commit()
+    c.close()
+    return '', 204
 
 
 @app.route('/Cart')
@@ -300,6 +408,15 @@ def Admin_upload_product_image(pID):
 def Admin_upload_product_texts():
     data = request.json
     cursor.execute("INSERT INTO products (ID, productName, productPrice, productStock, productDetail, productType, productSubtype) VALUES (?, ? ,? ,?, ?, ?, ?)", (data['ID'], data['product_name'], data['price'], data['stock'], data['detail'], data['type'], data['subtype'] ))
+    conn.commit()
+    return jsonify({'status': 'success'})
+
+@app.route('/Admin/restock', methods=['POST'])
+def Admin_update_stock():
+    data = request.json
+    print("Updating product stock!")
+    print(data['stock'], data['ID'])
+    cursor.execute("UPDATE products SET productStock = ? WHERE ID = ?", (data['stock'], data['ID']))
     conn.commit()
     return jsonify({'status': 'success'})
 

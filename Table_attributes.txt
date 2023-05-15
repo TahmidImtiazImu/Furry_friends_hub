@@ -33,3 +33,18 @@ CREATE TABLE cart (
   items TEXT,
   quantity NUMERIC
 );
+
+CREATE TABLE orders (
+    id INTEGER PRIMARY KEY AUTOINCREMENT DEFAULT 1000000,
+    email TEXT,
+    products TEXT,
+    total_price FLOAT,
+    status TEXT,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Name TEXT,
+    Phone TEXT,
+    Contact_mail TEXT,
+    Address TEXT,
+    Note TEXT
+);
+

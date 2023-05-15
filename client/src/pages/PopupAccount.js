@@ -7,7 +7,7 @@ const PopupAccount = ({closepop}) => {
   const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail } = useContext(GlobalContext);
 
   var isAdmin = false;
-  if(globalemail == "mf@gmail.com"){
+  if(globalemail == "ajahsanul19@gmail.com" || globalemail == "tahmidimtiaz11807048@gmail.com"){
     isAdmin = true;
   }  
   else{

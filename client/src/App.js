@@ -13,6 +13,8 @@ import Signupindividual from './pages/Signupindividual'
 import PersonList from './pages/PersonList'
 import Profile from './pages/Profile'
 import AdminUpload from './Components/Admin/AdminUpload'
+import AdminRestock from './Components/Admin/AdminRestock'
+import AdminOrderLsit from './Components/Admin/AdminOrderLsit'
 
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
             <Route path='/PersonList' element={<PersonList/>}/>
             <Route path='/Profile' element={<Profile/>}/>
             <Route path='/Admin' element={<AdminUpload/>}/>
+            <Route path='/Admin/Restock' element={<AdminRestock/>}/>
+            <Route path='/Admin/Orders' element={<AdminOrderLsit/>}/>
         </Routes>
     </Router>
   )
