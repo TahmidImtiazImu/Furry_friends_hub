@@ -24,17 +24,6 @@ conn = sqlite3.connect('../db/database.db', check_same_thread= False)
 cursor = conn.cursor()
 cursor1 = conn.cursor()
 
-# Testing image----------------------------------------------------------------
-# img_cursor = conn.cursor()
-# # Retrieve image data for image with ID 1
-# img_cursor.execute("SELECT productImg FROM products WHERE ID=?",("P123",) )
-# img_result = img_cursor.fetchone()
-
-# # Write image data to a file for inspection
-# with open('retrieved_image2.jpg', 'wb') as f:
-#     f.write(img_result[0])
-# Finish Testing image --------------------------------------------------------
-
 @app.route('/')
 def homepage():
     return app.send_static_file('index.html')
@@ -45,6 +34,10 @@ def profile():
 
 @app.route('/Signup')
 def singup():
+    return app.send_static_file('index.html')
+
+@app.route('/Login')
+def login_reload():
     return app.send_static_file('index.html')
 
 @app.route('/Login', methods=['POST'])
@@ -81,6 +74,10 @@ def Admin_restock():
 
 @app.route('/Admin/Orders')
 def Admin_orders():
+    return app.send_static_file('index.html')
+
+@app.route('/TermsAndPolicies')
+def Terms_and_policies():
     return app.send_static_file('index.html')
 
 @app.route('/Product/all', methods=['GET'])
@@ -273,39 +270,6 @@ def handleBuyNow():
     except Exception as e:
         return jsonify({'success': False, 'message': str(e)})
 
-# # Add to cart from product---------------------------------------
-# @app.route('/add-to-cart', methods=['POST'])
-# def add_to_cart():
-    # email = request.form['email']
-    # product_id = request.form['product_id']
-#     c = conn.cursor()
-
-#     # Check if the customer already has a cart
-#     c.execute("SELECT * FROM cart WHERE email=?", (email,))
-#     result = c.fetchone()
-#     # print(result[1])
-
-#     if result:
-#         # Customer already has a cart, so update it
-#         cart_items = result[1].split(',') if result[1] else []
-#         if product_id not in cart_items:
-#             cart_items.append(product_id)
-#         cart_items_str = ','.join(cart_items)
-#         print('the-cart-item-after-added----------------:    ')
-#         print(cart_items_str)
-#         c.execute("UPDATE cart SET items=? WHERE email=?", (cart_items_str, email))
-#     else:
-#         # Customer doesn't have a cart yet, so create a new one
-#         print("Data is being inserted")
-#         print(product_id)
-#         c.execute("INSERT INTO cart (email, items) VALUES (?, ?)", (email, product_id))
-
-#     # # Commit the changes to the database and close the connection
-#     # conn.commit()
-#     # conn.close()
-
-#     return jsonify({'success': True})
-
 # Admin orders checking -------------------------------------------------------------------------
 @app.route('/api/orders', methods=['GET'])
 def get_orders():
@@ -424,41 +388,6 @@ def Admin_update_stock():
     conn.commit()
     return jsonify({'status': 'success'})
 
-# @app.route('/Profile/<email>', methods=['GET'])
-# def getprofile(email):
-#     profile_get = conn.cursor()
-#     print('imagr1===============________________-------------+=======++++++_+_+_+_+_+_+++++++___')
-#     profile_get.execute("SELECT picture_data FROM users WHERE email=?", (email,))
-#     picture_data = profile_get.fetchone()[0]
-#     print('image image')
-#     response = make_response(picture_data)
-#     response.headers.set('Content-Type', 'image/jpg')
-#     # response.headers.set('Content-Disposition', 'attachment', filename='profile_picture/firstimage.jpg')
-#     response.headers.set('Content-Disposition', 'attachment; filename=firstimage.jpg')
-#     response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate')
-#     response.headers.set('Pragma', 'no-cache')
-#     response.headers.set('Expires', '0')
-        
-#     print('img img img img')
-#     return response
-
-# @app.route('/Profile', methods=['POST', 'GET'])
-# def postprofile():
-#     print('profile pic')
-#     file = request.files['file']
-#     file_data = file.read()
-
-#     email = 'mf@gmail.com'  # assuming the username is sent in the request body
-
-#     # Connect to the SQLite3 database
-#     profilecurson = conn.cursor()
-
-#     # Store the file data in the database for the specified user
-#     profilecurson.execute("UPDATE users SET picture_data = ? WHERE email = ?", (file_data, email))
-#     conn.commit()
-#     print('Uploaded image--------')
-#     return {'status': 'success'}
-
 
 @app.route('/Profile/<email>', methods=['GET', 'POST'])
 def update_profile(email):
@@ -466,8 +395,6 @@ def update_profile(email):
         print('profile pic')
         file = request.files['file']
         file_data = file.read()
-
-        # email = 'mf@gmail.com'  # assuming the username is sent in the request body
 
         # Connect to the SQLite3 database
         profilecurson = conn.cursor()
@@ -484,12 +411,6 @@ def update_profile(email):
         picture_data = profile_get.fetchone()[0]
         print('image image')
         response = make_response(picture_data)
-        # response.headers.set('Content-Type', 'image/jpg')
-        # # response.headers.set('Content-Disposition', 'attachment', filename='profile_picture/firstimage.jpg')
-        # response.headers.set('Content-Disposition', 'attachment; filename=firstimage.jpg')
-        # response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate')
-        # response.headers.set('Pragma', 'no-cache')
-        # response.headers.set('Expires', '0')
         
         print('img img img img')
         return response
@@ -527,10 +448,6 @@ def submit_form():
     petsizeselectedValue = ', '.join([key for key, value in data.get('petsizeselectedValue').items() if value])
     
     print("Hello from middle admin1")
-    # selected = request.form.getlist('selected')
-    # serviceselected = request.form.getlist('serviceselected')
-    # timerangeselectedValue = request.form['timerangeselectedValue']
-    # petsizeselectedValue = request.form['petsizeselectedValue']
 
     # Create connection to SQLite3 database and cursor object
     api_profile = conn.cursor()
@@ -591,38 +508,12 @@ def change_password():
 @app.route('/api/users/<pet>/<service>/<timerange>/<petsize>/<area>', methods=['GET'])
 def fetch_petsitters(pet,service,timerange,petsize,area):
     petsitter = conn.cursor()
-    # Extract search criteria from request parameters
-    # service = request.args.get('service')
-    # timerange = request.args.get('timerange')
-    # petsize = request.args.get('petsize')
-    # area = request.args.get('area')
-    # print("hello from petsitter data retrieve")
-    # data = request.json
-    
     print(pet)
     print(timerange)
     print(service)
     print(petsize)
     print(area)
 
-    # # Define SQL query to fetch users based on search criteria
-    # query = """
-    # SELECT *
-    # FROM users
-    # WHERE (pet LIKE ? OR pet LIKE ? OR pet LIKE ?)
-    # AND (service LIKE ? OR service LIKE ? OR service LIKE ?)
-    # AND (petsize LIKE ? OR petsize LIKE ? OR petsize LIKE ?)
-    # AND (timerange LIKE ? OR timerange LIKE ? OR timerange LIKE ?)
-    # AND (location LIKE ?)
-    # """
-
-    # # Define search strings for each category
-    # pet_search_strings = [f'%{val}%' for val in service.split()]
-    # service_search_strings = [f'%{val}%' for val in service.split()]
-    # petsize_search_strings = [f'%{val}%' for val in petsize.split()]
-    # timerange_search_strings = [f'%{val}%' for val in timerange.split()]
-
-    # Execute SQL query with search criteria
     query = """
         SELECT * FROM users 
         WHERE preferable_pet LIKE '%{pet}%'  
@@ -722,9 +613,6 @@ def get_customer_by_email(email):
     Notification_customer.execute("SELECT * FROM notifications WHERE customer_id = ? AND confirmation IN ('NO', 'YES') ORDER BY id DESC", (email,))
 
 
-    # Notification_customer.execute('SELECT * FROM notifications WHERE customer_id = ? AND confirmation = ?', (email, 'NO'))
-    # notification_customer.execute('SELECT * FROM notifications WHERE customer_id = ? AND confirmation = ?', (email, 'YES'))
-
     users = Notification_customer.fetchall()
     # users2 = notification_customer.fetchall()
     print(users)
@@ -737,15 +625,7 @@ def get_customer_by_email(email):
             'mobile' : row[4],
             'confirmation' : row[5],
         }
-        result.append(user)
-    # for row in users2:
-    #     user = {
-    #         'customer_id': row[1],
-    #         'serviceprovider_id' : row[2],
-    #         'mobile' : row[4],
-    #         'confirmation' : row[5],
-    #     }
-    #     result.append(user)    
+        result.append(user)  
     conn.commit()
     return jsonify(result)
 
@@ -783,92 +663,8 @@ def customerdelete_notification():
     conn.commit()
     return jsonify({'status': 'success'})
 
-    # profile_get.execute("SELECT name, address, pet_sitter,preferable_pet,preferable_services,preferable_timerange,preferable_petsize FROM users WHERE email=?", (email,))
-    # name_data, address_data, pet_sitter_data,preferable_pet_data,preferable_services_data,preferable_timerange_data,preferable_petsize_data = profile_get.fetchone()
-    
-    # response = {
-    #     "name": name_data,
-    #     "address": address_data,
-    #     "pet_sitter" : pet_sitter_data,
-    #     "preferable_pet" : preferable_pet_data,
-    #     "preferable_services" : preferable_services_data,
-    #     "preferable_timerange" : preferable_timerange_data,
-    #     "preferable_petsize" : preferable_petsize_data
-    # }
-
-# @app.route('/api/notifications', methods=['POST'])
-# def send_notification():
-#     data = request.get_json()
-#     customer_id = data['customer_id']
-#     server_id = data['server_id']
-#     pet_sitting = data['pet_sitting']
-#     mobile = data['mobile']
-#     confirmation = data['confirmation']
-
-#     notification = conn.cursor()
-#     notification.execute('INSERT INTO notifications (customer_id, serviceprovider_id, petsitting, mobile, confirmation) VALUES (?, ?, ?, ? ,?)', (customer_id, server_id,pet_sitting,mobile,confirmation))
-#     conn.commit()
-#     return jsonify({'status': 'success'})
-
 if __name__ == '__main__':
     app.run(debug=True)
-
-        # profile_get = conn.cursor()
-        # print('imagr1===============________________-------------+=======++++++_+_+_+_+_+_+++++++___')
-        # profile_get.execute("SELECT picture_data FROM users WHERE email=?", (email,))
-        # print('iamage step 2')
-        # picture_data = profile_get.fetchone()[0]
-        # print('iamage step 3')
-        # # if picture_data is None:
-        # #     # If there is no picture data for this user, send a default image
-        # #     with open("retrieved_image.jpg", "rb") as f:
-        # #         picture_data = f.read()
-        # # else:
-        # #     picture_data = base64.b64encode(picture_data).decode('utf-8')
-        # #     picture_data = BytesIO(base64.b64decode(picture_data))
-
-        # return send_file(picture_data, mimetype='image/jpg')
-# @app.route('/Profile<string:email>', methods=['GET'])
-# def profile_get(email):
-#     profile_get_conn = sqlite3.connect('my_database.db')
-    # profile_get = profile_get_conn.cursor()
-    # print('imagr1===============________________-------------+=======++++++_+_+_+_+_+_+++++++___')
-    # profile_get.execute("SELECT picture_data FROM users WHERE email=?", (email,))
-    # picture_data = profile_get.fetchone()[0]
-    # profile_get_conn.close()
-    # return send_file(picture_data, mimetype='image/jpg')
-    # print('image image')
-    # response = make_response(picture_data)
-    # response.headers.set('Content-Type', 'image/jpg')
-    # response.headers.set('Content-Disposition', 'attachment', filename='profile_picture/firstimage.jpg')
-    # return response
-
-# # Create a pets table
-# cursor.execute('''CREATE TABLE pets (
-#                     id INTEGER PRIMARY KEY,
-#                     name TEXT NOT NULL,
-#                     species TEXT NOT NULL,
-#                     age INTEGER NOT NULL
-#                 )''')
-
-# # Insert some sample data
-# cursor.execute("INSERT INTO pets (name, species, age) VALUES ('Fluffy', 'Cat', 3)")
-# cursor.execute("INSERT INTO pets (name, species, age) VALUES ('Buddy', 'Dog', 5)")
-# cursor.execute("INSERT INTO pets (name, species, age) VALUES ('Gizmo', 'Hamster', 1)")
-
-# execute the query and fetch the results
-
-# cursor1.execute('SELECT *FROM users')
-# rows = cursor1.fetchall()
-
-# # print the results
-# for row in rows:
-#     print(row)
-
-# cursor.execute()
-
-# cursor.execute("INSERT INTO users (username, password) VALUES ('john.doe', 'password123')")
-# cursor.execute("INSERT INTO users (username, password) VALUES ('jane.doe', 'password456')")
 
 conn.commit()
 
