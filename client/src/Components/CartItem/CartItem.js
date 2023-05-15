@@ -1,34 +1,51 @@
-import {React, useContext, useEffect, useState} from 'react'
+import {React, useContext, useEffect, useState, useRef} from 'react'
 import { FaPlus, FaMinus, FaTrash } from 'react-icons/fa';
 import axios from 'axios';
 import { GlobalContext } from '../../Global';
 import './CartItem.css'
 
 function CartItem(props) {
-  const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(props.quantity);
   const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType, globalSubtype, setGlobalSubtype } = useContext(GlobalContext);
-  console.log("In cart Card: ID- " + props.id + " and quantity- " + quantity);
-  useEffect(() => {
-    async function fetchProduct() {
-      console.log("fetching product for cart: ");
-      const productID =  props.id;  //parseInt(props.id.slice(1)); // convert product ID to integer
-      console.log("Product ID : " + productID);
-      const response = await fetch(`/products/cart/${productID}`);
-      const data = await response.json();
-      setProduct(data);
-    }
+  console.log("In cart Card: ID- " + props.id + " and quantity- " + quantity + " Name- " + props.name + " Price- " + props.price + " stock- " + props.stock);
+  const prevIdRef = useRef(null); // create a ref to store the previous value of the id prop
+  // useEffect(() => {
+  //   async function fetchProduct() {
+  //     console.log("fetching product for cart: ");
+  //     const productID = id; // convert product ID to integer
+  //     console.log("Product ID : " + productID);
+  //     const response = await fetch(`/products/cart/${productID}`);
+  //     const data = await response.json();
+  //     setProduct(data);
+  //     // if (data && data.price) {
+  //     //   onPriceFetched({ price: quantity * data.price, id: id, quantity: quantity });
+  //     // } else {
+  //     //   console.log("Product price not available");
+  //     // }
+  //   }
+  
+    // check if the current id prop is different from the previous one before fetching the data again
+  //   if (id !== prevIdRef.current) {
+  //     prevIdRef.current = id; // update the previous id ref with the current id prop
+  //     fetchProduct();
+  //   }
+  // }, [id, quantity, onPriceFetched]);
+  
+  
 
-    fetchProduct();
-  }, [props.id]);
   // console.log("Product fetched: name- " + product);
   const handleQuantityChange = async (newQuantity) => {
     console.log("Changing quantity");
     if (newQuantity < 1) {
       newQuantity = 1;
     }
+    if(newQuantity > props.stock) {
+      newQuantity = props.stock;
+    }
 
     setQuantity(newQuantity);
+
+    // onPriceFetched({price: quantity * product.price, id: id, quantity: quantity});
 
     try {
       console.log("Updating quantity in the database");
@@ -42,6 +59,7 @@ function CartItem(props) {
     } catch (error) {
       console.error(error);
     }
+    props.trigger(newQuantity);
   }
 
   const handleQuantityInput = async (event) => {
@@ -82,13 +100,13 @@ function CartItem(props) {
       <div>
         {/* items info row */}
         <div className="cartproduct">
-          {product && <div className="cartproduct-id">{product.name}</div>}
+          <div className="cartproduct-id">{props.name}</div>
           <div className="cartproduct-quantity">
             <FaMinus className='interactor' onClick={() => handleQuantityChange(quantity - 1)}/>
             <input className='inputquantity' type='text' value={quantity} onChange={handleQuantityInput}/>
             <FaPlus className='interactor' onClick={() => handleQuantityChange(quantity + 1)}/>
           </div>
-          {product && <div className="cartproduct-price">{quantity * product.price} tk</div>}
+          <div className="cartproduct-price">{quantity * props.price} tk</div>
           <FaTrash className='cartTrash' onClick={handleDelete}/>
         </div> 
         <div className='carthorizontalLine'></div>

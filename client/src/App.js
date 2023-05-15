@@ -15,6 +15,9 @@ import Profile from './pages/Profile'
 import AdminUpload from './Components/Admin/AdminUpload'
 import Notification from './Components/Notification/Notification'
 
+import AdminRestock from './Components/Admin/AdminRestock'
+import AdminOrderLsit from './Components/Admin/AdminOrderLsit'
+
 
 function App() {
   return(
@@ -33,6 +36,8 @@ function App() {
             <Route path='/Profile' element={<Profile/>}/>
             <Route path='/Admin' element={<AdminUpload/>}/>
             <Route path='/Notification' element={<Notification/>}/>
+            <Route path='/Admin/Restock' element={<AdminRestock/>}/>
+            <Route path='/Admin/Orders' element={<AdminOrderLsit/>}/>
         </Routes>
     </Router>
   )

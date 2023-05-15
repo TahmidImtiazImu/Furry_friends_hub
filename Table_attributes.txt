@@ -33,6 +33,7 @@ CREATE TABLE cart (
   items TEXT,
   quantity NUMERIC
 );
+<<<<<<< HEAD
  CREATE TABLE  notifications (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             customer_id TEXT NOT NULL,
@@ -46,3 +47,20 @@ CREATE TABLE cart (
             petsize TEXT,
             area TEXT
             );
+=======
+
+CREATE TABLE orders (
+    id INTEGER PRIMARY KEY AUTOINCREMENT DEFAULT 1000000,
+    email TEXT,
+    products TEXT,
+    total_price FLOAT,
+    status TEXT,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Name TEXT,
+    Phone TEXT,
+    Contact_mail TEXT,
+    Address TEXT,
+    Note TEXT
+);
+
+>>>>>>> refs/remotes/origin/master

@@ -1,0 +1,30 @@
+.restocking-id, .restocking-stock {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .restocking-id div, .restocking-stock div {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .restocking-id input, .restocking-stock input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .restockin-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .restockin-button:hover {
+    background-color: #0069d9;
+  }
+  

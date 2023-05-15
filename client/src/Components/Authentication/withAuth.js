@@ -11,7 +11,7 @@ const withAuth = (Component) => {
       return <Navigate to="/" />;
     }
     else{
-        if(globalemail != "mf@gmail.com"){
+        if(globalemail != "ajahsanul19@gmail.com" && globalemail != "tahmidimtiaz11807048@gmail.com"){
             return <Navigate to="/" />;
         }
     }

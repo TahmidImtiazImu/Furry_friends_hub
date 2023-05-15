@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect ,useContext } from "react";
 import axios from "axios"
 import withAuth from '../Authentication/withAuth';
 import './AdminUpload.css'
+import { Link } from "react-router-dom";
 
 const options = [
   { value: 'cat', label: 'Cat' },
@@ -150,7 +151,9 @@ function AdminUpload() {
             <textarea className='AdminTextArea' type="text" value={pDetail} onChange={(e) => setPDetail(e.target.value)} placeholder="Finish Your Sentences under 300 length" maxLength={300} required/>
         </div>
 
-        <button className='AdminUploadBtn' type='submit'>ReStock</button>
+        <button className='AdminUploadBtn' type='submit'>Stock</button>
+        <Link to="/Admin/Restock">ReStock</Link>
+        <Link to="/Admin/Orders">Orders List</Link>
 
     </form>
   )
