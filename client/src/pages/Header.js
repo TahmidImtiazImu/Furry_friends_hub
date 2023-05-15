@@ -19,6 +19,19 @@ import SearchBar from "../Components/SearchBar/SearchBar";
 import { GlobalContext } from '../Global';
 
 const Header = () => {
+  const StyledHeader = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+`;
+const HeaderContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+`;
   const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType, globalSubtype, setGlobalSubtype } = useContext(GlobalContext);
     const navigate = useNavigate();
     
@@ -89,6 +102,7 @@ const Header = () => {
     const[popaccount,setpopaccount] = useState(false);
 
   return (
+    <StyledHeader>
     <div>
     <nav className="navBar" onMouseLeave={()=>{setpop(false); setpopbird(false); setpopdog(false); setpoprabbit(false); setpopaccount(false);}}>
       {/* NAME OF THE WEBSITEEE */}
@@ -142,6 +156,7 @@ const Header = () => {
     </div>
     </nav>
     </div>
+    </StyledHeader>
   )
 }
 

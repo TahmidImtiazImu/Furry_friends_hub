@@ -16,23 +16,43 @@ import CardImages from "./CardImages";
 import Header from "./Header";
 import Footer from "./Footer";
 import SearchBar from "../Components/SearchBar/SearchBar";
-
+import { Link } from 'react-router-dom';
+import DogSection from "./DogSection";
+import BirdSection from "./BirdSection";
 
 
 const Homepage = () => {
 
-  // const handleClick = () => {
-  //   alert("You clicked me!"); 
-  // }  
-  
-  // const Card_homeimages = () =>{
-  //   return (
-  //   <div >
-  //     <img src={"/images/Cat.jpeg"} alt="React Image" className="pet_image"/> 
-  //         <button className="shopnow">Shop now</button>
-  //   </div>
-  //   )
-  // }
+  const CatSection = () => {
+    return (
+      <div className="section left-section">
+        <div className="section-content">
+          <div className="section-image">
+            <img src="/images/raiseacat.jpeg" alt="Raising a Cat" />
+          </div>
+          <div className="section-description">
+            <h2>The Perfect Companion: Nurturing Your Cat's Well-being</h2>
+            <p>
+              Are you considering getting a cat as a pet? Cats make wonderful companions and can bring joy and comfort to your life. Here are some essential tips to help you in raising a cat:
+            </p>
+            <ul>
+              <li>Provide a cozy and safe indoor environment for your cat.</li>
+              <li>Feed your cat a balanced and nutritious diet suitable for its age and health.</li>
+              <li>Keep your cat hydrated by providing fresh water at all times.</li>
+              <li>Make sure to provide regular veterinary care, including vaccinations and check-ups.</li>
+              <li>Offer plenty of toys and scratching posts to keep your cat mentally and physically stimulated.</li>
+              <li>Establish a litter box and litter training routine for your cat's hygiene.</li>
+              <li>Give your cat love, attention, and regular playtime to build a strong bond.</li>
+            </ul>
+            <p>
+              By following these guidelines, you can ensure a happy and healthy life for your feline companion.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
 
 
   return (
@@ -40,6 +60,7 @@ const Homepage = () => {
     {/* HEADERRRRRRRRRRRRRRRRRRRRR */}
     
       <Header/>
+      <br></br> <br></br>
      
       {/* BODDDDDDDDDDDDDDDDYYYYYYYYYYYYYYYY */}
       <body className="body">
@@ -56,6 +77,14 @@ const Homepage = () => {
         </ul>
         </ul>
       </div>
+      <div className="section-wrapper">
+          <CatSection />
+          <DogSection/>
+          <BirdSection/>
+          {/* <DogSection />
+          <BirdSection />
+          <PetSittingSection /> */}
+        </div>
 
         <ul className="body_writing">
         <ul className="delivery">

@@ -1,0 +1,51 @@
+/* Add these styles to your existing CSS file or create a new one */
+.section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+  
+  .section-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .section-description {
+    width: 50%;
+  }
+  
+  .section-description h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  .section-description p {
+    margin-bottom: 16px;
+  }
+  
+  .section-description ul {
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+  
+  .section-description li {
+    margin-bottom: 8px;
+  }
+  
+  .section-image {
+    width: 50%;
+    text-align: center;
+  }
+  
+  .section-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  /* Adjust the styles as needed to match your design preferences */
+  

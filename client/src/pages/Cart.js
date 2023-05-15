@@ -162,6 +162,7 @@ function Cart() {
     <>
         {/* ----------------Header--------------- */}
         <Header/>
+        <br></br> <br></br>
 
         {/* -------------Cart Body ----------------- */}
         <div className="CartBody">
