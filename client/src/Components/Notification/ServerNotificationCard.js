@@ -70,6 +70,7 @@ const ServerNotificationCard = ({ id,email,pet,service,timerange,petsize,area,me
       console.log(error);
       alert('Failed to send notification.');
     }
+    window.location.reload();
   };
 
 
@@ -112,6 +113,7 @@ const ServerNotificationCard = ({ id,email,pet,service,timerange,petsize,area,me
         alert('Failed to send notification.');
       }
     setShowPopup(false);
+    window.location.reload();
     // Perform further actions with the contact number
   };
 

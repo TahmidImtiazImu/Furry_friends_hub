@@ -37,6 +37,7 @@ const PersonList = ({ props }) => {
     <div className="person-list">
       {/* ------------------------------Header----------------------- */}
       <Header/>
+      <br></br> <br></br>
       <div>
       {personList.map(person => (
           <PersonCard
