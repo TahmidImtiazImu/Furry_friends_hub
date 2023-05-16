@@ -14,6 +14,10 @@ const PersonCard = (props) => {
   if(props.timerange == "second") {timerange = "6am-12pm"}
   if(props.timerange == "third") {timerange = "12pm-6pm"}
   if(props.timerange == "forth") {timerange = "6pm-12am"}
+  if(props.timerange == "oneday") {timerange = "One day"}
+  if(props.timerange == "twoday") {timerange = "Two day"}
+  if(props.timerange == "threeday") {timerange = "Three day"}
+  if(props.timerange == "sevenday") {timerange = "Seven day"}
   const sendNotification = async () => {
     const notificationData = {
       customer_id: globalemail,
