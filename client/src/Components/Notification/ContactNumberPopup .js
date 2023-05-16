@@ -6,7 +6,8 @@ const ContactNumberPopup = ({ onSubmit, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(contactNumber);
+    if(!contactNumber) alert("Number can't be empty") ;
+    else onSubmit(contactNumber);
   };
 
   return (

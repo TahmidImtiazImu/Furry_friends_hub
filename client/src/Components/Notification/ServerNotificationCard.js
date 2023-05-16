@@ -124,7 +124,7 @@ const ServerNotificationCard = ({ id,email,pet,service,timerange,petsize,area,me
   return (
     <div className="notification-card">
       <div>
-      <p>{customerName + "  wants too book you"}</p>
+      <p>{  "Request from  "  + customerName}</p>
       <p> {"Pet: " + pet + ",          Service : " + service + ",        Timerange : " + timerange + ",         Petsize : " + petsize} </p>
       <p>{"Address : " + area}</p>
       <p></p>

@@ -33,8 +33,8 @@ const CustomerNotificationCard = ({id,mobile, confirmation ,serviceprovider_id, 
   }, [email]);    
   var msg = "";
   
-  if(confirmation === "NO") msg =serviceproviderName + " rejected your proposal"
-  if(confirmation === "YES") msg = serviceproviderName + " confirmed your proposal, contact number : " + mobile ;
+  if(confirmation === "NO") msg =serviceproviderName + " rejected your request"
+  if(confirmation === "YES") msg = serviceproviderName + " accepted your request, contact number : " + mobile ;
 
   const delete_notification = async () => {
     const notificationData = {
@@ -51,7 +51,7 @@ const CustomerNotificationCard = ({id,mobile, confirmation ,serviceprovider_id, 
       });
 
       if (response.ok) {
-        alert('notification deleted!');
+        // alert('notification deleted!');
       } else {
         alert('Failed to customer delete notification.');
       }

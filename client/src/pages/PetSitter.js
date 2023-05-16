@@ -239,10 +239,10 @@ const PetSitter = () => {
                 <option value="second">12pm-6pm</option>
                 <option value="third">6pm-12pm</option>
                 <option value="forth">12pm-6am</option>
-                <option value="1 day">1 day</option>
-                <option value="2 days">2 days</option>
-                <option value="3 days">3 days</option>
-                <option value="7 days">7 days</option>
+                <option value="oneday">1 day</option>
+                <option value="twoday">2 days</option>
+                <option value="threeday">3 days</option>
+                <option value="sevenday">7 days</option>
                 </select>                         
               </div>
             </div>
