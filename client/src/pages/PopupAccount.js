@@ -30,9 +30,10 @@ const PopupAccount = ({closepop}) => {
         // navigate('./');
       }
 
+      const classString = isAdmin ? 'modalContainerAccountAdmin' : 'modalContainerAccount';
     return (
     <div className="modalBackgroundAccount">
-      <div className="modalContainerAccount">
+      <div className={classString}>
         <ui>
             <li className="Account-Item" onClick={navigateAccount}>Account</li>
             <hr></hr>
