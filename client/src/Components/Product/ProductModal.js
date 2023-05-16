@@ -50,7 +50,7 @@ const ProductModal = ({id, title, image, price, stock, about, closepop }) => {
   }
 
   const addToCart = (email, productId) => {
-    alert("Inside add to cart!");
+    // alert("Inside add to cart!");
     fetch('/add-to-cart', {
       method: 'POST',
       headers: {

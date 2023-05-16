@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Signupindividual.css'
-import { Link } from 'react-router-dom';
+import {Routes, Route, useNavigate, Navigate, Link} from 'react-router-dom';
 
 const Signupindividual= () => {
   const [name, setName] = useState('');
@@ -9,6 +9,7 @@ const Signupindividual= () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [address, setAddress] = useState('');
   const [termsChecked, setTermsChecked] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async  (e) => {
     e.preventDefault();
@@ -37,8 +38,9 @@ const Signupindividual= () => {
       .then(response => response.json())
       .then(data => console.log(data))
 
-      //alert-----------
-      alert("Signedup successfully!");
+      // //alert-----------
+      // alert("Signedup successfully!");
+      navigate("/Login");
   };
 
   return (

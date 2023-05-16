@@ -34,7 +34,7 @@ export const LogIn = () => {
         if (data.verified) {
           // Login successful
           console.log("Login successful");
-          alert('Login successfully') ;
+          // alert('Login successfully') ;
           setglobalLoggedIn(true); 
           setglobalEmail(email);
           navigate('/');
