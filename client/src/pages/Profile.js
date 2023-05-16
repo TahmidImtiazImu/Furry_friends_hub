@@ -310,7 +310,7 @@ const handleSubmit = async  (e) =>{
       <div className="profile-content">
         <div className="profile-section">
           <h2>About</h2>
-          <p>I am a Bitboxer! Checkout my next performance!!</p>
+          <p> I am there </p>
           <br/><br/><br/><br/>
           <div className='service-provider-edit'>
           <h3 className="profile-section-header">Service Provider</h3>
