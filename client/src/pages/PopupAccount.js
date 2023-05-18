@@ -2,6 +2,7 @@ import {React,useContext} from 'react'
 import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import "./PopupAccount.css"
 import { GlobalContext } from '../Global';
+import { toast } from 'react-toastify';
 
 const PopupAccount = ({closepop}) => {
   const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail } = useContext(GlobalContext);
@@ -24,10 +25,13 @@ const PopupAccount = ({closepop}) => {
       
       const LogOut =() =>{
         // setglobalEmail('') ;
-        window.location.reload();  
-        setglobalLoggedIn(false) ;
-        
+        setglobalEmail('');
+        setglobalLoggedIn(false);
+        toast.info("Logging Out");
         // navigate('./');
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       }
 
       const classString = isAdmin ? 'modalContainerAccountAdmin' : 'modalContainerAccount';

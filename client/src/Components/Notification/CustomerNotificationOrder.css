@@ -1,0 +1,60 @@
+/* CustomerNotificationOrder.css */
+
+.notification_card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .notification_card .card-body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .notification_card .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .notification_card .card-sub-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .notification_card .card-subtitle {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .notification_card .list-group {
+    margin-bottom: 10px;
+  }
+  
+  .notification_card .order-name,
+  .notification_card .product-status {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .notification_card .delete-icon-customer-order {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .notification_card .delete-icon-customer-order svg {
+    cursor: pointer;
+    color: red;
+    font-size: 20px;
+  }
+  
+  /* Add additional styles or modify existing styles as needed */
+  

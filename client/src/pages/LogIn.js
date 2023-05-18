@@ -2,6 +2,7 @@ import React, { useState,useContext } from "react";
 import {Routes, Route, useNavigate, Navigate, Link} from 'react-router-dom';
 import './LogIn.css'
 import { GlobalContext } from '../Global';
+import { toast } from "react-toastify";
 
 
 export const LogIn = () => {
@@ -34,14 +35,14 @@ export const LogIn = () => {
         if (data.verified) {
           // Login successful
           console.log("Login successful");
-          // alert('Login successfully') ;
+          toast.success('Login successfully') ;
           setglobalLoggedIn(true); 
           setglobalEmail(email);
           navigate('/');
         } else {
           // Login failed
           console.log("Login failed");
-          alert('Login failed');
+          toast.error('Login failed');
         }
       })
       .catch(error => console.error(error));

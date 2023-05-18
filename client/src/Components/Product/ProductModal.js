@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import { GlobalContext } from '../../Global';
 import "./ProductModal.css";
+import { toast } from "react-toastify";
 
 const ProductModal = ({id, title, image, price, stock, about, closepop }) => {
   const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType, globalSubtype, setGlobalSubtype } = useContext(GlobalContext);
@@ -41,10 +42,10 @@ const ProductModal = ({id, title, image, price, stock, about, closepop }) => {
   const handleAddToCart = () => {
     if(globalloggedIn){
       addToCart(globalemail, id);
-      alert("Product added to cart!");
+      toast.success("Product added to cart!");
     }
     else{
-      alert("Please Sign In before any purchase!");
+      toast.info("Please Sign In before any purchase!");
     }
    
   }

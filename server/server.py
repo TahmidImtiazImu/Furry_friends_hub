@@ -629,6 +629,52 @@ def get_customer_by_email(email):
     conn.commit()
     return jsonify(result)
 
+@app.route('/Order/api/customer/<email>', methods=['GET'])
+def get_order_track_by_email(email):
+    print("Retrieving order for tracking of " + email)
+    c = sqlite3.connect('../db/orders.db', check_same_thread= False)
+    curs = c.cursor()
+    curs.execute("SELECT *FROM orders WHERE email = ?", (email,))
+    orders = curs.fetchall()
+    # print(orders)
+
+    results=[]
+    for order in orders:
+        print(order[4])
+        if(order[4] != 'confirmed'):
+            result ={
+                'id': order[0],
+                'email': order[1],
+                'products': order[2],
+                'total_price': order[3],
+                'status': order[4], 
+                'created_date': order[5],
+                'Name': order[6],
+                'Phone': order[7],
+                'Contact_mail': order[8],
+                'Address': order[8],
+                'Note': order[9] 
+            }
+            results.append(result)
+    return jsonify(results)
+
+@app.route('/Order/api/customer/<int:order_id>', methods=['PUT'])
+def update_order_status(order_id):
+    try:
+        # Extract the new status from the request body
+        new_status = request.json.get('status')
+
+        # Update the order status in the database
+        con = sqlite3.connect('../db/orders.db', check_same_thread=False)
+        cursor = con.cursor()
+        cursor.execute("UPDATE orders SET status = ? WHERE id = ?", (new_status, order_id))
+        con.commit()
+        con.close()
+
+        return 'Order status updated successfully', 200
+    except:
+        return 'Failed to update order status', 500
+
 @app.route('/user/api/server/<email>', methods=['GET'])
 def get_serviceprovidername_notification(email):
     print("hi from /user/api/customer/")

@@ -18,6 +18,8 @@ import Notification from './Components/Notification/Notification'
 import AdminRestock from './Components/Admin/AdminRestock'
 import AdminOrderLsit from './Components/Admin/AdminOrderLsit'
 import TermsAndPolicies from './Components/TermsAndPolicies/TermsAndPolicies'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
@@ -41,6 +43,7 @@ function App() {
             <Route path='/Admin/Orders' element={<AdminOrderLsit/>}/>
             <Route path='/TermsAndPolicies' element={<TermsAndPolicies/>}/>
         </Routes>
+        <ToastContainer/>
     </Router>
   )
 }

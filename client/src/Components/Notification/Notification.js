@@ -3,13 +3,16 @@ import ServerNotificationCard from './ServerNotificationCard';
 import CustomerNotificationCard from './ CustomerNotificationCard';
 import './Notification.css';
 import { GlobalContext } from '../../Global';
+import CustomerNotificationOrder from './CustomerNotificationOrder';
 
 
 const Notification = () => {
   const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail } = useContext(GlobalContext);
   const [customerName, setCustomerName] = useState([]);
   const [serviceproviderName, setServiceproviderName] = useState([]);
-
+  const [orders, setOrders] = useState([]);
+  const [statu, setStatu] = useState(false);
+  // const [status, setStatus] = useEffect(false);
 
   useEffect(() => {
     const fetchServiceproviderName = async () => {
@@ -45,13 +48,37 @@ const Notification = () => {
     }
   };
 
+  const fetchOrderState =async () => {
+      console.log("Fetching order info:  ======");
+
+      try{
+        const response = await fetch(`/Order/api/customer/${globalemail}`);
+        const data = await response.json();
+
+        if(response.ok) {
+          console.log("Setting orders");
+          setOrders(data);
+          data.map(order => (console.log(order.id)));
+        }
+        else {
+          console.log('Failes to fetch order list');
+        }
+      }catch (error) {
+        console.log(error);
+        console.log('Failed to fetchorder list for an error');
+      }
+  };
+
     if(globalemail) fetchServiceproviderName();
     if(globalemail) fetchCustomerName() ;
+    if(globalemail && !statu) fetchOrderState();
 
-  }, [globalemail]);
+  }, [globalemail, statu]);
 
 
-
+if(statu){
+  setStatu(false);
+}
    
 console.log("Hi from notification js")
 // console.log( {serviceproviderName} + "service provider name")
@@ -94,6 +121,12 @@ console.log("Hi from notification js")
           petsize={notification.petsize}
           area={notification.area}
            message={"User wants to book you"} />
+        ))}
+      </div>
+      <div className='notification-container'>
+        <h3>Orders</h3>
+        {orders.map(order =>(
+            <CustomerNotificationOrder key={order.id} order={order} status={setStatu}/>
         ))}
       </div>
       <div className="notification-container">

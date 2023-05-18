@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
-import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
+import { saveAs } from "file-saver";
+import { pdf, Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import axios from "axios";
-import Header from './Header'
-import Footer from './Footer'
-import './Cart.css'
-import { BsDisplay } from "react-icons/bs";
+import Header from "./Header";
+import Footer from "./Footer";
+import "./Cart.css";
 import CartItem from "../Components/CartItem/CartItem";
-import { GlobalContext } from '../Global';
+import { GlobalContext } from "../Global";
+import { toast } from "react-toastify";
+
 function Cart() {
     const { globalloggedIn, setglobalLoggedIn, globalemail, setglobalEmail, globalType, setGlobalType, globalSubtype, setGlobalSubtype } = useContext(GlobalContext);
     const [cartItems, setCartItems] = useState([]);
@@ -103,9 +105,45 @@ function Cart() {
       return false;
     }
 
+
+  // Function to generate the PDF receipt
+  const generateReceipt = async () => {
+    const doc = (
+      <Document>
+      <Page size="A4" style={styles.page}>
+        <View style={styles.section}>
+          <Text style={styles.title}>Receipt</Text>
+          <View style={styles.info}>
+            <Text>Name: {Name}</Text>
+            <Text>Phone: {phone}</Text>
+            <Text>E-mail: {contactmail}</Text>
+            <Text>Address: {address}</Text>
+            <Text>Special Note: {note}</Text>
+          </View>
+          <View>
+            <Text style={styles.productName}>Products:</Text>
+            {cartItems.map(item => (
+              <Text key={item.item} style={styles.productQuantity}>
+                {item.name} - {item.quantity}
+              </Text>
+            ))}
+          </View>
+          <Text style={styles.totalPrice}>Total Price: {totalPrice} tk</Text>
+        </View>
+      </Page>
+    </Document>
+    );
+
+    const asPdf = pdf();
+    asPdf.updateContainer(doc);
+    const blob = await asPdf.toBlob();
+    saveAs(blob, "receipt.pdf");
+    console.log("Receipt downloaded");
+  };
+
     function logCartItems() {
         if(Name == '' || phone==''||contactmail==''||address==''){
-          alert("please Fill up your information");
+          toast.error("please Fill up your information");
         }
         else if (cartItems.length > 0) {
           // cartItems.map(item => console.log(item.item));
@@ -134,11 +172,14 @@ function Cart() {
       cartItems.map(item => {
         deleteItem(item.item);
       });
-      alert("Product order on Process");
-      window.location.reload();
+      generateReceipt();
+      toast.success("Product order on Process");
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     } else {
       // handle error
-      alert("Transaction failed!");
+      toast.error("Transaction failed!");
     }
   };
 
@@ -157,6 +198,49 @@ function Cart() {
       console.error(error);
     }
   }
+
+  // Styles for the PDF receipt
+  const styles = StyleSheet.create({
+    page: {
+      fontFamily: "Helvetica",
+      fontSize: 11,
+      paddingTop: 30,
+      paddingLeft: 60,
+      paddingRight: 60,
+      lineHeight: 1.5,
+      flexDirection: "column",
+      backgroundColor: "#f2f2f2",
+    },
+    section: {
+      margin: 10,
+      padding: 10,
+      flexGrow: 1,
+      backgroundColor: "white",
+      borderRadius: 5,
+    },
+    title: {
+      fontSize: 24,
+      textAlign: "center",
+      marginBottom: 30,
+      textTransform: "uppercase",
+    },
+    info: {
+      marginBottom: 10,
+    },
+    productName: {
+      fontSize: 12,
+      marginBottom: 5,
+    },
+    productQuantity: {
+      fontSize: 10,
+      marginLeft: 10,
+    },
+    totalPrice: {
+      fontSize: 14,
+      fontWeight: "bold",
+      marginTop: 20,
+    },
+  });  
 
     return (
     <>

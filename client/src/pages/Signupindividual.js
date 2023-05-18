@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Signupindividual.css'
 import {Routes, Route, useNavigate, Navigate, Link} from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Signupindividual= () => {
   const [name, setName] = useState('');
@@ -16,7 +17,7 @@ const Signupindividual= () => {
     // Submit form data
 
     if (password !== confirmPassword) {
-      alert('Password and password confirmation must be the same');
+      toast.info('Password and password confirmation must be the same');
       return;
     }
     const response = await fetch('/images/service_provider.png');
@@ -39,7 +40,7 @@ const Signupindividual= () => {
       .then(data => console.log(data))
 
       // //alert-----------
-      // alert("Signedup successfully!");
+      toast.success("Signedup successfully!");
       navigate("/Login");
   };
 
